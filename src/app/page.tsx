@@ -11,7 +11,7 @@ export default function Home() {
           <div className="absolute inset-0 bg-gradient-to-r from-background via-background/80 to-transparent z-0 md:w-2/3"></div>
           <div className="absolute inset-0 bg-gradient-to-t from-background via-background/80 md:via-transparent to-background/50 z-0"></div>
           {/* Render Background3D after overlays to make it pop and remove dullness */}
-          <div className="absolute inset-0 z-10">
+          <div className="absolute top-0 left-0 right-0 h-[100svh] z-10">
             <Background3D />
           </div>
         </div>

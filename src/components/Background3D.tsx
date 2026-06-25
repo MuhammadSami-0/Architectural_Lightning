@@ -29,7 +29,7 @@ const InteractiveShape = () => {
       // Mouse interaction: shape gently tilts towards mouse
       const isMobile = window.innerWidth < 768;
       const offsetX = isMobile ? 0 : 3.0; // Shift to the right on desktop
-      const offsetY = isMobile ? 2.5 : 0; // Shift UP on mobile to stay above text in tall container
+      const offsetY = 0; // Keep perfectly centered vertically on all screens
 
       const targetX = (mouse.x * viewport.width) / 10 + offsetX;
       const targetY = (mouse.y * viewport.height) / 10 + offsetY;
