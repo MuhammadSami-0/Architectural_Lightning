@@ -6,7 +6,7 @@ export default function Home() {
   return (
     <>
       {/* Hero Section */}
-      <header className="relative w-full h-[100svh] min-h-[700px] flex items-end md:items-center justify-start overflow-hidden -mt-24 md:-mt-32 pb-24 md:pb-0">
+      <header className="relative w-full h-[100svh] min-h-[600px] md:min-h-[800px] flex items-end md:items-center justify-start overflow-hidden -mt-24 md:-mt-32 pb-12 md:pb-0">
         <div className="absolute inset-0 z-0 pointer-events-none">
           <div className="absolute inset-0 bg-gradient-to-r from-background via-background/80 to-transparent z-10 md:w-2/3"></div>
           <div className="absolute inset-0 bg-gradient-to-t from-background via-background/80 md:via-transparent to-background/50 z-10"></div>

@@ -29,7 +29,7 @@ const InteractiveShape = () => {
       // Mouse interaction: shape gently tilts towards mouse
       const isMobile = window.innerWidth < 768;
       const offsetX = isMobile ? 0 : 3.0; // Shift to the right on desktop
-      const offsetY = isMobile ? 3.0 : 0; // Shift UP on mobile
+      const offsetY = isMobile ? 1.5 : 0; // Shift UP on mobile (reduced from 3.0 to sit lower)
 
       const targetX = (mouse.x * viewport.width) / 10 + offsetX;
       const targetY = (mouse.y * viewport.height) / 10 + offsetY;
