@@ -27,9 +27,12 @@ const InteractiveShape = () => {
       groupRef.current.rotation.x = Math.sin(state.clock.elapsedTime * 0.5) * 0.1;
 
       // Mouse interaction: shape gently tilts towards mouse
-      const offset = window.innerWidth >= 768 ? 3.0 : 0; // Shift to the right on desktop
-      const targetX = (mouse.x * viewport.width) / 10 + offset;
-      const targetY = (mouse.y * viewport.height) / 10;
+      const isMobile = window.innerWidth < 768;
+      const offsetX = isMobile ? 0 : 3.0; // Shift to the right on desktop
+      const offsetY = isMobile ? 3.0 : 0; // Shift UP on mobile
+
+      const targetX = (mouse.x * viewport.width) / 10 + offsetX;
+      const targetY = (mouse.y * viewport.height) / 10 + offsetY;
       
       groupRef.current.position.x = THREE.MathUtils.lerp(groupRef.current.position.x, targetX, 0.05);
       groupRef.current.position.y = THREE.MathUtils.lerp(groupRef.current.position.y, targetY, 0.05);
