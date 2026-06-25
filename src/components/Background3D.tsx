@@ -65,6 +65,20 @@ const InteractiveShape = () => {
             color="#f2ca50"
             emissive="#f2ca50"
             emissiveIntensity={4}
+            toneMapped={false}
+          />
+        </mesh>
+        
+        {/* Mobile-Safe Fallback Glow & Light */}
+        <pointLight position={[0, 0.2, 0]} color="#f2ca50" intensity={5} distance={5} />
+        <mesh position={[0, 0.2, 0]}>
+          <sphereGeometry args={[0.4, 32, 32]} />
+          <meshBasicMaterial 
+            color="#f2ca50" 
+            transparent 
+            opacity={0.3} 
+            blending={THREE.AdditiveBlending} 
+            depthWrite={false}
           />
         </mesh>
         
