@@ -44,7 +44,7 @@ export default function Portfolio() {
           <div key={index} className="masonry-item w-full relative group overflow-hidden cursor-pointer ambient-glow rounded bg-[#121212]">
             <div className={`${project.aspect} w-full overflow-hidden`}>
               <img 
-                className="w-full h-full object-cover transition-all duration-700 ease-in-out group-hover:scale-105 filter grayscale group-hover:grayscale-0" 
+                className="w-full h-full object-cover transition-all duration-700 ease-in-out group-hover:scale-105 filter grayscale-0 md:grayscale group-hover:grayscale-0" 
                 src={project.image}
                 alt={project.title}
               />

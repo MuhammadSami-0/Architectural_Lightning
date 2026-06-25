@@ -116,13 +116,24 @@
   .ambient-glow:hover { box-shadow: 0 0 30px rgba(212,175,55,0.15); }
   
   .hover-card-content {
-      opacity: 0;
-      transform: translateY(20px);
       transition: all 500ms cubic-bezier(0.83, 0, 0.17, 1);
   }
-  .group:hover .hover-card-content {
-      opacity: 1;
-      transform: translateY(0);
+  @media (max-width: 767px) {
+      .hover-card-content {
+          opacity: 1;
+          transform: translateY(0);
+      }
+  }
+  @media (min-width: 768px) {
+      .hover-card-content {
+          opacity: 0;
+          transform: translateY(20px);
+      }
+      .group:hover .hover-card-content,
+      .group:active .hover-card-content {
+          opacity: 1;
+          transform: translateY(0);
+      }
   }
   .masonry-grid {
       column-count: 1;

@@ -51,7 +51,7 @@ const ProcessStep = ({ step, index }: { step: any, index: number }) => {
       <div className={`w-full md:w-5/12 ${isEven ? 'md:pl-12' : 'md:pr-12'}`}>
         <div className="w-full h-64 bg-surface-container-low rounded-sm overflow-hidden relative group-hover:shadow-[0_0_30px_rgba(212,175,55,0.15)] transition-shadow duration-500">
           <img 
-            className="w-full h-full object-cover group-hover:scale-105 transition-all duration-700 ease-in-out filter grayscale group-hover:grayscale-0" 
+            className="w-full h-full object-cover group-hover:scale-105 transition-all duration-700 ease-in-out filter grayscale-0 md:grayscale group-hover:grayscale-0" 
             src={step.image} 
             alt={step.title} 
           />

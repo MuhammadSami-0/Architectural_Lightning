@@ -44,7 +44,7 @@ export default function Services() {
             {/* Image Container */}
             <div className="w-full aspect-[4/3] rounded-sm overflow-hidden relative mb-8 card-glow bg-[#121212]">
               <div 
-                className="absolute inset-0 bg-cover bg-center transition-transform duration-1000 ease-in-out group-hover:scale-105 filter grayscale group-hover:grayscale-0" 
+                className="absolute inset-0 bg-cover bg-center transition-transform duration-1000 ease-in-out group-hover:scale-105 filter grayscale-0 md:grayscale group-hover:grayscale-0" 
                 style={{ backgroundImage: `url('${service.image}')` }}
               ></div>
               <div className="absolute inset-0 bg-black/40 group-hover:bg-black/10 transition-colors duration-500"></div>

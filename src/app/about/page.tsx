@@ -10,7 +10,7 @@ export default function About() {
       <div className="relative w-full md:w-5/12 h-[614px] md:h-auto md:sticky md:top-0 group cursor-pointer">
         <div className="absolute inset-0 bg-black/20 z-10 pointer-events-none transition-colors duration-700 group-hover:bg-transparent"></div>
         <img 
-          className="w-full h-full object-cover object-center filter grayscale transition-all duration-700 group-hover:grayscale-0 contrast-125" 
+          className="w-full h-full object-cover object-center filter grayscale-0 md:grayscale transition-all duration-700 group-hover:grayscale-0 contrast-125" 
           src="https://lh3.googleusercontent.com/aida-public/AB6AXuAYGa4jwbSNXgdapilHbikh6eMDXYrkKHcCoxeRfV9mdAYUwLYW7qM-OnV4t-6T95zGcc2K3y-D3X6KXwc0Qp7eTKdAHlpWTOXYQ-orVdWNDRlVZfpN1F1KOvVmX8vY8zFCOecXTRPNEIlj_16vXIMUsYWpuGduJdV_cGKEHVh_A-iV3jea1qBTxMQ1do51nnpyUYzOwMo4Pl7F8CGcGKeBvLBakhQiLFzS-8u_D0LAbS0ZQoe9q37Wz7dLdGMxQoK_0-wBJvoQP0w" 
           alt="About Lumen & Shadow"
         />
