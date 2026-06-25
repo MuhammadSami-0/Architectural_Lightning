@@ -6,14 +6,16 @@ export default function Home() {
   return (
     <>
       {/* Hero Section */}
-      <header className="relative w-full h-screen min-h-[800px] flex items-center justify-center overflow-hidden -mt-24 md:-mt-32">
-        <Background3D />
+      <header className="relative w-full h-screen min-h-[800px] flex items-center justify-start overflow-hidden -mt-24 md:-mt-32">
         <div className="absolute inset-0 z-0 pointer-events-none">
-          <div className="absolute inset-0 bg-black/70 mix-blend-multiply"></div>
-          <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-background/50"></div>
+          <div className="absolute inset-0 bg-gradient-to-r from-background via-background/80 to-transparent z-10 md:w-2/3"></div>
+          <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-background/50 z-10"></div>
         </div>
+        
+        {/* Render Background3D after overlays to make it pop and remove dullness */}
+        <Background3D />
 
-        <div className="relative z-10 text-center px-margin-mobile md:px-margin-desktop max-w-[1440px] mx-auto flex flex-col items-center mt-20 pointer-events-none">
+        <div className="relative z-20 text-left px-margin-mobile md:px-margin-desktop max-w-[1440px] mx-auto flex flex-col items-start justify-center mt-20 pointer-events-none w-full">
           <h1 className="font-headline-xl-mobile md:font-headline-xl text-on-background mb-6 max-w-4xl hero-glow text-4xl md:text-8xl font-bold tracking-tighter">
             Designing the absence of <br className="hidden md:block" />
             <span className="text-primary-container drop-shadow-[0_0_20px_rgba(251,191,36,0.5)]">Light</span>

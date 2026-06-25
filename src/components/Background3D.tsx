@@ -2,7 +2,7 @@
 
 import { useRef, useState, useEffect } from 'react';
 import { Canvas, useFrame, useThree } from '@react-three/fiber';
-import { Environment, Float, ContactShadows, MeshTransmissionMaterial } from '@react-three/drei';
+import { Environment, Float, ContactShadows } from '@react-three/drei';
 import { EffectComposer, Bloom } from '@react-three/postprocessing';
 import * as THREE from 'three';
 
@@ -27,7 +27,8 @@ const InteractiveShape = () => {
       groupRef.current.rotation.x = Math.sin(state.clock.elapsedTime * 0.5) * 0.1;
 
       // Mouse interaction: shape gently tilts towards mouse
-      const targetX = (mouse.x * viewport.width) / 10;
+      const offset = window.innerWidth >= 768 ? 3.0 : 0; // Shift to the right on desktop
+      const targetX = (mouse.x * viewport.width) / 10 + offset;
       const targetY = (mouse.y * viewport.height) / 10;
       
       groupRef.current.position.x = THREE.MathUtils.lerp(groupRef.current.position.x, targetX, 0.05);
@@ -38,19 +39,18 @@ const InteractiveShape = () => {
   return (
     <Float speed={2} rotationIntensity={0.2} floatIntensity={1}>
       <group ref={groupRef} scale={scale}>
-        {/* Glass Bulb Body */}
+        {/* Glass Bulb Body - Using native material for massive performance boost */}
         <mesh position={[0, 0.5, 0]}>
           <sphereGeometry args={[1, 64, 64]} />
-          <MeshTransmissionMaterial 
-            backside
-            samples={4}
-            thickness={0.5}
-            chromaticAberration={0.05}
-            anisotropy={0.1}
-            distortion={0.1}
-            distortionScale={0.3}
-            temporalDistortion={0.1}
+          <meshPhysicalMaterial 
+            transparent
+            opacity={0.3}
+            roughness={0.05}
+            metalness={0.1}
+            transmission={0.9} 
             ior={1.5}
+            thickness={0.5}
+            envMapIntensity={2}
             color="#ffffff"
           />
         </mesh>
