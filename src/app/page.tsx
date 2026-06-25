@@ -1,4 +1,6 @@
 import Background3D from '@/components/Background3D';
+import Link from 'next/link';
+import MouseGlowContainer from '@/components/MouseGlowContainer';
 
 export default function Home() {
   return (
@@ -20,12 +22,12 @@ export default function Home() {
             We craft immersive architectural experiences through the intentional interplay of illumination and shadow. Elevating spaces beyond the visible.
           </p>
           <div className="flex flex-col sm:flex-row gap-6 pointer-events-auto">
-            <button className="px-8 py-4 bg-primary-container text-black font-label-caps text-label-caps uppercase tracking-widest hover:shadow-[0_0_30px_rgba(251,191,36,0.4)] transition-all duration-300 rounded-sm">
+            <Link href="/portfolio" className="px-8 py-4 bg-primary-container text-black font-label-caps text-label-caps uppercase tracking-widest hover:shadow-[0_0_30px_rgba(251,191,36,0.4)] transition-all duration-300 rounded-sm text-center">
               View Portfolio
-            </button>
-            <button className="px-8 py-4 border border-primary-container text-primary-container font-label-caps text-label-caps uppercase tracking-widest hover:bg-primary-container/10 hover:shadow-[0_0_20px_rgba(251,191,36,0.2)] transition-all duration-300 rounded-sm">
+            </Link>
+            <Link href="/process" className="px-8 py-4 border border-primary-container text-primary-container font-label-caps text-label-caps uppercase tracking-widest hover:bg-primary-container/10 hover:shadow-[0_0_20px_rgba(251,191,36,0.2)] transition-all duration-300 rounded-sm text-center">
               Our Process
-            </button>
+            </Link>
           </div>
         </div>
       </header>
@@ -33,7 +35,7 @@ export default function Home() {
       {/* Intro Section */}
       <section className="py-32 px-margin-mobile md:px-margin-desktop bg-surface-container-low relative z-10">
         <div className="max-w-[1440px] mx-auto grid grid-cols-1 md:grid-cols-12 gap-gutter items-center">
-          <div className="md:col-span-5 md:col-start-2 mb-12 md:mb-0">
+          <MouseGlowContainer className="md:col-span-5 md:col-start-2 mb-12 md:mb-0 p-8 md:p-12">
             <span className="inline-block px-3 py-1 border border-outline-variant text-primary font-label-caps text-label-caps uppercase tracking-widest rounded-sm mb-8">
               Our Philosophy
             </span>
@@ -43,7 +45,7 @@ export default function Home() {
             <p className="font-body-lg text-body-lg text-on-surface-variant leading-relaxed opacity-80">
               At Lumen & Shadow, we approach lighting design as a sculptural medium. We don't just illuminate spaces; we curate atmosphere, direct focus, and establish emotional resonance. Our methodology embraces darkness as the canvas, allowing strategic light to reveal texture, form, and narrative.
             </p>
-          </div>
+          </MouseGlowContainer>
           <div className="md:col-span-4 md:col-start-8 relative">
             <div className="aspect-[3/4] rounded-sm overflow-hidden relative group cursor-pointer ambient-glow">
               <div 
@@ -67,9 +69,9 @@ export default function Home() {
               </span>
               <h2 className="font-headline-lg text-headline-lg text-on-background">Curated Illumination</h2>
             </div>
-            <a className="hidden md:flex items-center gap-2 text-primary font-label-caps text-label-caps uppercase tracking-widest hover:drop-shadow-[0_0_10px_rgba(251,191,36,0.3)] transition-all duration-300" href="#">
+            <Link href="/portfolio" className="hidden md:flex items-center gap-2 text-primary font-label-caps text-label-caps uppercase tracking-widest hover:drop-shadow-[0_0_10px_rgba(251,191,36,0.3)] transition-all duration-300">
               Explore Gallery <span className="material-symbols-outlined text-sm">arrow_forward</span>
-            </a>
+            </Link>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div className="group relative aspect-square md:aspect-[4/5] rounded-sm overflow-hidden cursor-pointer card-glow bg-[#121212]">
@@ -111,9 +113,9 @@ export default function Home() {
               </div>
             </div>
           </div>
-          <a className="md:hidden mt-12 inline-flex items-center justify-center w-full py-4 border border-outline text-primary font-label-caps text-label-caps uppercase tracking-widest rounded-sm" href="#">
+          <Link href="/portfolio" className="md:hidden mt-12 inline-flex items-center justify-center w-full py-4 border border-outline text-primary font-label-caps text-label-caps uppercase tracking-widest rounded-sm">
             Explore Gallery
-          </a>
+          </Link>
         </div>
       </section>
     </>

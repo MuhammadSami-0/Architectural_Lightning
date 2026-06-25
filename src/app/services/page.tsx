@@ -1,3 +1,5 @@
+import MouseGlowContainer from '@/components/MouseGlowContainer';
+
 const services = [
   {
     title: "Residential Lighting",
@@ -49,7 +51,7 @@ export default function Services() {
             </div>
             
             {/* Content Container */}
-            <div className="flex flex-col flex-grow">
+            <MouseGlowContainer className="flex flex-col flex-grow p-6 md:p-8">
               <div className="flex items-center gap-4 mb-4">
                 <span className="text-label-caps font-label-caps text-primary/60 uppercase">0{index + 1}</span>
                 <div className="h-px bg-surface-container-highest flex-grow"></div>
@@ -60,7 +62,7 @@ export default function Services() {
               <p className="text-body-md text-on-surface-variant leading-relaxed text-lg">
                 {service.description}
               </p>
-            </div>
+            </MouseGlowContainer>
           </div>
         ))}
       </div>

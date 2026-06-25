@@ -49,9 +49,9 @@ const Navbar = () => {
           })}
         </div>
 
-        <button className="hidden md:block bg-primary-container text-[#050505] px-6 py-3 font-label-caps text-label-caps uppercase hover:shadow-[0_0_30px_rgba(212,175,55,0.15)] hover:brightness-110 transition-all duration-500 rounded-sm">
+        <Link href="/contact" className="hidden md:block bg-primary-container text-[#050505] px-6 py-3 font-label-caps text-label-caps uppercase hover:shadow-[0_0_30px_rgba(212,175,55,0.15)] hover:brightness-110 transition-all duration-500 rounded-sm">
           Consultation
-        </button>
+        </Link>
 
         <button 
           className="md:hidden text-on-surface p-2"

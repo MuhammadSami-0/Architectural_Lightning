@@ -1,6 +1,7 @@
 "use client";
 
 import { motion, useScroll, useSpring } from 'framer-motion';
+import MouseGlowContainer from '@/components/MouseGlowContainer';
 import { useRef } from 'react';
 
 const steps = [
@@ -37,10 +38,12 @@ const ProcessStep = ({ step, index }: { step: any, index: number }) => {
       transition={{ duration: 0.8, ease: "easeOut" }}
       className={`relative flex flex-col md:flex-row items-center justify-between w-full mb-32 group ${!isEven ? 'md:flex-row-reverse' : ''}`}
     >
-      <div className={`w-full md:w-5/12 ${isEven ? 'md:text-right md:pr-12' : 'md:text-left md:pl-12'} mb-8 md:mb-0`}>
-        <span className="text-label-caps font-label-caps text-primary-container mb-2 block">Step 0{index + 1}</span>
-        <h3 className="text-headline-md font-headline-md text-on-surface mb-4">{step.title}</h3>
-        <p className="text-body-md font-body-md text-on-surface-variant text-lg leading-relaxed">{step.desc}</p>
+      <div className={`w-full md:w-5/12 ${isEven ? 'md:pr-12' : 'md:pl-12'} mb-8 md:mb-0`}>
+        <MouseGlowContainer className={`p-8 ${isEven ? 'md:text-right' : 'md:text-left'}`}>
+          <span className="text-label-caps font-label-caps text-primary-container mb-2 block">Step 0{index + 1}</span>
+          <h3 className="text-headline-md font-headline-md text-on-surface mb-4">{step.title}</h3>
+          <p className="text-body-md font-body-md text-on-surface-variant text-lg leading-relaxed">{step.desc}</p>
+        </MouseGlowContainer>
       </div>
       
       <div className="hidden md:block absolute left-1/2 -translate-x-1/2 w-6 h-6 rounded-full border-2 border-primary bg-surface-container-lowest z-10 shadow-[0_0_15px_rgba(245,158,11,0.5)]"></div>
@@ -48,7 +51,7 @@ const ProcessStep = ({ step, index }: { step: any, index: number }) => {
       <div className={`w-full md:w-5/12 ${isEven ? 'md:pl-12' : 'md:pr-12'}`}>
         <div className="w-full h-64 bg-surface-container-low rounded-sm overflow-hidden relative group-hover:shadow-[0_0_30px_rgba(212,175,55,0.15)] transition-shadow duration-500">
           <img 
-            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-in-out" 
+            className="w-full h-full object-cover group-hover:scale-105 transition-all duration-700 ease-in-out filter grayscale group-hover:grayscale-0" 
             src={step.image} 
             alt={step.title} 
           />
