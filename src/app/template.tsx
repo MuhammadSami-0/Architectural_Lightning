@@ -12,7 +12,7 @@ const pageTransition = {
   type: 'tween',
   ease: 'easeInOut',
   duration: 0.6,
-};
+} as const;
 
 export default function Template({ children }: { children: React.ReactNode }) {
   return (
