@@ -68,7 +68,6 @@ export default function About() {
                 </blockquote>
               </MouseGlowContainer>
             </div>
-              </div>
             </motion.div>
           </div>
         </div>
