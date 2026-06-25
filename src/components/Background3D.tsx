@@ -41,11 +41,18 @@ const InteractiveShape = () => {
         <torusKnotGeometry args={[1, 0.3, 64, 16]} />
         <meshPhysicalMaterial 
           color="#f2ca50"
+          emissive="#d4af37"
+          emissiveIntensity={0.6}
           metalness={0.9}
           roughness={0.1}
           clearcoat={1.0}
           clearcoatRoughness={0.1}
         />
+        {/* Soft glowing halo behind the object */}
+        <mesh scale={2.5} position={[0, 0, -1]}>
+          <sphereGeometry args={[1, 32, 32]} />
+          <meshBasicMaterial color="#f2ca50" transparent opacity={0.15} blending={THREE.AdditiveBlending} depthWrite={false} />
+        </mesh>
       </mesh>
     </Float>
   );
