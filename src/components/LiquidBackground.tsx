@@ -3,57 +3,98 @@
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
 
+interface Orb {
+  id: number;
+  size: number;
+  startX: number;
+  startY: number;
+  moveX: string[];
+  moveY: string[];
+  duration: number;
+  delay: number;
+  opacity: number;
+  color: string;
+}
+
 export default function LiquidBackground() {
-  const [mounted, setMounted] = useState(false);
+  const [orbs, setOrbs] = useState<Orb[]>([]);
 
   useEffect(() => {
-    setMounted(true);
+    // Colors that fit the architectural lighting aesthetic
+    const colors = ["#D4AF37", "#F2CA50", "#E5E2E1", "#FFFFFF"];
+    
+    // Generate random orbs only on the client to prevent hydration mismatch
+    const generatedOrbs = Array.from({ length: 50 }).map((_, i) => {
+      const size = Math.random() * 4 + 2; // 2px to 6px
+      return {
+        id: i,
+        size,
+        startX: Math.random() * 100, // vw
+        startY: Math.random() * 100, // vh
+        // Create a random, wide-drifting path
+        moveX: [
+          "0vw",
+          `${(Math.random() - 0.5) * 30}vw`,
+          `${(Math.random() - 0.5) * 50}vw`,
+          `${(Math.random() - 0.5) * 30}vw`,
+          "0vw"
+        ],
+        moveY: [
+          "0vh",
+          `${(Math.random() - 0.5) * 30}vh`,
+          `${(Math.random() - 0.5) * 50}vh`,
+          `${(Math.random() - 0.5) * 30}vh`,
+          "0vh"
+        ],
+        duration: Math.random() * 30 + 30, // 30s to 60s
+        delay: Math.random() * -60, // Start randomly inside the animation loop
+        opacity: Math.random() * 0.4 + 0.1, // 0.1 to 0.5
+        color: colors[Math.floor(Math.random() * colors.length)],
+      };
+    });
+    setOrbs(generatedOrbs);
   }, []);
 
-  if (!mounted) return null;
+  if (orbs.length === 0) {
+    return (
+      <div className="fixed inset-0 z-[-1] overflow-hidden pointer-events-none bg-background">
+        <div className="absolute inset-0 bg-[#131313]"></div>
+      </div>
+    );
+  }
 
   return (
     <div className="fixed inset-0 z-[-1] overflow-hidden pointer-events-none bg-background">
       {/* Base dark layer */}
       <div className="absolute inset-0 bg-[#131313]"></div>
       
-      {/* Orb 1: Warm Gold */}
-      <motion.div
-        className="absolute top-1/4 left-1/4 w-[40vw] h-[40vw] rounded-full mix-blend-screen opacity-10"
-        style={{
-          background: "radial-gradient(circle, #CA8A04 0%, transparent 70%)",
-          filter: "blur(100px)",
-        }}
-        animate={{
-          x: [0, 100, -50, 0],
-          y: [0, -100, 50, 0],
-          scale: [1, 1.2, 0.8, 1],
-        }}
-        transition={{
-          duration: 25,
-          repeat: Infinity,
-          ease: "linear",
-        }}
-      />
-
-      {/* Orb 2: Deep Stone/Bronze */}
-      <motion.div
-        className="absolute bottom-1/4 right-1/4 w-[50vw] h-[50vw] rounded-full mix-blend-screen opacity-15"
-        style={{
-          background: "radial-gradient(circle, #44403C 0%, transparent 70%)",
-          filter: "blur(120px)",
-        }}
-        animate={{
-          x: [0, -120, 80, 0],
-          y: [0, 100, -80, 0],
-          scale: [1, 0.9, 1.1, 1],
-        }}
-        transition={{
-          duration: 30,
-          repeat: Infinity,
-          ease: "linear",
-        }}
-      />
+      {/* Floating Tiny Orbs (Dust/Fireflies Effect) */}
+      {orbs.map((orb) => (
+        <motion.div
+          key={orb.id}
+          className="absolute rounded-full"
+          style={{
+            left: `${orb.startX}vw`,
+            top: `${orb.startY}vh`,
+            width: `${orb.size}px`,
+            height: `${orb.size}px`,
+            backgroundColor: orb.color,
+            opacity: orb.opacity,
+            filter: `blur(${Math.max(1, orb.size / 3)}px)`,
+            boxShadow: `0 0 ${orb.size * 3}px ${orb.color}80`, // Adding glow
+          }}
+          animate={{
+            x: orb.moveX,
+            y: orb.moveY,
+          }}
+          transition={{
+            duration: orb.duration,
+            repeat: Infinity,
+            ease: "linear",
+            delay: orb.delay,
+          }}
+        />
+      ))}
     </div>
   );
 }
