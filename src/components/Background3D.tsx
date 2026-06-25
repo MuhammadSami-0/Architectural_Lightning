@@ -29,7 +29,7 @@ const InteractiveShape = () => {
       // Mouse interaction: shape gently tilts towards mouse
       const isMobile = window.innerWidth < 768;
       const offsetX = isMobile ? 0 : 3.0; // Shift to the right on desktop
-      const offsetY = 0; // Keep perfectly centered vertically on all screens
+      const offsetY = isMobile ? 2.5 : 0; // Shift UP on mobile to stay above text in tall container
 
       const targetX = (mouse.x * viewport.width) / 10 + offsetX;
       const targetY = (mouse.y * viewport.height) / 10 + offsetY;
@@ -64,19 +64,19 @@ const InteractiveShape = () => {
           <meshPhysicalMaterial 
             color="#f2ca50"
             emissive="#f2ca50"
-            emissiveIntensity={4}
+            emissiveIntensity={2}
             toneMapped={false}
           />
         </mesh>
         
         {/* Mobile-Safe Fallback Glow & Light */}
-        <pointLight position={[0, 0.2, 0]} color="#f2ca50" intensity={5} distance={5} />
+        <pointLight position={[0, 0.2, 0]} color="#f2ca50" intensity={2.5} distance={4} />
         <mesh position={[0, 0.2, 0]}>
           <sphereGeometry args={[0.4, 32, 32]} />
           <meshBasicMaterial 
             color="#f2ca50" 
             transparent 
-            opacity={0.3} 
+            opacity={0.1} 
             blending={THREE.AdditiveBlending} 
             depthWrite={false}
           />
