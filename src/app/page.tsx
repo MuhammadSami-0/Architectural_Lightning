@@ -76,7 +76,7 @@ export default function Home() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div className="group relative aspect-square md:aspect-[4/5] rounded-[2rem] overflow-hidden cursor-pointer card-glow bg-zinc-900/40 backdrop-blur-2xl border border-white/10 shadow-[inset_0_1px_0_rgba(255,255,255,0.1),0_20px_40px_-15px_rgba(0,0,0,0.5)] transition-all duration-500 ease-out hover:bg-zinc-900/50 hover:border-white/20">
               <div 
-                className="absolute inset-0 bg-cover bg-center filter grayscale-0 md:grayscale group-hover:grayscale-0 transition-all duration-700 group-hover:scale-105" 
+                className="absolute inset-0 bg-cover bg-center filter grayscale-0 md:grayscale group-hover:grayscale-0 group-active:grayscale-0 transition-all duration-700 group-hover:scale-105 group-active:scale-105" 
                 style={{ backgroundImage: "url('https://lh3.googleusercontent.com/aida-public/AB6AXuA1AuiQoVulykNnTeIbHwzQthFKdWypuArQ1weNM5ad-fjSEGmQbN9oxKyHWj0NE4k45mdV78Speczv7leefuiWkOvd1H2YqVvCStGgf4sQzwR-_Gobs4L5Agkrus-KY7iexE1G1R9bEnNYmBa08GMPg5GAsGIQksy9a2HUWH1qGUpIrd2avYe8G-jBMm8hRsng0t9LL_AriJZPejNFwVCxjzGyRHz_9IPWPmLuDpatW0_shFLkA1xhOUZWEkaPXDEjJhP9jNRHLkc')" }}
               ></div>
               <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent opacity-90 group-hover:opacity-70 transition-opacity duration-500"></div>
@@ -89,7 +89,7 @@ export default function Home() {
             
             <div className="group relative aspect-square md:aspect-[4/5] rounded-[2rem] overflow-hidden cursor-pointer card-glow bg-zinc-900/40 backdrop-blur-2xl border border-white/10 shadow-[inset_0_1px_0_rgba(255,255,255,0.1),0_20px_40px_-15px_rgba(0,0,0,0.5)] transition-all duration-500 ease-out hover:bg-zinc-900/50 hover:border-white/20 md:translate-y-12">
               <div 
-                className="absolute inset-0 bg-cover bg-center filter grayscale-0 md:grayscale group-hover:grayscale-0 transition-all duration-700 group-hover:scale-105" 
+                className="absolute inset-0 bg-cover bg-center filter grayscale-0 md:grayscale group-hover:grayscale-0 group-active:grayscale-0 transition-all duration-700 group-hover:scale-105 group-active:scale-105" 
                 style={{ backgroundImage: "url('https://lh3.googleusercontent.com/aida-public/AB6AXuCeOb7TP9PiCBn-WhIXyL8XjFE_kz2ApzycdDmAJrkn8QBsfMqHjqHSxYJPyqgm_nkoZa5W832bjXTgJ7qS_cUajP3SMb88w6TVRvFZS1hlwFfcXryv9F6BW7i_wjKLCfEp-N6IVm1mZnLZwFa-dYPeJZwstYMroE5wFsYLaGCUUtbfqzXZkzF5zIFEM6w2_xiNSyIAn39OPcsL7ct9nA4mZbvmcLd8EBtYEp19sokaCX-p1ZX3wHfFYf97J9FkOLvnwNlEiKIJUm0')" }}
               ></div>
               <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent opacity-90 group-hover:opacity-70 transition-opacity duration-500"></div>
@@ -102,7 +102,7 @@ export default function Home() {
 
             <div className="group relative aspect-square md:aspect-[4/5] rounded-[2rem] overflow-hidden cursor-pointer card-glow bg-zinc-900/40 backdrop-blur-2xl border border-white/10 shadow-[inset_0_1px_0_rgba(255,255,255,0.1),0_20px_40px_-15px_rgba(0,0,0,0.5)] transition-all duration-500 ease-out hover:bg-zinc-900/50 hover:border-white/20">
               <div 
-                className="absolute inset-0 bg-cover bg-center filter grayscale-0 md:grayscale group-hover:grayscale-0 transition-all duration-700 group-hover:scale-105" 
+                className="absolute inset-0 bg-cover bg-center filter grayscale-0 md:grayscale group-hover:grayscale-0 group-active:grayscale-0 transition-all duration-700 group-hover:scale-105 group-active:scale-105" 
                 style={{ backgroundImage: "url('https://lh3.googleusercontent.com/aida-public/AB6AXuDMVrTtuX0qSHa7RSVzHW4oHrmFalVDk591pYPfTjFxG3_mfySuvgwzSJ5rruV8lF4ebteVVV2mM_d4n7ImAiSU1ePhS80kC2zJ1QMZval9jdhIm6lzQktf_uszYGNcVLEmCTPKhzqav_XSS7LV9vJrehFjhBlnsQstLG1z-g8qPutBfbd5sBuF4GI3Ubt1B5g72x_NDONkn5a68j4qNwcvye5oF9es-eNTXW7SR88A-KOjDMGFt9K7v6c-Z2S_4IU2RmexH_pCQN0')" }}
               ></div>
               <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent opacity-90 group-hover:opacity-70 transition-opacity duration-500"></div>

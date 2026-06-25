@@ -25,10 +25,10 @@ export default function About() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-stretch">
           
           {/* Left: Image Pane */}
-          <div className="relative w-full h-full min-h-[500px] rounded-[2rem] overflow-hidden shadow-2xl cursor-pointer">
+          <div className="relative w-full h-full min-h-[500px] rounded-[2rem] overflow-hidden shadow-2xl cursor-pointer group">
             <div className={`absolute inset-0 z-10 pointer-events-none transition-colors duration-700 ${isTextHovered ? 'bg-transparent' : 'bg-black/20'}`}></div>
             <img 
-              className={`w-full h-full object-cover object-center filter transition-all duration-700 contrast-125 ${isTextHovered ? 'grayscale-0 scale-105' : 'grayscale-0 md:grayscale scale-100'}`} 
+              className={`w-full h-full object-cover object-center filter transition-all duration-700 contrast-125 group-active:scale-105 group-active:grayscale-0 ${isTextHovered ? 'grayscale-0 scale-105' : 'grayscale-0 md:grayscale scale-100'}`} 
               src="https://lh3.googleusercontent.com/aida-public/AB6AXuAYGa4jwbSNXgdapilHbikh6eMDXYrkKHcCoxeRfV9mdAYUwLYW7qM-OnV4t-6T95zGcc2K3y-D3X6KXwc0Qp7eTKdAHlpWTOXYQ-orVdWNDRlVZfpN1F1KOvVmX8vY8zFCOecXTRPNEIlj_16vXIMUsYWpuGduJdV_cGKEHVh_A-iV3jea1qBTxMQ1do51nnpyUYzOwMo4Pl7F8CGcGKeBvLBakhQiLFzS-8u_D0LAbS0ZQoe9q37Wz7dLdGMxQoK_0-wBJvoQP0w" 
               alt="About Lumen & Shadow"
             />
@@ -47,8 +47,8 @@ export default function About() {
                 onMouseLeave={() => setIsTextHovered(false)}
                 className="h-full"
               >
-                <MouseGlowContainer className="p-8 md:p-12 h-full flex flex-col justify-center">
-                  <div className="space-y-6 font-body-lg text-body-lg text-on-surface-variant mb-12 text-lg">
+                <MouseGlowContainer className="p-6 md:p-12 h-full flex flex-col justify-center">
+                  <div className="space-y-4 md:space-y-6 font-body-md md:font-body-lg text-on-surface-variant mb-8 md:mb-12 text-base md:text-lg">
                   <p>
                     At Lumen & Shadow, we believe that light is only half of the equation. True architectural brilliance is defined by what remains unseen. We are a boutique consultancy dedicated to the art of high-end lighting design, where shadow is our primary medium.
                   </p>
@@ -57,9 +57,9 @@ export default function About() {
                   </p>
                 </div>
                 
-                <blockquote className="pl-8 border-l-[4px] border-primary relative">
+                <blockquote className="pl-6 md:pl-8 border-l-[3px] md:border-l-[4px] border-primary relative">
                   <div className="absolute -left-2 top-0 bottom-0 w-4 bg-primary/20 blur-md -z-10 pointer-events-none"></div>
-                  <p className="font-headline-lg text-headline-lg text-on-surface italic leading-snug">
+                  <p className="text-xl md:text-headline-lg font-serif italic text-on-surface leading-snug">
                     "To reveal the architecture, you must first master the dark. Light is merely the tool we use to carve the shadow."
                   </p>
                   <footer className="mt-6 font-label-caps text-label-caps uppercase tracking-widest text-primary">
