@@ -6,16 +6,15 @@ export default function Home() {
   return (
     <>
       {/* Hero Section */}
-      <header className="relative w-full h-[100svh] min-h-[850px] md:min-h-[800px] flex items-end md:items-center justify-start overflow-hidden -mt-24 md:-mt-32 pb-12 md:pb-0">
-        <div className="absolute inset-0 z-0 pointer-events-none">
+      <header className="relative w-full min-h-[100svh] md:h-[100svh] flex flex-col md:flex-row items-end md:items-center justify-start overflow-visible md:overflow-hidden -mt-24 md:-mt-32 pb-12 md:pb-0">
+        <div className="absolute top-0 left-0 right-0 h-[100svh] z-0 pointer-events-none">
           <div className="absolute inset-0 bg-gradient-to-r from-background via-background/80 to-transparent z-10 md:w-2/3"></div>
           <div className="absolute inset-0 bg-gradient-to-t from-background via-background/80 md:via-transparent to-background/50 z-10"></div>
+          {/* Render Background3D after overlays to make it pop and remove dullness */}
+          <Background3D />
         </div>
-        
-        {/* Render Background3D after overlays to make it pop and remove dullness */}
-        <Background3D />
 
-        <div className="relative z-20 text-left px-margin-mobile md:px-margin-desktop max-w-[1440px] mx-auto flex flex-col items-start justify-center pointer-events-none w-full mt-auto md:mt-0">
+        <div className="relative z-20 text-left px-margin-mobile md:px-margin-desktop max-w-[1440px] mx-auto flex flex-col items-start justify-center pointer-events-none w-full pt-[95svh] md:pt-0 mt-auto md:mt-0">
           <h1 className="font-headline-xl-mobile md:font-headline-xl text-on-background mb-6 max-w-4xl hero-glow text-4xl md:text-8xl font-bold tracking-tighter">
             Designing the absence of <br className="hidden md:block" />
             <span className="text-primary-container drop-shadow-[0_0_20px_rgba(251,191,36,0.5)]">Light</span>
