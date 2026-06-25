@@ -17,7 +17,7 @@ export default function About() {
       </div>
 
       {/* Right: Content Canvas */}
-      <div className="w-full md:w-7/12 bg-surface-container-lowest flex items-center pt-32 pb-24 px-margin-mobile md:px-margin-desktop lg:px-24">
+      <div className="w-full md:w-7/12 bg-surface-container-lowest/40 backdrop-blur-md flex items-center pt-32 pb-24 px-margin-mobile md:px-margin-desktop lg:px-24">
         <motion.div 
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
