@@ -2,7 +2,8 @@
 
 import { useRef, useState, useEffect } from 'react';
 import { Canvas, useFrame, useThree } from '@react-three/fiber';
-import { Environment, Float, MeshTransmissionMaterial, ContactShadows } from '@react-three/drei';
+import { Environment, Float, ContactShadows } from '@react-three/drei';
+import { EffectComposer, Bloom } from '@react-three/postprocessing';
 import * as THREE from 'three';
 
 const InteractiveShape = () => {
@@ -41,18 +42,13 @@ const InteractiveShape = () => {
         <torusKnotGeometry args={[1, 0.3, 64, 16]} />
         <meshPhysicalMaterial 
           color="#f2ca50"
-          emissive="#d4af37"
-          emissiveIntensity={0.6}
+          emissive="#f2ca50"
+          emissiveIntensity={0.5}
           metalness={0.9}
           roughness={0.1}
           clearcoat={1.0}
           clearcoatRoughness={0.1}
         />
-        {/* Soft glowing halo behind the object */}
-        <mesh scale={2.5} position={[0, 0, -1]}>
-          <sphereGeometry args={[1, 32, 32]} />
-          <meshBasicMaterial color="#f2ca50" transparent opacity={0.15} blending={THREE.AdditiveBlending} depthWrite={false} />
-        </mesh>
       </mesh>
     </Float>
   );
@@ -71,6 +67,10 @@ const Background3D = () => {
         <Environment preset="city" />
         {/* Adds a sophisticated shadow below the object */}
         <ContactShadows position={[0, -3, 0]} opacity={0.4} scale={10} blur={2.5} far={4} color="#d4af37" resolution={256} frames={1} />
+
+        <EffectComposer>
+          <Bloom luminanceThreshold={0.2} luminanceSmoothing={0.9} intensity={2.5} mipmapBlur />
+        </EffectComposer>
       </Canvas>
     </div>
   );
