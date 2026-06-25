@@ -1,11 +1,8 @@
 "use client";
 
 import { useEffect } from 'react';
-import { usePathname } from 'next/navigation';
 
 export default function GlobalScrollReveal() {
-  const pathname = usePathname();
-
   useEffect(() => {
     // Only run on client
     if (typeof window === 'undefined') return;
@@ -35,6 +32,7 @@ export default function GlobalScrollReveal() {
       );
       
       elements.forEach((el) => {
+        // If not already observed by THIS specific class system
         if (!el.classList.contains('reveal-base')) {
           el.classList.add('reveal-base');
           observer.observe(el);
@@ -45,7 +43,7 @@ export default function GlobalScrollReveal() {
     // Run slightly after mount to ensure DOM is ready
     const timer = setTimeout(observeElements, 100);
 
-    // Setup mutation observer for dynamically added elements
+    // Setup mutation observer for dynamically added elements (like Next.js route changes)
     const mutationObserver = new MutationObserver(() => {
       observeElements();
     });
@@ -57,7 +55,7 @@ export default function GlobalScrollReveal() {
       observer.disconnect();
       mutationObserver.disconnect();
     };
-  }, [pathname]);
+  }, []); // Run ONCE for the entire lifecycle of the app!
 
   return null;
 }
