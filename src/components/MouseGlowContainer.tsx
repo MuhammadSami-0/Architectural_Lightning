@@ -32,7 +32,7 @@ export default function MouseGlowContainer({
 
   return (
     <div
-      className={`group/glow relative overflow-hidden rounded-sm bg-black/40 backdrop-blur-md border border-white/5 transition-colors duration-500 hover:bg-black/60 active:bg-black/60 ${className}`}
+      className={`group/glow relative overflow-hidden rounded-sm bg-black/40 backdrop-blur-md border border-white/5 transition-colors duration-700 ease-out hover:bg-black/60 active:bg-black/60 ${className}`}
       onMouseMove={handleMouseMove}
       onTouchMove={handleTouchMove}
       onTouchStart={handleTouchMove}
@@ -45,13 +45,13 @@ export default function MouseGlowContainer({
       
       {/* Desktop: Ambient glow when hovering the parent group (e.g. the image) but NOT hovering this text container directly */}
       <div 
-        className={`hidden md:block pointer-events-none absolute -inset-px rounded-sm transition-opacity duration-500 ${!isHovered ? 'group-hover:opacity-100 opacity-0' : 'opacity-0'}`} 
+        className={`hidden md:block pointer-events-none absolute -inset-px rounded-sm transition-opacity duration-700 ease-out ${!isHovered ? 'group-hover:opacity-100 opacity-0' : 'opacity-0'}`} 
         style={{ background: 'radial-gradient(circle at 50% 50%, rgba(212, 175, 55, 0.12), transparent 80%)' }} 
       />
 
       {/* Dynamic tracking glow (Desktop + Active Touch) */}
       <motion.div
-        className={`pointer-events-none absolute -inset-px rounded-sm transition-opacity duration-500 ${isTouched || isHovered ? 'opacity-100' : 'opacity-0'}`}
+        className={`pointer-events-none absolute -inset-px rounded-sm transition-opacity duration-700 ease-out ${isTouched || isHovered ? 'opacity-100' : 'opacity-0'}`}
         style={{
           background: useMotionTemplate`
             radial-gradient(

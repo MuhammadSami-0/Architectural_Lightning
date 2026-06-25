@@ -49,15 +49,15 @@
   --color-surface-tint: #e9c349;
   --color-on-primary-fixed-variant: #574500;
 
-  --font-headline-md: 'Playfair Display', serif;
-  --font-label-caps: 'Inter', sans-serif;
-  --font-headline-lg-mobile: 'Playfair Display', serif;
-  --font-label-md: 'Inter', sans-serif;
-  --font-headline-lg: 'Playfair Display', serif;
-  --font-body-lg: 'Inter', sans-serif;
-  --font-body-md: 'Inter', sans-serif;
-  --font-headline-xl-mobile: 'Playfair Display', serif;
-  --font-headline-xl: 'Playfair Display', serif;
+  --font-headline-md: 'Cinzel', serif;
+  --font-label-caps: 'Josefin Sans', sans-serif;
+  --font-headline-lg-mobile: 'Cinzel', serif;
+  --font-label-md: 'Josefin Sans', sans-serif;
+  --font-headline-lg: 'Cinzel', serif;
+  --font-body-lg: 'Josefin Sans', sans-serif;
+  --font-body-md: 'Josefin Sans', sans-serif;
+  --font-headline-xl-mobile: 'Cinzel', serif;
+  --font-headline-xl: 'Cinzel', serif;
 
   --text-headline-md: 32px;
   --text-headline-md--line-height: 40px;
