@@ -112,8 +112,6 @@ const Background3D = () => {
         <InteractiveShape />
         
         <Environment preset="city" />
-        {/* Adds a sophisticated shadow below the object */}
-        <ContactShadows position={[0, -3, 0]} opacity={0.4} scale={10} blur={2.5} far={4} color="#d4af37" resolution={256} frames={1} />
 
         <EffectComposer>
           <Bloom luminanceThreshold={0.2} luminanceSmoothing={0.9} intensity={2.5} mipmapBlur />
