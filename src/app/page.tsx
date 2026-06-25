@@ -34,7 +34,7 @@ export default function Home() {
 
       {/* Intro Section */}
       <section className="py-32 px-margin-mobile md:px-margin-desktop bg-surface-container-low relative z-10">
-        <div className="max-w-[1440px] mx-auto grid grid-cols-1 md:grid-cols-12 gap-gutter items-center">
+        <div className="max-w-[1440px] mx-auto grid grid-cols-1 md:grid-cols-12 gap-gutter items-center group">
           <MouseGlowContainer className="md:col-span-5 md:col-start-2 mb-12 md:mb-0 p-8 md:p-12">
             <span className="inline-block px-3 py-1 border border-outline-variant text-primary font-label-caps text-label-caps uppercase tracking-widest rounded-sm mb-8">
               Our Philosophy

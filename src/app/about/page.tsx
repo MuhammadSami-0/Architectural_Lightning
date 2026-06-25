@@ -5,7 +5,7 @@ import MouseGlowContainer from '@/components/MouseGlowContainer';
 
 export default function About() {
   return (
-    <main className="min-h-[calc(100vh-200px)] w-full flex flex-col md:flex-row">
+    <main className="flex flex-col md:flex-row min-h-screen group">
       {/* Left: Image Pane */}
       <div className="relative w-full md:w-5/12 h-[614px] md:h-auto md:sticky md:top-0 group cursor-pointer">
         <div className="absolute inset-0 bg-black/20 z-10 pointer-events-none transition-colors duration-700 group-hover:bg-transparent"></div>

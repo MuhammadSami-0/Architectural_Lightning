@@ -13,6 +13,7 @@ export default function MouseGlowContainer({
   let mouseX = useMotionValue(0);
   let mouseY = useMotionValue(0);
   const [isTouched, setIsTouched] = useState(false);
+  const [isHovered, setIsHovered] = useState(false);
 
   function handleMouseMove({ currentTarget, clientX, clientY }: ReactMouseEvent) {
     let { left, top } = currentTarget.getBoundingClientRect();
@@ -31,18 +32,26 @@ export default function MouseGlowContainer({
 
   return (
     <div
-      className={`group relative overflow-hidden rounded-sm bg-black/40 backdrop-blur-md border border-white/5 transition-colors duration-500 hover:bg-black/60 active:bg-black/60 ${className}`}
+      className={`group/glow relative overflow-hidden rounded-sm bg-black/40 backdrop-blur-md border border-white/5 transition-colors duration-500 hover:bg-black/60 active:bg-black/60 ${className}`}
       onMouseMove={handleMouseMove}
       onTouchMove={handleTouchMove}
       onTouchStart={handleTouchMove}
       onTouchEnd={() => setIsTouched(false)}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
     >
       {/* Mobile-only static ambient glow */}
       <div className="md:hidden pointer-events-none absolute -inset-px rounded-sm opacity-100" style={{ background: 'radial-gradient(circle at 50% 50%, rgba(212, 175, 55, 0.08), transparent 80%)' }} />
       
+      {/* Desktop: Ambient glow when hovering the parent group (e.g. the image) but NOT hovering this text container directly */}
+      <div 
+        className={`hidden md:block pointer-events-none absolute -inset-px rounded-sm transition-opacity duration-500 ${!isHovered ? 'group-hover:opacity-100 opacity-0' : 'opacity-0'}`} 
+        style={{ background: 'radial-gradient(circle at 50% 50%, rgba(212, 175, 55, 0.12), transparent 80%)' }} 
+      />
+
       {/* Dynamic tracking glow (Desktop + Active Touch) */}
       <motion.div
-        className={`pointer-events-none absolute -inset-px rounded-sm transition duration-500 ${isTouched ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'}`}
+        className={`pointer-events-none absolute -inset-px rounded-sm transition-opacity duration-500 ${isTouched || isHovered ? 'opacity-100' : 'opacity-0'}`}
         style={{
           background: useMotionTemplate`
             radial-gradient(
