@@ -57,15 +57,20 @@ export default function About() {
                   </p>
                 </div>
                 
-                <blockquote className="pl-6 md:pl-8 border-l-[3px] md:border-l-[4px] border-primary relative">
-                  <div className="absolute -left-2 top-0 bottom-0 w-4 bg-primary/20 blur-md -z-10 pointer-events-none"></div>
-                  <p className="text-xl md:text-headline-lg font-serif italic text-on-surface leading-snug">
-                    "To reveal the architecture, you must first master the dark. Light is merely the tool we use to carve the shadow."
-                  </p>
-                  <footer className="mt-6 font-label-caps text-label-caps uppercase tracking-widest text-primary">
-                    — The Founders
-                  </footer>
-                </blockquote>
+                <div className="flex gap-6 md:gap-8 items-stretch relative">
+                  {/* Glowing Accent Line */}
+                  <div className="w-[2px] bg-amber-400 rounded-full shrink-0 h-auto filter drop-shadow-[0_0_12px_rgba(251,191,36,0.6)] drop-shadow-[0_0_25px_rgba(251,191,36,0.2)]" />
+                
+                  {/* Quote Text */}
+                  <blockquote className="py-2">
+                    <p className="text-xl md:text-headline-lg font-serif italic text-on-surface leading-snug">
+                      "To reveal the architecture, you must first master the dark. Light is merely the tool we use to carve the shadow."
+                    </p>
+                    <footer className="mt-6 font-label-caps text-label-caps uppercase tracking-widest text-primary">
+                      — The Founders
+                    </footer>
+                  </blockquote>
+                </div>
               </MouseGlowContainer>
             </div>
             </motion.div>
