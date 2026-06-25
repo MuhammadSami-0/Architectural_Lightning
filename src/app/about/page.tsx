@@ -11,7 +11,7 @@ export default function About() {
     <main className="min-h-screen relative overflow-hidden pt-32 pb-24">
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center max-w-7xl mx-auto px-8 relative z-10 group">
         {/* Left: Image Pane */}
-        <div className="relative w-full max-w-md mx-auto aspect-[3/4] rounded-2xl overflow-hidden shadow-2xl cursor-pointer">
+        <div className="relative w-full max-w-lg mx-auto aspect-[4/5] rounded-2xl overflow-hidden shadow-2xl cursor-pointer">
           <div className={`absolute inset-0 z-10 pointer-events-none transition-colors duration-700 ${isTextHovered ? 'bg-transparent' : 'bg-black/20'}`}></div>
           <img 
             className={`w-full h-full object-cover object-center filter transition-all duration-700 contrast-125 ${isTextHovered ? 'grayscale-0 scale-105' : 'grayscale-0 md:grayscale scale-100'}`} 
