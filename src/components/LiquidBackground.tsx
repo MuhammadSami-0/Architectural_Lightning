@@ -72,7 +72,7 @@ export default function LiquidBackground() {
       {orbs.map((orb) => (
         <motion.div
           key={orb.id}
-          className="absolute rounded-full"
+          className="absolute rounded-full transform-gpu will-change-transform"
           style={{
             left: `${orb.startX}vw`,
             top: `${orb.startY}vh`,
