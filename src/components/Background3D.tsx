@@ -2,18 +2,18 @@
 
 import { useRef, useState, useEffect } from 'react';
 import { Canvas, useFrame, useThree } from '@react-three/fiber';
-import { Environment, Float, ContactShadows } from '@react-three/drei';
+import { Environment, Float, ContactShadows, MeshTransmissionMaterial } from '@react-three/drei';
 import { EffectComposer, Bloom } from '@react-three/postprocessing';
 import * as THREE from 'three';
 
 const InteractiveShape = () => {
-  const meshRef = useRef<THREE.Mesh>(null);
+  const groupRef = useRef<THREE.Group>(null);
   const { mouse, viewport } = useThree();
   const [scale, setScale] = useState(1.8);
 
   useEffect(() => {
     const handleResize = () => {
-      setScale(window.innerWidth < 768 ? 1.0 : 1.8);
+      setScale(window.innerWidth < 768 ? 1.0 : 1.5); // Slightly smaller scale for bulb
     };
     handleResize();
     window.addEventListener('resize', handleResize);
@@ -21,35 +21,82 @@ const InteractiveShape = () => {
   }, []);
 
   useFrame((state, delta) => {
-    if (meshRef.current) {
-      // Base rotation
-      meshRef.current.rotation.x += delta * 0.1;
-      meshRef.current.rotation.y += delta * 0.15;
+    if (groupRef.current) {
+      // Base rotation (mostly just spinning slowly on Y for a bulb)
+      groupRef.current.rotation.y += delta * 0.15;
+      groupRef.current.rotation.x = Math.sin(state.clock.elapsedTime * 0.5) * 0.1;
 
       // Mouse interaction: shape gently tilts towards mouse
       const targetX = (mouse.x * viewport.width) / 10;
       const targetY = (mouse.y * viewport.height) / 10;
       
-      meshRef.current.position.x = THREE.MathUtils.lerp(meshRef.current.position.x, targetX, 0.05);
-      meshRef.current.position.y = THREE.MathUtils.lerp(meshRef.current.position.y, targetY, 0.05);
+      groupRef.current.position.x = THREE.MathUtils.lerp(groupRef.current.position.x, targetX, 0.05);
+      groupRef.current.position.y = THREE.MathUtils.lerp(groupRef.current.position.y, targetY, 0.05);
     }
   });
 
   return (
-    <Float speed={2} rotationIntensity={0.5} floatIntensity={1}>
-      <mesh ref={meshRef} scale={scale}>
-        {/* Using a torus knot for a more complex, luxurious shape */}
-        <torusKnotGeometry args={[1, 0.3, 64, 16]} />
-        <meshPhysicalMaterial 
-          color="#f2ca50"
-          emissive="#f2ca50"
-          emissiveIntensity={0.5}
-          metalness={0.9}
-          roughness={0.1}
-          clearcoat={1.0}
-          clearcoatRoughness={0.1}
-        />
-      </mesh>
+    <Float speed={2} rotationIntensity={0.2} floatIntensity={1}>
+      <group ref={groupRef} scale={scale}>
+        {/* Glass Bulb Body */}
+        <mesh position={[0, 0.5, 0]}>
+          <sphereGeometry args={[1, 64, 64]} />
+          <MeshTransmissionMaterial 
+            backside
+            samples={4}
+            thickness={0.5}
+            chromaticAberration={0.05}
+            anisotropy={0.1}
+            distortion={0.1}
+            distortionScale={0.3}
+            temporalDistortion={0.1}
+            ior={1.5}
+            color="#ffffff"
+          />
+        </mesh>
+
+        {/* Inner Glowing Filament */}
+        <mesh position={[0, 0.2, 0]}>
+          <cylinderGeometry args={[0.05, 0.05, 0.8, 16]} />
+          <meshPhysicalMaterial 
+            color="#f2ca50"
+            emissive="#f2ca50"
+            emissiveIntensity={4}
+          />
+        </mesh>
+        
+        {/* Filament Supports */}
+        <mesh position={[-0.2, -0.1, 0]} rotation={[0, 0, 0.3]}>
+          <cylinderGeometry args={[0.02, 0.02, 0.5, 8]} />
+          <meshStandardMaterial color="#555" metalness={0.8} roughness={0.2} />
+        </mesh>
+        <mesh position={[0.2, -0.1, 0]} rotation={[0, 0, -0.3]}>
+          <cylinderGeometry args={[0.02, 0.02, 0.5, 8]} />
+          <meshStandardMaterial color="#555" metalness={0.8} roughness={0.2} />
+        </mesh>
+
+        {/* Bulb Base */}
+        <mesh position={[0, -0.8, 0]}>
+          <cylinderGeometry args={[0.4, 0.35, 0.6, 32]} />
+          <meshStandardMaterial color="#2a2a2a" metalness={0.9} roughness={0.4} />
+        </mesh>
+        
+        {/* Base Details (Rings) */}
+        <mesh position={[0, -0.7, 0]}>
+          <torusGeometry args={[0.41, 0.03, 16, 32]} />
+          <meshStandardMaterial color="#2a2a2a" metalness={0.9} roughness={0.4} />
+        </mesh>
+        <mesh position={[0, -0.9, 0]}>
+          <torusGeometry args={[0.38, 0.03, 16, 32]} />
+          <meshStandardMaterial color="#2a2a2a" metalness={0.9} roughness={0.4} />
+        </mesh>
+        
+        {/* Base Bottom Contact */}
+        <mesh position={[0, -1.15, 0]}>
+          <sphereGeometry args={[0.15, 32, 16]} />
+          <meshStandardMaterial color="#111" metalness={0.8} roughness={0.8} />
+        </mesh>
+      </group>
     </Float>
   );
 };
