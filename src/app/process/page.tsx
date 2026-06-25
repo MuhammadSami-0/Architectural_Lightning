@@ -41,17 +41,17 @@ const ProcessStep = ({ step, index }: { step: any, index: number }) => {
       <div className={`w-full md:w-5/12 ${isEven ? 'md:pr-12' : 'md:pl-12'} mb-8 md:mb-0`}>
         <MouseGlowContainer className={`p-8 ${isEven ? 'md:text-right' : 'md:text-left'}`}>
           <span className="text-label-caps font-label-caps text-primary-container mb-2 block">Step 0{index + 1}</span>
-          <h3 className="text-headline-md font-headline-md text-on-surface mb-4">{step.title}</h3>
-          <p className="text-body-md font-body-md text-on-surface-variant text-lg leading-relaxed">{step.desc}</p>
+          <h3 className="text-2xl md:text-headline-md font-headline-md text-on-surface mb-4">{step.title}</h3>
+          <p className="text-base md:text-body-md font-body-md text-on-surface-variant leading-relaxed">{step.desc}</p>
         </MouseGlowContainer>
       </div>
       
       <div className="absolute left-0 md:left-1/2 -translate-x-1/2 w-6 h-6 rounded-full border-2 border-primary bg-surface-container-lowest z-10 shadow-[0_0_15px_rgba(245,158,11,0.5)]"></div>
       
       <div className={`w-full md:w-5/12 ${isEven ? 'md:pl-12' : 'md:pr-12'}`}>
-        <div className="w-full h-64 bg-zinc-900/40 backdrop-blur-2xl rounded-[2rem] border border-white/10 shadow-[inset_0_1px_0_rgba(255,255,255,0.1),0_20px_40px_-15px_rgba(0,0,0,0.5)] transition-all duration-500 ease-out hover:bg-zinc-900/50 hover:border-white/20 overflow-hidden relative group-hover:shadow-[0_0_30px_rgba(212,175,55,0.15)]">
+        <div tabIndex={0} className="w-full h-64 bg-zinc-900/40 backdrop-blur-2xl rounded-[2rem] border border-white/10 shadow-[inset_0_1px_0_rgba(255,255,255,0.1),0_20px_40px_-15px_rgba(0,0,0,0.5)] transition-all duration-500 ease-out hover:bg-zinc-900/50 hover:border-white/20 focus:bg-zinc-900/50 overflow-hidden relative group-hover:shadow-[0_0_30px_rgba(212,175,55,0.15)] outline-none">
           <img 
-            className="w-full h-full object-cover group-hover:scale-105 group-active:scale-105 transition-all duration-700 ease-in-out filter grayscale-0 md:grayscale group-hover:grayscale-0 group-active:grayscale-0" 
+            className="w-full h-full object-cover group-hover:scale-105 group-focus:scale-105 transition-all duration-700 ease-in-out filter grayscale-0 md:grayscale group-hover:grayscale-0 group-focus:grayscale-0" 
             src={step.image} 
             alt={step.title} 
           />
@@ -78,8 +78,8 @@ export default function Process() {
     <div className="pb-32 px-margin-mobile md:px-margin-desktop max-w-[1440px] mx-auto w-full">
       {/* Header */}
       <header className="text-center mb-32">
-        <h1 className="text-headline-xl-mobile md:text-headline-xl font-headline-xl text-on-surface mb-6">The Methodology.</h1>
-        <p className="text-body-lg text-on-surface-variant max-w-2xl mx-auto text-lg">
+        <h1 className="text-4xl md:text-headline-xl font-headline-xl text-on-surface mb-6">The Methodology.</h1>
+        <p className="text-base md:text-body-lg text-on-surface-variant max-w-2xl mx-auto text-lg">
           A rigorous sequence of creative exploration and technical precision, ensuring every lumen is placed with absolute intentionality.
         </p>
       </header>

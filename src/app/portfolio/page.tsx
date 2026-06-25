@@ -30,10 +30,10 @@ export default function Portfolio() {
     <div className="pb-32 px-margin-mobile md:px-margin-desktop max-w-[1440px] mx-auto w-full">
       {/* Header Section */}
       <header className="mb-24 md:mb-32 max-w-4xl">
-        <h1 className="text-headline-xl-mobile md:text-headline-xl text-on-surface mb-6">
+        <h1 className="text-4xl md:text-headline-xl text-on-surface mb-6 font-headline-xl-mobile md:font-headline-xl">
           A Gallery of Light.
         </h1>
-        <p className="text-body-lg text-on-surface-variant max-w-2xl text-lg">
+        <p className="text-base md:text-body-lg text-on-surface-variant max-w-2xl text-lg">
           Explore our portfolio. Every project is a unique dialogue between architecture, shadow, and luminance.
         </p>
       </header>
@@ -41,10 +41,10 @@ export default function Portfolio() {
       {/* Masonry Gallery */}
       <div className="masonry-grid w-full">
         {projects.map((project, index) => (
-          <div key={index} className="masonry-item w-full relative group overflow-hidden cursor-pointer ambient-glow rounded-[2rem] bg-zinc-900/40 backdrop-blur-2xl border border-white/10 shadow-[inset_0_1px_0_rgba(255,255,255,0.1),0_20px_40px_-15px_rgba(0,0,0,0.5)] transition-all duration-500 ease-out hover:bg-zinc-900/50 hover:border-white/20">
+          <div tabIndex={0} key={index} className="masonry-item w-full relative group overflow-hidden cursor-pointer ambient-glow rounded-[2rem] bg-zinc-900/40 backdrop-blur-2xl border border-white/10 shadow-[inset_0_1px_0_rgba(255,255,255,0.1),0_20px_40px_-15px_rgba(0,0,0,0.5)] transition-all duration-500 ease-out hover:bg-zinc-900/50 hover:border-white/20 outline-none">
             <div className={`${project.aspect} w-full overflow-hidden`}>
               <img 
-                className="w-full h-full object-cover transition-all duration-700 ease-in-out group-hover:scale-105 group-active:scale-105 filter grayscale-0 md:grayscale group-hover:grayscale-0 group-active:grayscale-0" 
+                className="w-full h-full object-cover transition-all duration-700 ease-in-out group-hover:scale-105 group-focus:scale-105 filter grayscale-0 md:grayscale group-hover:grayscale-0 group-focus:grayscale-0" 
                 src={project.image}
                 alt={project.title}
               />

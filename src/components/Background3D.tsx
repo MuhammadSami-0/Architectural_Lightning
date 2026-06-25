@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import { Canvas, useFrame, useThree } from '@react-three/fiber';
 import { Environment, Float, MeshTransmissionMaterial, ContactShadows } from '@react-three/drei';
 import * as THREE from 'three';
@@ -8,6 +8,16 @@ import * as THREE from 'three';
 const InteractiveShape = () => {
   const meshRef = useRef<THREE.Mesh>(null);
   const { mouse, viewport } = useThree();
+  const [scale, setScale] = useState(1.8);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setScale(window.innerWidth < 768 ? 1.0 : 1.8);
+    };
+    handleResize();
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   useFrame((state, delta) => {
     if (meshRef.current) {
@@ -26,7 +36,7 @@ const InteractiveShape = () => {
 
   return (
     <Float speed={2} rotationIntensity={0.5} floatIntensity={1}>
-      <mesh ref={meshRef} scale={1.8}>
+      <mesh ref={meshRef} scale={scale}>
         {/* Using a torus knot for a more complex, luxurious shape */}
         <torusKnotGeometry args={[1, 0.3, 64, 16]} />
         <meshPhysicalMaterial 

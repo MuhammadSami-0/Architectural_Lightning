@@ -29,10 +29,10 @@ export default function Services() {
       {/* Header */}
       <header className="mb-24 md:mb-32 max-w-4xl pt-12">
         <span className="text-label-caps font-label-caps text-primary uppercase tracking-widest mb-4 block">Our Expertise</span>
-        <h1 className="text-headline-xl-mobile md:text-headline-xl text-on-surface mb-8 leading-tight">
+        <h1 className="text-4xl md:text-headline-xl text-on-surface mb-8 leading-tight font-headline-xl-mobile md:font-headline-xl">
           Comprehensive <br /> Lighting Design.
         </h1>
-        <p className="text-body-lg text-on-surface-variant max-w-2xl text-lg">
+        <p className="text-base md:text-body-lg text-on-surface-variant max-w-2xl text-lg">
           We offer a full spectrum of architectural lighting services, from initial conceptualization to precise on-site focusing and programming.
         </p>
       </header>
@@ -40,11 +40,11 @@ export default function Services() {
       {/* Services Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16">
         {services.map((service, index) => (
-          <div key={index} className="group relative flex flex-col">
+          <div tabIndex={0} key={index} className="group relative flex flex-col outline-none">
             {/* Image Container */}
-            <div className="w-full aspect-[4/3] rounded-[2rem] overflow-hidden relative mb-8 card-glow bg-zinc-900/40 backdrop-blur-2xl border border-white/10 shadow-[inset_0_1px_0_rgba(255,255,255,0.1),0_20px_40px_-15px_rgba(0,0,0,0.5)] transition-all duration-500 ease-out hover:bg-zinc-900/50 hover:border-white/20">
+            <div className="w-full aspect-[4/3] rounded-[2rem] overflow-hidden relative mb-8 card-glow bg-zinc-900/40 backdrop-blur-2xl border border-white/10 shadow-[inset_0_1px_0_rgba(255,255,255,0.1),0_20px_40px_-15px_rgba(0,0,0,0.5)] transition-all duration-500 ease-out hover:bg-zinc-900/50 hover:border-white/20 focus:bg-zinc-900/50">
               <div 
-                className="absolute inset-0 bg-cover bg-center transition-transform duration-1000 ease-in-out group-hover:scale-105 group-active:scale-105 filter grayscale-0 md:grayscale group-hover:grayscale-0 group-active:grayscale-0" 
+                className="absolute inset-0 bg-cover bg-center transition-transform duration-1000 ease-in-out group-hover:scale-105 group-focus:scale-105 filter grayscale-0 md:grayscale group-hover:grayscale-0 group-focus:grayscale-0" 
                 style={{ backgroundImage: `url('${service.image}')` }}
               ></div>
               <div className="absolute inset-0 bg-black/40 group-hover:bg-black/10 transition-colors duration-500"></div>
@@ -56,10 +56,10 @@ export default function Services() {
                 <span className="text-label-caps font-label-caps text-primary/60 uppercase">0{index + 1}</span>
                 <div className="h-px bg-surface-container-highest flex-grow"></div>
               </div>
-              <h2 className="text-headline-lg-mobile font-headline-lg-mobile md:text-[32px] text-on-surface mb-4">
+              <h2 className="text-2xl md:text-[32px] font-headline-lg-mobile md:font-headline-lg text-on-surface mb-4">
                 {service.title}
               </h2>
-              <p className="text-body-md text-on-surface-variant leading-relaxed text-lg">
+              <p className="text-base md:text-body-lg text-on-surface-variant flex-grow leading-relaxed">
                 {service.description}
               </p>
             </MouseGlowContainer>
