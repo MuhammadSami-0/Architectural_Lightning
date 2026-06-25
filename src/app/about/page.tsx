@@ -5,7 +5,7 @@ import MouseGlowContainer from '@/components/MouseGlowContainer';
 
 export default function About() {
   return (
-    <main className="flex flex-col md:flex-row min-h-screen group">
+    <main className="flex flex-col md:flex-row min-h-screen group relative overflow-hidden">
       {/* Left: Image Pane */}
       <div className="relative w-full md:w-5/12 h-[614px] md:h-auto md:sticky md:top-0 group cursor-pointer">
         <div className="absolute inset-0 bg-black/20 z-10 pointer-events-none transition-colors duration-700 group-hover:bg-transparent"></div>
@@ -17,7 +17,7 @@ export default function About() {
       </div>
 
       {/* Right: Content Canvas */}
-      <div className="w-full md:w-7/12 bg-zinc-900/40 backdrop-blur-2xl border-l border-white/10 shadow-[inset_1px_0_0_rgba(255,255,255,0.1),-20px_0_40px_-15px_rgba(0,0,0,0.5)] transition-all duration-500 ease-out hover:bg-zinc-900/50 flex items-center pt-32 pb-24 px-margin-mobile md:px-margin-desktop lg:px-24">
+      <div className="w-full md:w-7/12 flex items-center pt-32 pb-24 px-margin-mobile md:px-margin-desktop lg:px-24 relative z-10">
         <motion.div 
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
@@ -38,7 +38,7 @@ export default function About() {
               </p>
             </div>
             
-            <blockquote className="pl-8 border-l-[4px] border-primary-container relative">
+            <blockquote className="pl-8 border-l-[4px] border-primary relative">
               <div className="absolute -left-2 top-0 bottom-0 w-4 bg-primary/20 blur-md -z-10 pointer-events-none"></div>
               <p className="font-headline-lg text-headline-lg text-on-surface italic leading-snug">
                 "To reveal the architecture, you must first master the dark. Light is merely the tool we use to carve the shadow."
