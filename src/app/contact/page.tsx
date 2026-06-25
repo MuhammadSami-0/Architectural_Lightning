@@ -4,7 +4,7 @@ export default function Contact() {
   return (
     <div className="flex-grow flex flex-col md:flex-row w-full max-w-[1440px] mx-auto min-h-[calc(100vh-100px)]">
       {/* Left Column - Contact Info */}
-      <div className="w-full md:w-5/12 px-margin-mobile md:px-margin-desktop py-24 md:py-32 bg-surface-container-lowest/40 backdrop-blur-md border-r border-surface-container-highest/50 flex flex-col justify-between">
+      <div className="w-full md:w-5/12 px-margin-mobile md:px-margin-desktop py-24 md:py-32 bg-black/70 backdrop-blur-2xl border-r border-surface-container-highest/50 flex flex-col justify-between">
         <div>
           <h1 className="text-headline-xl-mobile md:text-headline-xl font-headline-xl text-on-surface mb-8 leading-tight">
             Begin the <br /> Dialogue.

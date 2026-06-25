@@ -41,7 +41,7 @@ export default function Portfolio() {
       {/* Masonry Gallery */}
       <div className="masonry-grid w-full">
         {projects.map((project, index) => (
-          <div key={index} className="masonry-item w-full relative group overflow-hidden cursor-pointer ambient-glow rounded bg-black/40 backdrop-blur-md">
+          <div key={index} className="masonry-item w-full relative group overflow-hidden cursor-pointer ambient-glow rounded bg-black/70 backdrop-blur-2xl">
             <div className={`${project.aspect} w-full overflow-hidden`}>
               <img 
                 className="w-full h-full object-cover transition-all duration-700 ease-in-out group-hover:scale-105 filter grayscale-0 md:grayscale group-hover:grayscale-0" 

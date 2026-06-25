@@ -32,7 +32,7 @@ export default function MouseGlowContainer({
 
   return (
     <div
-      className={`group/glow relative overflow-hidden rounded-sm bg-black/40 backdrop-blur-md border border-white/5 transition-colors duration-700 ease-out hover:bg-black/60 active:bg-black/60 ${className}`}
+      className={`group/glow relative overflow-hidden rounded-sm bg-black/70 backdrop-blur-2xl border border-white/5 transition-colors duration-700 ease-out hover:bg-black/80 active:bg-black/80 ${className}`}
       onMouseMove={handleMouseMove}
       onTouchMove={handleTouchMove}
       onTouchStart={handleTouchMove}
