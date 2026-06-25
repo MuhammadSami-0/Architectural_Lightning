@@ -42,7 +42,7 @@ export default function Services() {
         {services.map((service, index) => (
           <div key={index} className="group relative flex flex-col">
             {/* Image Container */}
-            <div className="w-full aspect-[4/3] rounded-sm overflow-hidden relative mb-8 card-glow bg-black/70 backdrop-blur-2xl">
+            <div className="w-full aspect-[4/3] rounded-[2rem] overflow-hidden relative mb-8 card-glow bg-zinc-900/40 backdrop-blur-2xl border border-white/10 shadow-[inset_0_1px_0_rgba(255,255,255,0.1),0_20px_40px_-15px_rgba(0,0,0,0.5)] transition-all duration-500 ease-out hover:bg-zinc-900/50 hover:border-white/20">
               <div 
                 className="absolute inset-0 bg-cover bg-center transition-transform duration-1000 ease-in-out group-hover:scale-105 filter grayscale-0 md:grayscale group-hover:grayscale-0" 
                 style={{ backgroundImage: `url('${service.image}')` }}

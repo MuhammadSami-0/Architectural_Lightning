@@ -17,7 +17,7 @@ export default function About() {
       </div>
 
       {/* Right: Content Canvas */}
-      <div className="w-full md:w-7/12 bg-black/70 backdrop-blur-2xl flex items-center pt-32 pb-24 px-margin-mobile md:px-margin-desktop lg:px-24">
+      <div className="w-full md:w-7/12 bg-zinc-900/40 backdrop-blur-2xl border-l border-white/10 shadow-[inset_1px_0_0_rgba(255,255,255,0.1),-20px_0_40px_-15px_rgba(0,0,0,0.5)] transition-all duration-500 ease-out hover:bg-zinc-900/50 flex items-center pt-32 pb-24 px-margin-mobile md:px-margin-desktop lg:px-24">
         <motion.div 
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
