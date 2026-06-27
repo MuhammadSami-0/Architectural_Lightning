@@ -27,7 +27,8 @@ const InteractiveShape = () => {
       groupRef.current.rotation.x = Math.sin(state.clock.elapsedTime * 0.5) * 0.1;
 
       // Positioning without mouse tracking (floating statically)
-      const isMobile = window.innerWidth < 768;
+      // We use viewport size to detect mobile layout, avoiding window.innerWidth in the render loop
+      const isMobile = viewport.width < 5; // viewport.width is in 3D units, ~5 is typical mobile breakpoint at this distance
       const offsetX = isMobile ? 0 : 3.0; // Shift to the right on desktop
       const offsetY = 0; // Keep perfectly centered vertically on all screens
 
@@ -119,7 +120,17 @@ const InteractiveShape = () => {
 const Background3D = () => {
   return (
     <div className="absolute inset-0 z-0 pointer-events-auto mix-blend-screen">
-      <Canvas camera={{ position: [0, 0, 8], fov: 45 }} gl={{ antialias: false, alpha: true }} dpr={[1, 1]}>
+      <Canvas 
+        camera={{ position: [0, 0, 8], fov: 45 }} 
+        gl={{ antialias: false, alpha: true, powerPreference: "default", failIfMajorPerformanceCaveat: false }} 
+        dpr={[1, 1]}
+        onCreated={({ gl }) => {
+          gl.getContext().canvas.addEventListener('webglcontextlost', function(event) {
+            event.preventDefault();
+            console.warn('WebGL context lost. Please refresh the page if 3D elements disappear.');
+          }, false);
+        }}
+      >
         <ambientLight intensity={0.2} />
         <directionalLight position={[10, 10, 5]} intensity={1.5} color="#ffe088" />
         <directionalLight position={[-10, -10, -5]} intensity={0.5} color="#d4af37" />
