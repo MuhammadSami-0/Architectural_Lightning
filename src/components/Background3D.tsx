@@ -26,25 +26,23 @@ const InteractiveShape = () => {
       groupRef.current.rotation.y += delta * 0.15;
       groupRef.current.rotation.x = Math.sin(state.clock.elapsedTime * 0.5) * 0.1;
 
-      // Mouse interaction: shape gently tilts towards mouse
+      // Positioning without mouse tracking (floating statically)
       const isMobile = window.innerWidth < 768;
       const offsetX = isMobile ? 0 : 3.0; // Shift to the right on desktop
       const offsetY = 0; // Keep perfectly centered vertically on all screens
 
-      const targetX = (mouse.x * viewport.width) / 10 + offsetX;
-      const targetY = (mouse.y * viewport.height) / 10 + offsetY;
-      
-      groupRef.current.position.x = THREE.MathUtils.lerp(groupRef.current.position.x, targetX, 0.05);
-      groupRef.current.position.y = THREE.MathUtils.lerp(groupRef.current.position.y, targetY, 0.05);
+      // Smoothly move to fixed position (handles window resize smoothly)
+      groupRef.current.position.x = THREE.MathUtils.lerp(groupRef.current.position.x, offsetX, 0.05);
+      groupRef.current.position.y = THREE.MathUtils.lerp(groupRef.current.position.y, offsetY, 0.05);
     }
   });
 
   return (
     <Float speed={2} rotationIntensity={0.2} floatIntensity={1}>
       <group ref={groupRef} scale={scale}>
-        {/* Glass Bulb Body - Using native material for massive performance boost */}
+        {/* Glass Bulb Body - Using native material and lower segments for massive performance boost */}
         <mesh position={[0, 0.5, 0]}>
-          <sphereGeometry args={[1, 64, 64]} />
+          <sphereGeometry args={[1, 32, 32]} />
           <meshPhysicalMaterial 
             transparent
             opacity={0.3}
@@ -119,28 +117,9 @@ const InteractiveShape = () => {
 };
 
 const Background3D = () => {
-  const [isInView, setIsInView] = useState(true);
-  const [isMobile, setIsMobile] = useState(false);
-
-  useEffect(() => {
-    setIsMobile(window.innerWidth < 768);
-    
-    const handleScroll = () => {
-      // Pause rendering if scrolled past the hero section
-      setIsInView(window.scrollY < window.innerHeight + 100);
-    };
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
   return (
     <div className="absolute inset-0 z-0 pointer-events-auto mix-blend-screen">
-      <Canvas 
-        camera={{ position: [0, 0, 8], fov: 45 }} 
-        gl={{ antialias: true, alpha: true, powerPreference: "high-performance" }} 
-        dpr={[1, 1.5]}
-        frameloop={isInView ? "always" : "demand"}
-      >
+      <Canvas camera={{ position: [0, 0, 8], fov: 45 }} gl={{ antialias: false, alpha: true }} dpr={[1, 1]}>
         <ambientLight intensity={0.2} />
         <directionalLight position={[10, 10, 5]} intensity={1.5} color="#ffe088" />
         <directionalLight position={[-10, -10, -5]} intensity={0.5} color="#d4af37" />
@@ -149,8 +128,8 @@ const Background3D = () => {
         
         <Environment preset="city" />
 
-        <EffectComposer multisampling={isMobile ? 0 : 4}>
-          <Bloom luminanceThreshold={0.2} luminanceSmoothing={0.9} intensity={2.5} mipmapBlur />
+        <EffectComposer>
+          <Bloom luminanceThreshold={0.2} luminanceSmoothing={0.9} intensity={2.5} />
         </EffectComposer>
       </Canvas>
     </div>

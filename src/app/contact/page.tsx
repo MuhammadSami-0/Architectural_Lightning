@@ -1,6 +1,29 @@
 "use client";
 
+import { useState, useRef, useEffect } from "react";
+
 export default function Contact() {
+  const [inquiryType, setInquiryType] = useState("Residential Project");
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+        setDropdownOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
+  const options = [
+    "Residential Project",
+    "Commercial Space",
+    "Custom Fixture Design",
+    "Press / Media"
+  ];
+
   return (
     <div className="flex-grow flex flex-col md:flex-row w-full max-w-[1440px] mx-auto min-h-[calc(100vh-100px)]">
       {/* Left Column - Contact Info */}
@@ -62,19 +85,34 @@ export default function Contact() {
             </div>
           </div>
 
-          <div className="flex flex-col relative group">
-            <label htmlFor="inquiry" className="text-label-caps font-label-caps text-on-surface-variant uppercase tracking-widest mb-3">Inquiry Type</label>
-            <select 
-              id="inquiry" 
-              className="bg-transparent border-b border-surface-container-highest text-on-surface text-lg py-3 focus:outline-none focus:border-primary transition-colors rounded-none appearance-none cursor-pointer"
+          <div className="flex flex-col relative group z-20" ref={dropdownRef}>
+            <label className="text-label-caps font-label-caps text-on-surface-variant uppercase tracking-widest mb-3">Inquiry Type</label>
+            <div 
+              className="bg-transparent border-b border-surface-container-highest text-on-surface text-lg py-3 flex justify-between items-center cursor-pointer select-none"
+              onClick={() => setDropdownOpen(!dropdownOpen)}
             >
-              <option className="bg-surface-container-lowest text-on-surface">Residential Project</option>
-              <option className="bg-surface-container-lowest text-on-surface">Commercial Space</option>
-              <option className="bg-surface-container-lowest text-on-surface">Custom Fixture Design</option>
-              <option className="bg-surface-container-lowest text-on-surface">Press / Media</option>
-            </select>
-            <div className="absolute right-0 top-1/2 -translate-y-1/2 pointer-events-none material-symbols-outlined text-on-surface-variant">expand_more</div>
-            <div className="absolute bottom-0 left-0 w-0 h-[2px] bg-primary transition-all duration-300 group-focus-within:w-full"></div>
+              <span>{inquiryType}</span>
+              <div className={`material-symbols-outlined text-on-surface-variant transition-transform duration-300 ${dropdownOpen ? 'rotate-180' : ''}`}>expand_more</div>
+            </div>
+            <div className={`absolute bottom-0 left-0 h-[2px] bg-primary transition-all duration-300 ${dropdownOpen ? 'w-full' : 'w-0'}`}></div>
+            
+            {/* Custom Dropdown Menu */}
+            <div 
+              className={`absolute top-full left-0 w-full mt-2 bg-zinc-900 border border-white/10 shadow-2xl overflow-hidden transition-all duration-300 transform origin-top ${dropdownOpen ? 'opacity-100 scale-y-100 pointer-events-auto' : 'opacity-0 scale-y-95 pointer-events-none'}`}
+            >
+              {options.map((opt) => (
+                <div 
+                  key={opt}
+                  className="px-6 py-4 text-on-surface hover:bg-primary/20 hover:text-primary cursor-pointer transition-colors"
+                  onClick={() => {
+                    setInquiryType(opt);
+                    setDropdownOpen(false);
+                  }}
+                >
+                  {opt}
+                </div>
+              ))}
+            </div>
           </div>
 
           <div className="flex flex-col relative group">

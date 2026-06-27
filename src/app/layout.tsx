@@ -4,6 +4,7 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import LiquidBackground from '@/components/LiquidBackground';
 import GlobalScrollReveal from '@/components/GlobalScrollReveal';
+import CursorTrail from '@/components/CursorTrail';
 
 export const metadata: Metadata = {
   title: 'LUMEN & SHADOW | Architectural Lighting',
@@ -24,6 +25,7 @@ export default function RootLayout({
         <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
       </head>
       <body>
+        <CursorTrail />
         <GlobalScrollReveal />
         <div className="flex flex-col min-h-screen">
           <LiquidBackground />

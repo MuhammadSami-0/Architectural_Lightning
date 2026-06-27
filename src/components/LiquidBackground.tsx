@@ -24,8 +24,7 @@ export default function LiquidBackground() {
     const colors = ["#D4AF37", "#F2CA50", "#E5E2E1", "#FFFFFF"];
     
     // Generate random orbs only on the client to prevent hydration mismatch
-    const numOrbs = window.innerWidth < 768 ? 15 : 40;
-    const generatedOrbs = Array.from({ length: numOrbs }).map((_, i) => {
+    const generatedOrbs = Array.from({ length: 50 }).map((_, i) => {
       const size = Math.random() * 4 + 2; // 2px to 6px
       return {
         id: i,
