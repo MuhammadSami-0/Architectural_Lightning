@@ -2,7 +2,7 @@
 
 import { useRef, useState, useEffect } from 'react';
 import { Canvas, useFrame, useThree } from '@react-three/fiber';
-import { Environment, Float, ContactShadows } from '@react-three/drei';
+import { Environment, Float, PerformanceMonitor } from '@react-three/drei';
 import { EffectComposer, Bloom } from '@react-three/postprocessing';
 import * as THREE from 'three';
 
@@ -119,6 +119,7 @@ const InteractiveShape = ({ isMobile }: { isMobile: boolean }) => {
 
 const Background3D = () => {
   const [isMobile, setIsMobile] = useState(false);
+  const [isLowPerformance, setIsLowPerformance] = useState(false);
 
   useEffect(() => {
     const checkMobile = () => setIsMobile(window.innerWidth < 768);
@@ -127,23 +128,26 @@ const Background3D = () => {
     return () => window.removeEventListener('resize', checkMobile);
   }, []);
 
+  const shouldSimplify = isMobile || isLowPerformance;
+
   return (
     <div className="absolute inset-0 z-0 pointer-events-auto mix-blend-screen">
       <Canvas 
         camera={{ position: [0, 0, 8], fov: 45 }} 
-        gl={{ antialias: !isMobile, alpha: true, powerPreference: "high-performance" }} 
-        dpr={isMobile ? 1 : [1, 1.5]}
+        gl={{ antialias: !shouldSimplify, alpha: true, powerPreference: "high-performance" }} 
+        dpr={shouldSimplify ? 1 : [1, 1.5]}
       >
+        <PerformanceMonitor onDecline={() => setIsLowPerformance(true)} />
         <ambientLight intensity={0.2} />
         <directionalLight position={[10, 10, 5]} intensity={1.5} color="#ffe088" />
         <directionalLight position={[-10, -10, -5]} intensity={0.5} color="#d4af37" />
         
-        <InteractiveShape isMobile={isMobile} />
+        <InteractiveShape isMobile={shouldSimplify} />
         
         <Environment preset="city" />
 
-        {/* Disable expensive post-processing on mobile to eliminate lag */}
-        {!isMobile && (
+        {/* Disable expensive post-processing on mobile and low-end devices to eliminate lag */}
+        {!shouldSimplify && (
           <EffectComposer>
             <Bloom luminanceThreshold={0.2} luminanceSmoothing={0.9} intensity={2.5} mipmapBlur />
           </EffectComposer>
