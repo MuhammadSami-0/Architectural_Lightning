@@ -1,17 +1,12 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { motion, useSpring, useMotionValue } from "framer-motion";
+import { motion, useMotionValue } from "framer-motion";
 
 export default function CursorTrail() {
   const [isVisible, setIsVisible] = useState(false);
   const cursorX = useMotionValue(-100);
   const cursorY = useMotionValue(-100);
-
-  // Spring physics for a smooth, trailing effect
-  const springConfig = { damping: 25, stiffness: 120, mass: 0.5 };
-  const smoothX = useSpring(cursorX, springConfig);
-  const smoothY = useSpring(cursorY, springConfig);
 
   useEffect(() => {
     // Disable on mobile/touch devices for performance and UX
@@ -43,8 +38,8 @@ export default function CursorTrail() {
     <motion.div
       className="fixed top-0 left-0 w-[30px] h-[30px] rounded-full pointer-events-none z-[100] mix-blend-screen"
       style={{
-        x: smoothX,
-        y: smoothY,
+        x: cursorX,
+        y: cursorY,
         background: "radial-gradient(circle, rgba(242, 202, 80, 0.9) 0%, rgba(242, 202, 80, 0) 70%)",
         boxShadow: "0 0 30px 10px rgba(242, 202, 80, 0.3)",
       }}
