@@ -6,7 +6,7 @@ import { Environment, Float, ContactShadows } from '@react-three/drei';
 import { EffectComposer, Bloom } from '@react-three/postprocessing';
 import * as THREE from 'three';
 
-const InteractiveShape = () => {
+const InteractiveShape = ({ isMobile }: { isMobile: boolean }) => {
   const groupRef = useRef<THREE.Group>(null);
   const { mouse, viewport } = useThree();
   const [scale, setScale] = useState(1.8);
@@ -27,7 +27,6 @@ const InteractiveShape = () => {
       groupRef.current.rotation.x = Math.sin(state.clock.elapsedTime * 0.5) * 0.1;
 
       // Mouse interaction: shape gently tilts towards mouse
-      const isMobile = window.innerWidth < 768;
       const offsetX = isMobile ? 0 : 3.0; // Shift to the right on desktop
       const offsetY = 0; // Keep perfectly centered vertically on all screens
 
@@ -42,9 +41,9 @@ const InteractiveShape = () => {
   return (
     <Float speed={2} rotationIntensity={0.2} floatIntensity={1}>
       <group ref={groupRef} scale={scale}>
-        {/* Glass Bulb Body - Using native material for massive performance boost */}
+        {/* Glass Bulb Body - Lower poly count on mobile for performance */}
         <mesh position={[0, 0.5, 0]}>
-          <sphereGeometry args={[1, 64, 64]} />
+          <sphereGeometry args={isMobile ? [1, 32, 32] : [1, 64, 64]} />
           <meshPhysicalMaterial 
             transparent
             opacity={0.3}
@@ -72,7 +71,7 @@ const InteractiveShape = () => {
         {/* Mobile-Safe Fallback Glow & Light */}
         <pointLight position={[0, 0.2, 0]} color="#f2ca50" intensity={1} distance={3} />
         <mesh position={[0, 0.2, 0]}>
-          <sphereGeometry args={[0.3, 32, 32]} />
+          <sphereGeometry args={isMobile ? [0.3, 16, 16] : [0.3, 32, 32]} />
           <meshBasicMaterial 
             color="#f2ca50" 
             transparent 
@@ -94,23 +93,23 @@ const InteractiveShape = () => {
 
         {/* Bulb Base */}
         <mesh position={[0, -0.8, 0]}>
-          <cylinderGeometry args={[0.4, 0.35, 0.6, 32]} />
+          <cylinderGeometry args={isMobile ? [0.4, 0.35, 0.6, 16] : [0.4, 0.35, 0.6, 32]} />
           <meshStandardMaterial color="#2a2a2a" metalness={0.9} roughness={0.4} />
         </mesh>
         
         {/* Base Details (Rings) */}
         <mesh position={[0, -0.7, 0]}>
-          <torusGeometry args={[0.41, 0.03, 16, 32]} />
+          <torusGeometry args={isMobile ? [0.41, 0.03, 8, 16] : [0.41, 0.03, 16, 32]} />
           <meshStandardMaterial color="#2a2a2a" metalness={0.9} roughness={0.4} />
         </mesh>
         <mesh position={[0, -0.9, 0]}>
-          <torusGeometry args={[0.38, 0.03, 16, 32]} />
+          <torusGeometry args={isMobile ? [0.38, 0.03, 8, 16] : [0.38, 0.03, 16, 32]} />
           <meshStandardMaterial color="#2a2a2a" metalness={0.9} roughness={0.4} />
         </mesh>
         
         {/* Base Bottom Contact */}
         <mesh position={[0, -1.15, 0]}>
-          <sphereGeometry args={[0.15, 32, 16]} />
+          <sphereGeometry args={isMobile ? [0.15, 16, 8] : [0.15, 32, 16]} />
           <meshStandardMaterial color="#111" metalness={0.8} roughness={0.8} />
         </mesh>
       </group>
@@ -119,20 +118,36 @@ const InteractiveShape = () => {
 };
 
 const Background3D = () => {
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    checkMobile(); // Check on mount
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
   return (
     <div className="absolute inset-0 z-0 pointer-events-auto mix-blend-screen">
-      <Canvas camera={{ position: [0, 0, 8], fov: 45 }} gl={{ antialias: true, alpha: true }} dpr={[1, 1.5]}>
+      <Canvas 
+        camera={{ position: [0, 0, 8], fov: 45 }} 
+        gl={{ antialias: !isMobile, alpha: true, powerPreference: "high-performance" }} 
+        dpr={isMobile ? 1 : [1, 1.5]}
+      >
         <ambientLight intensity={0.2} />
         <directionalLight position={[10, 10, 5]} intensity={1.5} color="#ffe088" />
         <directionalLight position={[-10, -10, -5]} intensity={0.5} color="#d4af37" />
         
-        <InteractiveShape />
+        <InteractiveShape isMobile={isMobile} />
         
         <Environment preset="city" />
 
-        <EffectComposer>
-          <Bloom luminanceThreshold={0.2} luminanceSmoothing={0.9} intensity={2.5} mipmapBlur />
-        </EffectComposer>
+        {/* Disable expensive post-processing on mobile to eliminate lag */}
+        {!isMobile && (
+          <EffectComposer>
+            <Bloom luminanceThreshold={0.2} luminanceSmoothing={0.9} intensity={2.5} mipmapBlur />
+          </EffectComposer>
+        )}
       </Canvas>
     </div>
   );
