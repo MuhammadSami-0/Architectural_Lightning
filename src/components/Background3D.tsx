@@ -10,48 +10,49 @@ const InteractiveShape = () => {
   const groupRef = useRef<THREE.Group>(null);
   const { viewport } = useThree();
   const [scale, setScale] = useState(1.8);
-  const [isDragging, setIsDragging] = useState(false);
+  const isDraggingRef = useRef(false);
   const lastX = useRef(0);
+  const dragVelocity = useRef(0);
 
   useEffect(() => {
     const handleGlobalPointerMove = (e: PointerEvent) => {
-      if (isDragging && groupRef.current) {
+      if (isDraggingRef.current) {
         const deltaX = e.clientX - lastX.current;
         lastX.current = e.clientX;
-        groupRef.current.rotation.y += deltaX * 0.01;
+        // Overwrite velocity based on latest mouse movement
+        dragVelocity.current = deltaX * 0.015; 
       }
     };
 
     const handleGlobalPointerUp = () => {
-      setIsDragging(false);
+      isDraggingRef.current = false;
       document.body.style.cursor = 'auto';
     };
 
-    if (isDragging) {
-      window.addEventListener('pointermove', handleGlobalPointerMove);
-      window.addEventListener('pointerup', handleGlobalPointerUp);
-    }
+    window.addEventListener('pointermove', handleGlobalPointerMove);
+    window.addEventListener('pointerup', handleGlobalPointerUp);
 
     return () => {
       window.removeEventListener('pointermove', handleGlobalPointerMove);
       window.removeEventListener('pointerup', handleGlobalPointerUp);
     };
-  }, [isDragging]);
+  }, []);
 
   const handlePointerDown = (e: ThreeEvent<PointerEvent>) => {
     e.stopPropagation();
-    setIsDragging(true);
+    isDraggingRef.current = true;
     lastX.current = e.clientX;
+    dragVelocity.current = 0;
     document.body.style.cursor = 'grabbing';
   };
 
   const handlePointerOver = (e: ThreeEvent<PointerEvent>) => {
     e.stopPropagation();
-    if (!isDragging) document.body.style.cursor = 'grab';
+    if (!isDraggingRef.current) document.body.style.cursor = 'grab';
   };
 
   const handlePointerOut = () => {
-    if (!isDragging) document.body.style.cursor = 'auto';
+    if (!isDraggingRef.current) document.body.style.cursor = 'auto';
   };
 
   useEffect(() => {
@@ -65,7 +66,17 @@ const InteractiveShape = () => {
 
   useFrame((state, delta) => {
     if (groupRef.current) {
-      // Base rotation (mostly just spinning slowly on Y for a bulb)
+      if (isDraggingRef.current) {
+        groupRef.current.rotation.y += dragVelocity.current;
+        // Rapidly decay velocity while dragging so if the mouse stops, the bulb stops
+        dragVelocity.current *= 0.5;
+      } else {
+        // Apply momentum (inertia) after releasing
+        groupRef.current.rotation.y += dragVelocity.current;
+        dragVelocity.current *= 0.95; 
+      }
+
+      // Base rotation added constantly
       groupRef.current.rotation.y += delta * 0.15;
       groupRef.current.rotation.x = Math.sin(state.clock.elapsedTime * 0.5) * 0.1;
 

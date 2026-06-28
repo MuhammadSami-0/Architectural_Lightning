@@ -69,7 +69,7 @@ export default function Home() {
       </section>
 
       {/* Featured Work Gallery */}
-      <section className="py-32 px-margin-mobile md:px-margin-desktop bg-surface/30 backdrop-blur-sm relative z-10">
+      <section className="py-32 px-margin-mobile md:px-margin-desktop bg-surface/30 relative z-10">
         <div className="max-w-[1440px] mx-auto">
           <div className="flex flex-col md:flex-row justify-between items-end mb-16">
             <div>
