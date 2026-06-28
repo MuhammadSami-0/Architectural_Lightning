@@ -102,7 +102,7 @@ const InteractiveShape = () => {
           onPointerOut={handlePointerOut}
         >
           <sphereGeometry args={[1.5, 16, 16]} />
-          <meshBasicMaterial visible={false} />
+          <meshBasicMaterial transparent opacity={0} depthWrite={false} />
         </mesh>
 
         {/* Glass Bulb Body - Using native material and lower segments for massive performance boost */}
@@ -183,9 +183,10 @@ const InteractiveShape = () => {
 
 const Background3D = () => {
   return (
-    <div className="absolute inset-0 z-0 pointer-events-auto mix-blend-screen">
+    <div className="absolute inset-0 z-0 mix-blend-screen" style={{ touchAction: 'pan-y' }}>
       <Canvas 
         camera={{ position: [0, 0, 8], fov: 45 }} 
+        style={{ touchAction: 'pan-y' }}
         gl={{ antialias: false, alpha: true, powerPreference: "default", failIfMajorPerformanceCaveat: false }} 
         dpr={[1, 1]}
         onCreated={({ gl }) => {
