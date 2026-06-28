@@ -14,36 +14,32 @@ const InteractiveShape = () => {
   const lastX = useRef(0);
   const dragVelocity = useRef(0);
 
-  useEffect(() => {
-    const handleGlobalPointerMove = (e: PointerEvent) => {
-      if (isDraggingRef.current) {
-        const deltaX = e.clientX - lastX.current;
-        lastX.current = e.clientX;
-        // Overwrite velocity based on latest mouse movement
-        dragVelocity.current = deltaX * 0.015; 
-      }
-    };
-
-    const handleGlobalPointerUp = () => {
-      isDraggingRef.current = false;
-      document.body.style.cursor = 'auto';
-    };
-
-    window.addEventListener('pointermove', handleGlobalPointerMove);
-    window.addEventListener('pointerup', handleGlobalPointerUp);
-
-    return () => {
-      window.removeEventListener('pointermove', handleGlobalPointerMove);
-      window.removeEventListener('pointerup', handleGlobalPointerUp);
-    };
-  }, []);
-
   const handlePointerDown = (e: ThreeEvent<PointerEvent>) => {
     e.stopPropagation();
+    (e.target as any).setPointerCapture(e.pointerId);
     isDraggingRef.current = true;
     lastX.current = e.clientX;
     dragVelocity.current = 0;
     document.body.style.cursor = 'grabbing';
+  };
+
+  const handlePointerMove = (e: ThreeEvent<PointerEvent>) => {
+    if (isDraggingRef.current) {
+      e.stopPropagation();
+      const deltaX = e.clientX - lastX.current;
+      lastX.current = e.clientX;
+      // Capped velocity for gentle, smooth spinning
+      dragVelocity.current = Math.min(Math.max(deltaX * 0.004, -0.1), 0.1);
+    }
+  };
+
+  const handlePointerUp = (e: ThreeEvent<PointerEvent>) => {
+    e.stopPropagation();
+    try {
+      (e.target as any).releasePointerCapture(e.pointerId);
+    } catch (err) {} // safely ignore if capture was already lost
+    isDraggingRef.current = false;
+    document.body.style.cursor = 'auto';
   };
 
   const handlePointerOver = (e: ThreeEvent<PointerEvent>) => {
@@ -51,7 +47,7 @@ const InteractiveShape = () => {
     if (!isDraggingRef.current) document.body.style.cursor = 'grab';
   };
 
-  const handlePointerOut = () => {
+  const handlePointerOut = (e: ThreeEvent<PointerEvent>) => {
     if (!isDraggingRef.current) document.body.style.cursor = 'auto';
   };
 
@@ -99,6 +95,9 @@ const InteractiveShape = () => {
         <mesh 
           position={[0, 0.2, 0]} 
           onPointerDown={handlePointerDown}
+          onPointerMove={handlePointerMove}
+          onPointerUp={handlePointerUp}
+          onPointerCancel={handlePointerUp}
           onPointerOver={handlePointerOver}
           onPointerOut={handlePointerOut}
         >
