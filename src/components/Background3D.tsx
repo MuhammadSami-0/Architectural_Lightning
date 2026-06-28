@@ -1,15 +1,58 @@
 "use client";
 
 import { useRef, useState, useEffect } from 'react';
-import { Canvas, useFrame, useThree } from '@react-three/fiber';
-import { Environment, Float, ContactShadows, OrbitControls } from '@react-three/drei';
+import { Canvas, useFrame, useThree, ThreeEvent } from '@react-three/fiber';
+import { Environment, Float, ContactShadows } from '@react-three/drei';
 import { EffectComposer, Bloom } from '@react-three/postprocessing';
 import * as THREE from 'three';
 
 const InteractiveShape = () => {
   const groupRef = useRef<THREE.Group>(null);
-  const { mouse, viewport } = useThree();
+  const { viewport } = useThree();
   const [scale, setScale] = useState(1.8);
+  const [isDragging, setIsDragging] = useState(false);
+  const lastX = useRef(0);
+
+  useEffect(() => {
+    const handleGlobalPointerMove = (e: PointerEvent) => {
+      if (isDragging && groupRef.current) {
+        const deltaX = e.clientX - lastX.current;
+        lastX.current = e.clientX;
+        groupRef.current.rotation.y += deltaX * 0.01;
+      }
+    };
+
+    const handleGlobalPointerUp = () => {
+      setIsDragging(false);
+      document.body.style.cursor = 'auto';
+    };
+
+    if (isDragging) {
+      window.addEventListener('pointermove', handleGlobalPointerMove);
+      window.addEventListener('pointerup', handleGlobalPointerUp);
+    }
+
+    return () => {
+      window.removeEventListener('pointermove', handleGlobalPointerMove);
+      window.removeEventListener('pointerup', handleGlobalPointerUp);
+    };
+  }, [isDragging]);
+
+  const handlePointerDown = (e: ThreeEvent<PointerEvent>) => {
+    e.stopPropagation();
+    setIsDragging(true);
+    lastX.current = e.clientX;
+    document.body.style.cursor = 'grabbing';
+  };
+
+  const handlePointerOver = (e: ThreeEvent<PointerEvent>) => {
+    e.stopPropagation();
+    if (!isDragging) document.body.style.cursor = 'grab';
+  };
+
+  const handlePointerOut = () => {
+    if (!isDragging) document.body.style.cursor = 'auto';
+  };
 
   useEffect(() => {
     const handleResize = () => {
@@ -41,6 +84,17 @@ const InteractiveShape = () => {
   return (
     <Float speed={2} rotationIntensity={0.2} floatIntensity={1}>
       <group ref={groupRef} scale={scale}>
+        {/* Invisible Hit Mesh for interaction */}
+        <mesh 
+          position={[0, 0.2, 0]} 
+          onPointerDown={handlePointerDown}
+          onPointerOver={handlePointerOver}
+          onPointerOut={handlePointerOut}
+        >
+          <sphereGeometry args={[1.5, 16, 16]} />
+          <meshBasicMaterial visible={false} />
+        </mesh>
+
         {/* Glass Bulb Body - Using native material and lower segments for massive performance boost */}
         <mesh position={[0, 0.5, 0]}>
           <sphereGeometry args={[1, 32, 32]} />
@@ -136,13 +190,6 @@ const Background3D = () => {
         <directionalLight position={[-10, -10, -5]} intensity={0.5} color="#d4af37" />
         
         <InteractiveShape />
-        
-        <OrbitControls 
-          enableZoom={false} 
-          enablePan={false} 
-          minPolarAngle={Math.PI / 2} 
-          maxPolarAngle={Math.PI / 2} 
-        />
         
         <Environment preset="city" />
 
