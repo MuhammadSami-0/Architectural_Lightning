@@ -178,7 +178,7 @@
 .reveal-base {
   opacity: 0;
   translate: 0 40px;
-  transition: opacity 1.2s cubic-bezier(0.22, 1, 0.36, 1), translate 1.2s cubic-bezier(0.22, 1, 0.36, 1);
+  transition: all 700ms ease-in-out, opacity 1.2s cubic-bezier(0.22, 1, 0.36, 1), translate 1.2s cubic-bezier(0.22, 1, 0.36, 1);
   will-change: opacity, translate;
 }
 
