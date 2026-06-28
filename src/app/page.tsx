@@ -8,8 +8,8 @@ export default function Home() {
       {/* Hero Section */}
       <header className="relative w-full min-h-[100svh] md:h-[100svh] flex flex-col md:flex-row items-end md:items-center justify-start overflow-visible md:overflow-hidden -mt-24 md:-mt-32 pb-12 md:pb-0">
         <div className="absolute inset-0 z-0 pointer-events-none">
-          <div className="absolute inset-0 bg-gradient-to-r from-background via-background/80 to-transparent z-0 md:w-2/3"></div>
-          <div className="absolute inset-0 bg-gradient-to-t from-background via-background/80 md:via-transparent to-background/50 z-0"></div>
+          <div className="absolute inset-0 bg-gradient-to-r from-background/70 via-background/40 to-transparent z-0 md:w-2/3"></div>
+          <div className="absolute inset-0 bg-gradient-to-t from-background/70 via-background/40 md:via-transparent to-background/20 z-0"></div>
           {/* Render Background3D after overlays to make it pop and remove dullness */}
           <div 
             className="absolute top-0 left-0 right-0 h-[100svh] z-10"
@@ -69,7 +69,7 @@ export default function Home() {
       </section>
 
       {/* Featured Work Gallery */}
-      <section className="py-32 px-margin-mobile md:px-margin-desktop bg-surface relative z-10">
+      <section className="py-32 px-margin-mobile md:px-margin-desktop bg-surface/30 backdrop-blur-sm relative z-10">
         <div className="max-w-[1440px] mx-auto">
           <div className="flex flex-col md:flex-row justify-between items-end mb-16">
             <div>

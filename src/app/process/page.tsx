@@ -50,11 +50,11 @@ const ProcessStep = ({ step, index }: { step: any, index: number }) => {
       
       <div className={`w-full md:w-5/12 ${isEven ? 'md:pl-12' : 'md:pr-12'}`}>
         <div tabIndex={0} className="w-full h-64 bg-zinc-900/40 backdrop-blur-2xl rounded-[2rem] border border-white/10 shadow-[inset_0_1px_0_rgba(255,255,255,0.1),0_20px_40px_-15px_rgba(0,0,0,0.5)] transition-all duration-500 ease-out hover:bg-zinc-900/50 hover:border-white/20 focus:bg-zinc-900/50 overflow-hidden relative group-hover:shadow-[0_0_30px_rgba(212,175,55,0.15)] outline-none">
-          <img 
-            className="w-full h-full object-cover group-hover:scale-105 group-focus:scale-105 transition-all duration-700 ease-in-out filter grayscale-0 md:grayscale group-hover:grayscale-0 group-focus:grayscale-0" 
-            src={step.image} 
-            alt={step.title} 
-          />
+          <div 
+            className="absolute inset-0 bg-cover bg-center group-hover:scale-105 group-focus:scale-105 transition-transform duration-700 ease-in-out filter grayscale-0 md:grayscale group-hover:grayscale-0 group-focus:grayscale-0" 
+            style={{ backgroundImage: `url('${step.image}')` }}
+            aria-label={step.title}
+          ></div>
         </div>
       </div>
     </motion.div>

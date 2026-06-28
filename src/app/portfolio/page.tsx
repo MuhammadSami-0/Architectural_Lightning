@@ -42,12 +42,12 @@ export default function Portfolio() {
       <div className="masonry-grid w-full">
         {projects.map((project, index) => (
           <div tabIndex={0} key={index} className="masonry-item w-full relative group overflow-hidden cursor-pointer ambient-glow rounded-[2rem] bg-zinc-900/40 backdrop-blur-2xl border border-white/10 shadow-[inset_0_1px_0_rgba(255,255,255,0.1),0_20px_40px_-15px_rgba(0,0,0,0.5)] transition-all duration-500 ease-out hover:bg-zinc-900/50 hover:border-white/20 outline-none">
-            <div className={`${project.aspect} w-full overflow-hidden`}>
-              <img 
-                className="w-full h-full object-cover transition-all duration-700 ease-in-out group-hover:scale-105 group-focus:scale-105 filter grayscale-0 md:grayscale group-hover:grayscale-0 group-focus:grayscale-0" 
-                src={project.image}
-                alt={project.title}
-              />
+            <div className={`${project.aspect} w-full overflow-hidden relative`}>
+              <div 
+                className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105 group-focus:scale-105 filter grayscale-0 md:grayscale group-hover:grayscale-0 group-focus:grayscale-0" 
+                style={{ backgroundImage: `url('${project.image}')` }}
+                aria-label={project.title}
+              ></div>
             </div>
             <div className="absolute inset-0 bg-gradient-to-t from-background/90 via-background/40 to-transparent flex flex-col justify-end p-8">
               <div className="hover-card-content">

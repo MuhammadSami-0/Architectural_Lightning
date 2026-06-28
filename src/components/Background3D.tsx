@@ -2,7 +2,7 @@
 
 import { useRef, useState, useEffect } from 'react';
 import { Canvas, useFrame, useThree } from '@react-three/fiber';
-import { Environment, Float, ContactShadows } from '@react-three/drei';
+import { Environment, Float, ContactShadows, OrbitControls } from '@react-three/drei';
 import { EffectComposer, Bloom } from '@react-three/postprocessing';
 import * as THREE from 'three';
 
@@ -136,6 +136,13 @@ const Background3D = () => {
         <directionalLight position={[-10, -10, -5]} intensity={0.5} color="#d4af37" />
         
         <InteractiveShape />
+        
+        <OrbitControls 
+          enableZoom={false} 
+          enablePan={false} 
+          minPolarAngle={Math.PI / 2} 
+          maxPolarAngle={Math.PI / 2} 
+        />
         
         <Environment preset="city" />
 
