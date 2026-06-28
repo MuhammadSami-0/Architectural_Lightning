@@ -73,7 +73,7 @@ const InteractiveShape = () => {
       }
 
       // Base rotation added constantly
-      groupRef.current.rotation.y += delta * 0.15;
+      groupRef.current.rotation.y += delta * 0.4;
       groupRef.current.rotation.x = Math.sin(state.clock.elapsedTime * 0.5) * 0.1;
 
       // Positioning without mouse tracking (floating statically)
