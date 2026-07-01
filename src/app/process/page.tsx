@@ -73,43 +73,37 @@ export default function ProcessPage() {
       </div>
 
       {/* Timeline */}
-      <div ref={containerRef} className="max-w-5xl mx-auto px-margin-mobile md:px-margin-desktop relative mt-32">
-        {/* Central Line Base */}
-        <div className="absolute left-6 md:left-1/2 top-0 bottom-0 w-[2px] bg-primary/10 -translate-x-1/2"></div>
-        {/* Central Line Active (Scroll Fill) */}
+      <div ref={containerRef} className="max-w-4xl mx-auto px-margin-mobile md:px-margin-desktop relative mt-32">
+        {/* Left Line Base */}
+        <div className="absolute left-6 md:left-12 top-0 bottom-0 w-[2px] bg-primary/10"></div>
+        {/* Left Line Active (Scroll Fill) */}
         <motion.div 
-          className="absolute left-6 md:left-1/2 top-0 w-[2px] bg-primary shadow-[0_0_10px_rgba(212,175,55,0.8)] -translate-x-1/2 origin-top"
+          className="absolute left-6 md:left-12 top-0 w-[2px] bg-primary shadow-[0_0_10px_rgba(212,175,55,0.8)] origin-top"
           style={{ height: lineHeight }}
         ></motion.div>
         
-        {steps.map((step, index) => {
-          const isEven = index % 2 === 0;
-          return (
-            <div key={index} className={`relative flex flex-col md:flex-row items-center mb-32 ${isEven ? 'md:flex-row-reverse' : ''} reveal-base`}>
-              
-              {/* Timeline Node */}
-              <div className="absolute left-6 md:left-1/2 -translate-x-1/2 w-6 h-6 rounded-full border-2 border-primary bg-surface-container-lowest z-10 shadow-[0_0_15px_rgba(245,158,11,0.5)]"></div>
-              
-              {/* Empty Side */}
-              <div className={`hidden md:block md:w-5/12`}></div>
-
-              {/* Spacer for center line */}
-              <div className="hidden md:block w-2/12"></div>
-
-              {/* Content Side */}
-              <div className={`w-full md:w-5/12 pl-16 md:pl-0 ${isEven ? 'md:pl-12 md:text-left' : 'md:pr-12 md:text-right'}`}>
-                <div className="text-primary font-headline-md text-6xl opacity-10 absolute -z-10 -top-8 left-4 md:left-auto md:right-auto">{step.number}</div>
-                <MouseGlowContainer className="p-8 md:p-12 rounded-[2rem] bg-zinc-900/30 border border-white/5 relative overflow-hidden group h-full">
-                  <h3 className="text-primary text-sm font-label-caps tracking-widest uppercase mb-4">Step {step.number}</h3>
-                  <h2 className="text-3xl md:text-4xl font-headline-md text-on-surface mb-6">{step.title}</h2>
-                  <p className="text-on-surface-variant font-body-md text-lg leading-relaxed">
-                    {step.description}
-                  </p>
-                </MouseGlowContainer>
+        <div className="space-y-32">
+          {steps.map((step, index) => {
+            return (
+              <div key={index} className="relative pl-20 md:pl-32 reveal-base">
+                {/* Timeline Node */}
+                <div className="absolute left-6 md:left-12 -translate-x-[11px] top-12 w-6 h-6 rounded-full border-2 border-primary bg-surface-container-lowest z-10 shadow-[0_0_15px_rgba(245,158,11,0.5)]"></div>
+                
+                {/* Content Side */}
+                <div className="relative w-full">
+                  <div className="text-primary font-headline-md text-7xl md:text-8xl opacity-10 absolute -z-10 -top-8 md:-top-12 -left-4 md:-left-8">{step.number}</div>
+                  <MouseGlowContainer className="p-8 md:p-12 rounded-[2rem] bg-zinc-900/30 border border-white/5 relative overflow-hidden group">
+                    <h3 className="text-primary text-sm font-label-caps tracking-widest uppercase mb-4">Step {step.number}</h3>
+                    <h2 className="text-3xl md:text-4xl font-headline-md text-on-surface mb-6">{step.title}</h2>
+                    <p className="text-on-surface-variant font-body-md text-lg md:text-xl leading-relaxed">
+                      {step.description}
+                    </p>
+                  </MouseGlowContainer>
+                </div>
               </div>
-            </div>
-          );
-        })}
+            );
+          })}
+        </div>
       </div>
 
       {/* The Result Section */}

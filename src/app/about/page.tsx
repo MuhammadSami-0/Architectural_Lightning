@@ -42,19 +42,7 @@ export default function About() {
               className="h-full"
             >
               <MouseGlowContainer className="p-8 md:p-16 h-full flex flex-col justify-center">
-                <div className="space-y-8 text-on-surface-variant font-body-lg text-lg leading-relaxed mb-16">
-                  <p>
-                    At Luxury Lighting Studio, we believe exceptional lighting is never an afterthought—it is an essential element of exceptional architecture. Every project begins with a thoughtful understanding of the space, allowing us to create lighting that enhances its character, celebrates its materials, and transforms the way it is experienced.
-                  </p>
-                  <p>
-                    Founded by Muhammad Affan Nadeem, an Electrical Engineer, Luxury Lighting Studio brings together technical expertise and refined design. Every lighting scheme is carefully tailored to complement the architecture while balancing aesthetics, performance, and functionality.
-                  </p>
-                  <p>
-                    From luxury residences and private villas to commercial developments, we deliver bespoke architectural lighting solutions that combine precision, craftsmanship, and timeless elegance.
-                  </p>
-                </div>
-                
-                <div className="border-t border-white/10 pt-12">
+                <div className="mb-12">
                   <h3 className="text-primary text-sm font-label-caps tracking-widest uppercase mb-2">Meet Our Founder</h3>
                   <h2 className="text-3xl md:text-4xl font-headline-md text-on-surface mb-4">Muhammad Affan Nadeem</h2>
                   <p className="text-primary-container text-sm font-label-md tracking-wider uppercase mb-8">Electrical Engineer | Lighting Design Specialist</p>
@@ -65,6 +53,18 @@ export default function About() {
                       “The finest lighting doesn’t ask to be noticed. It quietly reveals the beauty that was always there.”
                     </p>
                   </blockquote>
+                </div>
+
+                <div className="border-t border-white/10 pt-12 space-y-8 text-on-surface-variant font-body-lg text-lg leading-relaxed">
+                  <p>
+                    Founded by Muhammad Affan Nadeem, an Electrical Engineer, Luxury Lighting Studio brings together technical expertise and refined design. Every lighting scheme is carefully tailored to complement the architecture while balancing aesthetics, performance, and functionality.
+                  </p>
+                  <p>
+                    At Luxury Lighting Studio, we believe exceptional lighting is never an afterthought—it is an essential element of exceptional architecture. Every project begins with a thoughtful understanding of the space, allowing us to create lighting that enhances its character, celebrates its materials, and transforms the way it is experienced.
+                  </p>
+                  <p>
+                    From luxury residences and private villas to commercial developments, we deliver bespoke architectural lighting solutions that combine precision, craftsmanship, and timeless elegance.
+                  </p>
                 </div>
               </MouseGlowContainer>
             </motion.div>

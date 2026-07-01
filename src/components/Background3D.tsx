@@ -162,8 +162,8 @@ const InteractiveShape = () => {
         <pointLight position={[0, 0.2, 0]} color="#f2ca50" intensity={3} distance={10} />
         {glowTexture && (
           <group position={[0, 0, 0]}>
-            {/* Inner intense glow - restored to spherical */}
-            <sprite position={[0, 0.3, 0]} scale={[3, 3, 1]} renderOrder={99}>
+            {/* Inner intense glow - capsule shape */}
+            <sprite position={[0, 0.3, 0]} scale={[2, 3.5, 1]} renderOrder={99}>
               <spriteMaterial 
                 map={glowTexture} 
                 blending={THREE.AdditiveBlending} 
@@ -173,8 +173,8 @@ const InteractiveShape = () => {
                 opacity={1}
               />
             </sprite>
-            {/* Outer ambient glow - restored to spherical */}
-            <sprite position={[0, 0.4, -0.5]} scale={[6, 6, 1]} renderOrder={98}>
+            {/* Outer ambient glow - capsule shape */}
+            <sprite position={[0, 0.4, -0.5]} scale={[4, 6, 1]} renderOrder={98}>
               <spriteMaterial 
                 map={glowTexture} 
                 blending={THREE.AdditiveBlending} 
@@ -189,9 +189,9 @@ const InteractiveShape = () => {
 
         {/* --- ROTATING ELEMENTS (Filament & Base spin) --- */}
         <group ref={innerGroupRef}>
-          {/* Inner Glowing Filament - Replaced with sphere to match the glow shape */}
-          <mesh position={[0, 0.3, 0]}>
-            <sphereGeometry args={[0.15, 32, 32]} />
+          {/* Inner Glowing Filament - Capsule (Spherical light bar) */}
+          <mesh position={[0, 0.25, 0]}>
+            <capsuleGeometry args={[0.06, 0.4, 16, 32]} />
             <meshBasicMaterial 
               color="#fff8d6"
               depthTest={false}
