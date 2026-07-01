@@ -1,6 +1,8 @@
 import Background3D from '@/components/Background3D';
 import Link from 'next/link';
 import MouseGlowContainer from '@/components/MouseGlowContainer';
+import StatisticsCounter from '@/components/StatisticsCounter';
+import ReviewSlider from '@/components/ReviewSlider';
 
 export default function Home() {
   return (
@@ -24,11 +26,12 @@ export default function Home() {
 
         <div className="relative z-20 text-left px-margin-mobile md:px-margin-desktop max-w-[1440px] mx-auto flex flex-col items-start justify-center pointer-events-none w-full pt-[95svh] md:pt-0 mt-auto md:mt-0">
           <h1 className="font-headline-xl-mobile md:font-headline-xl text-on-background mb-6 max-w-4xl hero-glow text-4xl md:text-8xl font-bold tracking-tighter">
-            Designing the absence of <br className="hidden md:block" />
-            <span className="text-primary-container drop-shadow-[0_0_20px_rgba(251,191,36,0.5)]">Light</span>
+            Experience <br className="hidden md:block" />
+            <span className="text-primary-container drop-shadow-[0_0_20px_rgba(251,191,36,0.5)]">Light</span><br className="hidden md:block" />
+            With Purpose.
           </h1>
           <p className="font-body-lg text-body-lg text-on-surface-variant max-w-2xl mb-12 opacity-80 text-lg md:text-xl">
-            We craft immersive architectural experiences through the intentional interplay of illumination and shadow. Elevating spaces beyond the visible.
+            Luxury lighting design that brings architecture to life through beauty, balance, and intention.
           </p>
           <div className="flex flex-col sm:flex-row gap-6 pointer-events-auto">
             <Link href="/portfolio" className="px-8 py-4 bg-primary-container text-black font-label-caps text-label-caps uppercase tracking-widest hover:shadow-[0_0_30px_rgba(251,191,36,0.4)] transition-all duration-300 rounded-sm text-center">
@@ -48,11 +51,14 @@ export default function Home() {
             <span className="inline-block px-3 py-1 border border-outline-variant text-primary font-label-caps text-label-caps uppercase tracking-widest rounded-sm mb-6 md:mb-8">
               Our Philosophy
             </span>
-            <h2 className="text-3xl md:text-headline-lg font-headline-lg text-on-background mb-6 md:mb-8 leading-tight">
-              Light is not merely seen. <br /> It is felt.
+            <h2 className="text-3xl md:text-headline-lg font-headline-lg text-on-background mb-6 md:mb-8 leading-tight uppercase">
+              LIGHT ISN’T JUST SEEN. <br /> IT’S FELT.
             </h2>
+            <p className="text-base md:text-body-lg font-body-lg text-on-surface-variant leading-relaxed opacity-80 mb-6">
+              At Luxury Lighting Studio, we believe exceptional lighting transforms the way a space is experienced. Thoughtfully designed architectural lighting enhances beauty, creates atmosphere, and reveals the finest details of every interior and exterior.
+            </p>
             <p className="text-base md:text-body-lg font-body-lg text-on-surface-variant leading-relaxed opacity-80">
-              At Lumen & Shadow, we approach lighting design as a sculptural medium. We don't just illuminate spaces; we curate atmosphere, direct focus, and establish emotional resonance. Our methodology embraces darkness as the canvas, allowing strategic light to reveal texture, form, and narrative.
+              Every project is crafted with purpose, balancing light and shadow to create spaces that feel timeless, elegant, and effortlessly refined.
             </p>
           </MouseGlowContainer>
           <div className="md:col-span-4 md:col-start-8 relative">
@@ -124,6 +130,23 @@ export default function Home() {
           </div>
           <Link href="/portfolio" className="md:hidden mt-12 inline-flex items-center justify-center w-full py-4 border border-outline text-primary font-label-caps text-label-caps uppercase tracking-widest rounded-sm">
             Explore Gallery
+          </Link>
+        </div>
+      </section>
+
+      <StatisticsCounter />
+      
+      <ReviewSlider />
+
+      {/* CTA Section */}
+      <section className="py-32 px-margin-mobile md:px-margin-desktop bg-surface/30 relative z-10 text-center">
+        <div className="max-w-4xl mx-auto">
+          <h2 className="font-headline-lg text-headline-lg text-on-background mb-6">Ready to Transform Your Space?</h2>
+          <p className="text-body-lg text-on-surface-variant max-w-2xl mx-auto text-lg mb-12">
+            Whether you’re designing a new space or renovating an existing one, we’ll help you design lighting that perfectly complements your vision.
+          </p>
+          <Link href="/contact" className="inline-block px-12 py-5 bg-primary-container text-black font-label-caps text-label-caps uppercase tracking-widest hover:shadow-[0_0_30px_rgba(251,191,36,0.4)] hover:brightness-110 transition-all duration-300 rounded-sm">
+            Book a Free Consultation
           </Link>
         </div>
       </section>
