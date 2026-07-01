@@ -1,9 +1,8 @@
 "use client";
 
-import { useRef, useState, useEffect } from 'react';
+import { useRef, useState, useEffect, useMemo } from 'react';
 import { Canvas, useFrame, useThree, ThreeEvent } from '@react-three/fiber';
 import { Environment, Float, ContactShadows } from '@react-three/drei';
-import { EffectComposer, Bloom } from '@react-three/postprocessing';
 import * as THREE from 'three';
 
 const InteractiveShape = () => {
@@ -58,6 +57,24 @@ const InteractiveShape = () => {
     handleResize();
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  const glowTexture = useMemo(() => {
+    if (typeof document === 'undefined') return null;
+    const canvas = document.createElement('canvas');
+    canvas.width = 512;
+    canvas.height = 512;
+    const context = canvas.getContext('2d');
+    if (context) {
+      const gradient = context.createRadialGradient(256, 256, 0, 256, 256, 256);
+      gradient.addColorStop(0, 'rgba(255, 230, 150, 1)'); 
+      gradient.addColorStop(0.1, 'rgba(242, 202, 80, 0.9)'); 
+      gradient.addColorStop(0.4, 'rgba(212, 175, 55, 0.4)'); 
+      gradient.addColorStop(1, 'rgba(212, 175, 55, 0)'); 
+      context.fillStyle = gradient;
+      context.fillRect(0, 0, 512, 512);
+    }
+    return new THREE.CanvasTexture(canvas);
   }, []);
 
   useFrame((state, delta) => {
@@ -124,26 +141,24 @@ const InteractiveShape = () => {
         {/* Inner Glowing Filament */}
         <mesh position={[0, 0.2, 0]}>
           <cylinderGeometry args={[0.05, 0.05, 0.8, 16]} />
-          <meshPhysicalMaterial 
-            color="#f2ca50"
-            emissive="#f2ca50"
-            emissiveIntensity={1}
-            toneMapped={false}
+          <meshBasicMaterial 
+            color="#fff0b3"
           />
         </mesh>
         
-        {/* Core Glow */}
+        {/* Core Glow (Cheap Bloom Sprite) */}
         <pointLight position={[0, 0.2, 0]} color="#f2ca50" intensity={1.5} distance={5} />
-        <mesh position={[0, 0.2, 0]}>
-          <sphereGeometry args={[0.5, 32, 32]} />
-          <meshBasicMaterial 
-            color="#f2ca50" 
-            transparent 
-            opacity={0.2} 
-            blending={THREE.AdditiveBlending} 
-            depthWrite={false}
-          />
-        </mesh>
+        {glowTexture && (
+          <sprite position={[0, 0.4, 0]} scale={[4, 4, 1]}>
+            <spriteMaterial 
+              map={glowTexture} 
+              blending={THREE.AdditiveBlending} 
+              transparent 
+              depthWrite={false} 
+              opacity={0.85}
+            />
+          </sprite>
+        )}
         
         {/* Filament Supports */}
         <mesh position={[-0.2, -0.1, 0]} rotation={[0, 0, 0.3]}>
@@ -203,10 +218,6 @@ const Background3D = () => {
         <InteractiveShape />
         
         <Environment preset="city" />
-
-        <EffectComposer>
-          <Bloom luminanceThreshold={0.2} luminanceSmoothing={0.9} intensity={2.5} />
-        </EffectComposer>
       </Canvas>
     </div>
   );
