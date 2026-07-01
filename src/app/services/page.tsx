@@ -3,7 +3,7 @@
 import { useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { MouseGlowContainer } from "@/components/MouseGlowContainer";
+import MouseGlowContainer from "@/components/MouseGlowContainer";
 
 export default function ExpertisePage() {
   useEffect(() => {
@@ -103,7 +103,7 @@ export default function ExpertisePage() {
                 <h2 className="text-4xl md:text-5xl font-headline-md text-on-surface mt-3 mb-6">{area.title}</h2>
                 <div className="space-y-4">
                   {area.description.split('\n\n').map((paragraph, i) => (
-                    <p key={i} className="text-on-surface-variant font-body-md text-lg leading-relaxed" key={i}>
+                    <p key={i} className="text-on-surface-variant font-body-md text-lg leading-relaxed">
                       {paragraph}
                     </p>
                   ))}

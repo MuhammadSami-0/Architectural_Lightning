@@ -2,7 +2,7 @@
 
 import { useEffect } from "react";
 import Link from "next/link";
-import { MouseGlowContainer } from "@/components/MouseGlowContainer";
+import MouseGlowContainer from "@/components/MouseGlowContainer";
 
 export default function ProcessPage() {
   useEffect(() => {

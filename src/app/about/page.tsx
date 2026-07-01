@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { motion } from 'framer-motion';
+import Image from 'next/image';
 import MouseGlowContainer from '@/components/MouseGlowContainer';
 
 export default function About() {
