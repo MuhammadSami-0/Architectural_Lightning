@@ -43,15 +43,17 @@ export default function GlobalScrollReveal() {
     // Run slightly after mount to ensure DOM is ready
     const timer = setTimeout(observeElements, 100);
 
-    // Setup mutation observer for dynamically added elements (like Next.js route changes)
+    let debounceTimer: ReturnType<typeof setTimeout>;
     const mutationObserver = new MutationObserver(() => {
-      observeElements();
+      clearTimeout(debounceTimer);
+      debounceTimer = setTimeout(observeElements, 250);
     });
 
     mutationObserver.observe(document.body, { childList: true, subtree: true });
 
     return () => {
       clearTimeout(timer);
+      clearTimeout(debounceTimer);
       observer.disconnect();
       mutationObserver.disconnect();
     };
