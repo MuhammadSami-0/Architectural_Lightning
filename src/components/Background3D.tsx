@@ -67,9 +67,10 @@ const InteractiveShape = () => {
     const context = canvas.getContext('2d');
     if (context) {
       const gradient = context.createRadialGradient(256, 256, 0, 256, 256, 256);
-      gradient.addColorStop(0, 'rgba(255, 240, 180, 1)'); // Intense bright center
-      gradient.addColorStop(0.2, 'rgba(242, 202, 80, 0.8)'); // Golden core
-      gradient.addColorStop(0.5, 'rgba(212, 175, 55, 0.3)'); // Soft ambient falloff
+      gradient.addColorStop(0, 'rgba(255, 255, 255, 1)'); // Sharp white core
+      gradient.addColorStop(0.05, 'rgba(255, 240, 180, 0.9)'); // Intense tight center
+      gradient.addColorStop(0.15, 'rgba(242, 202, 80, 0.6)'); // Golden falloff
+      gradient.addColorStop(0.3, 'rgba(212, 175, 55, 0.2)'); // Soft ambient
       gradient.addColorStop(1, 'rgba(0, 0, 0, 0)'); // Must fade to 0 alpha
       context.fillStyle = gradient;
       context.fillRect(0, 0, 512, 512);
@@ -127,11 +128,11 @@ const InteractiveShape = () => {
           <sphereGeometry args={[1, 32, 32]} />
           <meshStandardMaterial 
             transparent
-            opacity={0.15}
-            roughness={0.1}
-            metalness={0.8}
+            opacity={0.1}
+            roughness={0}
+            metalness={0.9}
             color="#ffffff"
-            envMapIntensity={2}
+            envMapIntensity={4}
           />
         </mesh>
         

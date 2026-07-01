@@ -41,7 +41,7 @@ export default function Portfolio() {
       {/* Masonry Gallery */}
       <div className="masonry-grid w-full">
         {projects.map((project, index) => (
-          <div tabIndex={0} key={index} className="masonry-item w-full relative group overflow-hidden cursor-pointer ambient-glow rounded-[2rem] bg-zinc-900/40 backdrop-blur-2xl border border-white/10 shadow-[inset_0_1px_0_rgba(255,255,255,0.1),0_20px_40px_-15px_rgba(0,0,0,0.5)] transition-all duration-500 ease-out hover:bg-zinc-900/50 hover:border-white/20 outline-none">
+          <div tabIndex={0} key={index} className="masonry-item w-full relative group overflow-hidden cursor-pointer rounded-[2rem] bg-zinc-900/40 backdrop-blur-2xl border border-white/10 shadow-[inset_0_1px_0_rgba(255,255,255,0.1),0_20px_40px_-15px_rgba(0,0,0,0.5)] luxury-card-hover outline-none">
             <div className={`${project.aspect} w-full overflow-hidden relative`}>
               <div 
                 className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105 group-focus:scale-105 filter grayscale-0 md:grayscale group-hover:grayscale-0 group-focus:grayscale-0" 

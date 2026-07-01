@@ -33,11 +33,11 @@ export default function Home() {
           <p className="font-body-lg text-body-lg text-on-surface-variant max-w-2xl mb-12 opacity-80 text-lg md:text-xl">
             Luxury lighting design that brings architecture to life through beauty, balance, and intention.
           </p>
-          <div className="flex flex-col sm:flex-row gap-6 pointer-events-auto">
-            <Link href="/portfolio" className="px-8 py-4 bg-primary-container text-black font-label-caps text-label-caps uppercase tracking-widest hover:shadow-[0_0_30px_rgba(251,191,36,0.4)] transition-all duration-300 rounded-sm text-center">
+          <div className="flex flex-col sm:flex-row gap-6 justify-center md:justify-start reveal-base is-revealed" style={{ transitionDelay: '300ms' }}>
+            <Link href="/portfolio" className="btn-primary w-full sm:w-auto">
               View Portfolio
             </Link>
-            <Link href="/process" className="px-8 py-4 border border-primary-container text-primary-container font-label-caps text-label-caps uppercase tracking-widest hover:bg-primary-container/10 hover:shadow-[0_0_20px_rgba(251,191,36,0.2)] transition-all duration-300 rounded-sm text-center">
+            <Link href="/process" className="btn-outline w-full sm:w-auto">
               Our Process
             </Link>
           </div>
@@ -87,9 +87,11 @@ export default function Home() {
           <p className="text-body-lg text-on-surface-variant max-w-2xl mx-auto text-lg mb-12">
             Whether you’re designing a new space or renovating an existing one, we’ll help you design lighting that perfectly complements your vision.
           </p>
-          <Link href="/contact" className="inline-block px-12 py-5 bg-primary-container text-black font-label-caps text-label-caps uppercase tracking-widest hover:shadow-[0_0_30px_rgba(251,191,36,0.4)] hover:brightness-110 transition-all duration-300 rounded-sm">
-            Book a Free Consultation
-          </Link>
+          <div className="text-center mt-16 max-w-2xl mx-auto">
+            <Link href="/contact" className="btn-primary !px-12 !py-5">
+              Schedule a Consultation
+            </Link>
+          </div>
         </div>
       </section>
     </>

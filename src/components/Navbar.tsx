@@ -32,7 +32,7 @@ const Navbar = () => {
     <nav className={`fixed top-0 w-full z-50 transition-all ease-in-out duration-500 border-b ${isScrolled ? 'bg-background/90 backdrop-blur-md border-primary/20 shadow-[0_0_30px_rgba(212,175,55,0.05)] py-4' : 'bg-transparent border-transparent py-6'}`}>
       <div className="flex justify-between items-center w-full px-margin-mobile md:px-margin-desktop max-w-[1440px] mx-auto">
         <Link href="/" className="text-headline-md font-headline-md tracking-tighter text-on-surface uppercase hover:text-primary transition-colors duration-500">
-          LUMEN & SHADOW
+          STITCH
         </Link>
         
         <div className="hidden md:flex items-center gap-8">
@@ -50,8 +50,8 @@ const Navbar = () => {
           })}
         </div>
 
-        <Link href="/contact" className="hidden md:block bg-primary-container text-[#050505] px-6 py-3 font-label-caps text-label-caps uppercase hover:shadow-[0_0_30px_rgba(212,175,55,0.15)] hover:brightness-110 transition-all duration-500 rounded-sm">
-          Consultation
+        <Link href="/contact" className="hidden md:inline-flex btn-primary !px-6 !py-3">
+          Start a Project
         </Link>
 
         <button 

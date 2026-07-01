@@ -5,7 +5,7 @@ import { motion, useInView, animate } from "framer-motion";
 
 const Counter = ({ value, suffix = "" }: { value: number; suffix?: string }) => {
   const ref = useRef<HTMLSpanElement>(null);
-  const isInView = useInView(ref, { once: false, margin: "-100px" });
+  const isInView = useInView(ref, { once: false, amount: 0.1 });
   
   useEffect(() => {
     if (isInView) {
@@ -45,7 +45,7 @@ export default function StatisticsCounter() {
               className="md:hidden absolute top-0 left-0 right-0 h-[2px] bg-primary origin-left"
               initial={{ scaleX: 0 }}
               whileInView={{ scaleX: 1 }}
-              viewport={{ once: false, margin: "-100px" }}
+              viewport={{ once: false, amount: 0.1 }}
               transition={{ duration: 2, ease: "easeOut" }}
             />
             {/* Left Border for Desktop */}
@@ -54,7 +54,7 @@ export default function StatisticsCounter() {
               className="hidden md:block absolute left-0 top-0 bottom-0 w-[2px] bg-primary origin-bottom"
               initial={{ scaleY: 0 }}
               whileInView={{ scaleY: 1 }}
-              viewport={{ once: false, margin: "-100px" }}
+              viewport={{ once: false, amount: 0.1 }}
               transition={{ duration: 2, ease: "easeOut" }}
             />
             <h3 className="text-6xl md:text-8xl font-headline-lg text-primary-container mb-4">
@@ -70,7 +70,7 @@ export default function StatisticsCounter() {
               className="md:hidden absolute top-0 left-0 right-0 h-[2px] bg-primary origin-left"
               initial={{ scaleX: 0 }}
               whileInView={{ scaleX: 1 }}
-              viewport={{ once: false, margin: "-100px" }}
+              viewport={{ once: false, amount: 0.1 }}
               transition={{ duration: 2, ease: "easeOut" }}
             />
             {/* Left Border for Desktop */}
@@ -79,7 +79,7 @@ export default function StatisticsCounter() {
               className="hidden md:block absolute left-0 top-0 bottom-0 w-[2px] bg-primary origin-bottom"
               initial={{ scaleY: 0 }}
               whileInView={{ scaleY: 1 }}
-              viewport={{ once: false, margin: "-100px" }}
+              viewport={{ once: false, amount: 0.1 }}
               transition={{ duration: 2, ease: "easeOut" }}
             />
             <h3 className="text-6xl md:text-8xl font-headline-lg text-primary-container mb-4">
@@ -95,7 +95,7 @@ export default function StatisticsCounter() {
               className="md:hidden absolute top-0 left-0 right-0 h-[2px] bg-primary origin-left"
               initial={{ scaleX: 0 }}
               whileInView={{ scaleX: 1 }}
-              viewport={{ once: false, margin: "-100px" }}
+              viewport={{ once: false, amount: 0.1 }}
               transition={{ duration: 2, ease: "easeOut" }}
             />
             {/* Left Border for Desktop */}

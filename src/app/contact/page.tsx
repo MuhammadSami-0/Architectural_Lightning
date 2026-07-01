@@ -127,8 +127,8 @@ export default function Contact() {
           </div>
 
           <button 
-            type="submit" 
-            className="mt-8 bg-primary-container text-[#050505] px-12 py-5 font-label-caps text-label-caps uppercase tracking-widest hover:shadow-[0_0_40px_rgba(212,175,55,0.2)] hover:brightness-110 transition-all duration-500 rounded-sm w-full md:w-auto self-start"
+            type="submit"
+            className="w-full btn-primary mt-4"
           >
             Submit Inquiry
           </button>
