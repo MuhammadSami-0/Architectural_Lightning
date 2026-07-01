@@ -15,13 +15,11 @@ export default function ReviewSlider() {
       <style dangerouslySetInnerHTML={{__html: `
         @keyframes marquee {
           0% { transform: translateX(0); }
-          100% { transform: translateX(-50%); }
+          100% { transform: translateX(-100%); }
         }
         .animate-marquee {
           animation: marquee 30s linear infinite;
           will-change: transform;
-          display: flex;
-          width: max-content;
         }
       `}} />
       <motion.div
@@ -41,11 +39,36 @@ export default function ReviewSlider() {
         </div>
 
         {/* Infinite Slider */}
-        <div className="relative w-full overflow-hidden py-8 hover:[&>div]:[animation-play-state:paused]">
+        <div className="relative w-full overflow-hidden flex py-8 hover:[&>div]:[animation-play-state:paused]">
           
-          <div className="animate-marquee">
-            {[...reviews, ...reviews].map((review, i) => (
-              <div key={i} className="pr-6 md:pr-8 shrink-0">
+          <div className="flex animate-marquee shrink-0">
+            {reviews.map((review, i) => (
+              <div key={`first-${i}`} className="pr-6 md:pr-8 shrink-0">
+                <div 
+                  className="w-[85vw] md:w-[450px] bg-[#161616] rounded-[2rem] border border-white/5 p-10 flex flex-col justify-between hover:bg-[#1a1a1a] transition-colors duration-300 h-full"
+                >
+                  <div>
+                    <div className="flex gap-1 text-primary-container mb-8">
+                      {[...Array(5)].map((_, i) => (
+                        <span key={i} className="material-symbols-outlined text-lg" style={{ fontVariationSettings: "'FILL' 1" }}>star</span>
+                      ))}
+                    </div>
+                    <p className="text-lg md:text-xl font-body-md text-on-surface leading-relaxed mb-12">
+                      "{review.text}"
+                    </p>
+                  </div>
+                  <div className="border-t border-white/10 pt-6">
+                    <p className="font-headline-md text-on-background text-lg">{review.author}</p>
+                    <p className="text-primary-container/80 font-label-caps uppercase tracking-widest text-sm mt-2">{review.role}</p>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <div className="flex animate-marquee shrink-0" aria-hidden="true">
+            {reviews.map((review, i) => (
+              <div key={`second-${i}`} className="pr-6 md:pr-8 shrink-0">
                 <div 
                   className="w-[85vw] md:w-[450px] bg-[#161616] rounded-[2rem] border border-white/5 p-10 flex flex-col justify-between hover:bg-[#1a1a1a] transition-colors duration-300 h-full"
                 >
