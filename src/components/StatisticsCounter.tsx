@@ -5,7 +5,7 @@ import { motion, useInView, useMotionValue, useSpring } from "framer-motion";
 
 const Counter = ({ value, suffix = "" }: { value: number; suffix?: string }) => {
   const ref = useRef<HTMLSpanElement>(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const isInView = useInView(ref, { once: false, margin: "-100px" });
   
   const motionValue = useMotionValue(0);
   const springValue = useSpring(motionValue, {
@@ -16,6 +16,8 @@ const Counter = ({ value, suffix = "" }: { value: number; suffix?: string }) => 
   useEffect(() => {
     if (isInView) {
       motionValue.set(value);
+    } else {
+      motionValue.set(0);
     }
   }, [isInView, value, motionValue]);
 
