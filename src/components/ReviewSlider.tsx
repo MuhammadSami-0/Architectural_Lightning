@@ -1,7 +1,5 @@
 "use client";
 
-import { motion } from "framer-motion";
-
 const reviews = [
   { text: "The lighting completely transformed our villa. Every fixture feels like a piece of art, and the team’s recommendations were spot on.", author: "Sarah M.", role: "Luxury Villa Owner" },
   { text: "Unparalleled attention to detail. They didn't just light our space, they gave it a soul and completely redefined our hotel's ambiance.", author: "James R.", role: "Boutique Hotel Owner" },
@@ -12,6 +10,16 @@ const reviews = [
 export default function ReviewSlider() {
   return (
     <section className="py-32 bg-transparent relative z-10 overflow-hidden">
+      <style dangerouslySetInnerHTML={{__html: `
+        @keyframes marquee {
+          0% { transform: translate3d(0, 0, 0); }
+          100% { transform: translate3d(-50%, 0, 0); }
+        }
+        .animate-marquee {
+          animation: marquee 30s linear infinite;
+          will-change: transform;
+        }
+      `}} />
       <div className="max-w-[1440px] mx-auto px-margin-mobile md:px-margin-desktop mb-16 text-center">
         <span className="inline-block px-3 py-1 border border-outline-variant text-primary font-label-caps text-label-caps uppercase tracking-widest rounded-sm mb-6">
           Testimonials
@@ -24,20 +32,12 @@ export default function ReviewSlider() {
 
       {/* Infinite Slider */}
       <div className="relative w-full overflow-hidden flex">
-        {/* Gradients to fade edges */}
-        <div className="absolute top-0 left-0 w-16 md:w-48 h-full bg-gradient-to-r from-background to-transparent z-10 pointer-events-none"></div>
-        <div className="absolute top-0 right-0 w-16 md:w-48 h-full bg-gradient-to-l from-background to-transparent z-10 pointer-events-none"></div>
-        
-        <motion.div 
-          className="flex gap-6 md:gap-8 px-4 md:px-0 w-max"
-          animate={{ x: ["0%", "-50%"] }}
-          transition={{ repeat: Infinity, ease: "linear", duration: 30 }}
-        >
+        <div className="flex gap-6 md:gap-8 px-4 md:px-0 w-max animate-marquee hover:[animation-play-state:paused]">
           {/* Double the array for seamless infinite looping */}
           {[...reviews, ...reviews].map((review, i) => (
             <div 
               key={i} 
-              className="w-[85vw] md:w-[450px] flex-shrink-0 bg-zinc-900/40 backdrop-blur-2xl rounded-[2rem] border border-white/10 p-10 flex flex-col justify-between hover:bg-zinc-900/60 transition-colors duration-500 shadow-[0_10px_30px_rgba(0,0,0,0.5)]"
+              className="w-[85vw] md:w-[450px] flex-shrink-0 bg-surface/80 rounded-[2rem] border border-white/5 p-10 flex flex-col justify-between hover:bg-surface transition-colors duration-300 shadow-[0_10px_30px_rgba(0,0,0,0.5)]"
             >
               <div>
                 <div className="flex gap-1 text-primary-container mb-8">
@@ -55,7 +55,7 @@ export default function ReviewSlider() {
               </div>
             </div>
           ))}
-        </motion.div>
+        </div>
       </div>
     </section>
   );
