@@ -88,7 +88,7 @@ export default function ExpertisePage() {
             <div className="w-full md:w-1/2">
               <MouseGlowContainer className="w-full aspect-[4/3] outline-none group cursor-pointer block">
                 <div 
-                  className="absolute inset-0 bg-cover bg-center transition-transform duration-1000 ease-in-out group-hover:scale-105 group-focus:scale-105 filter grayscale-0 md:grayscale group-hover:grayscale-0 group-focus:grayscale-0" 
+                  className="absolute inset-0 bg-cover bg-center transition-transform duration-1000 ease-in-out group-hover:scale-105 group-focus:scale-105" 
                   style={{ backgroundImage: `url('${area.image}')` }}
                   aria-hidden="true"
                 />
@@ -127,19 +127,28 @@ export default function ExpertisePage() {
         ))}
       </div>
 
-      {/* CTA Section */}
-      <div className="max-w-[1440px] mx-auto px-margin-mobile md:px-margin-desktop mt-40 text-center reveal-base">
-        <div className="max-w-3xl mx-auto py-24 bg-zinc-900/40 backdrop-blur-sm border-t border-b border-primary/20">
-          <h2 className="text-4xl md:text-5xl font-headline-md text-primary-container mb-6">Designed Around Your Vision.</h2>
-          <p className="text-xl text-on-surface-variant mb-4">
-            Every project begins with understanding your architecture, your aspirations, and the experience you want to create. Whether you’re designing a luxury residence, a commercial destination, or a landmark façade, we create lighting that is tailored exclusively to your space.
-          </p>
-          <p className="text-2xl font-serif italic text-on-surface mb-12">
-            Let’s create something extraordinary.
-          </p>
-          <Link href="/contact" className="btn-primary">
-            Book a Consultation
-          </Link>
+      {/* CTA Section - Expertise Design */}
+      <div className="max-w-[1440px] mx-auto px-margin-mobile md:px-margin-desktop mt-40 reveal-base">
+        <div className="relative overflow-hidden rounded-[2rem] bg-gradient-to-br from-zinc-900/80 to-zinc-950 border border-white/5 p-12 md:p-20 shadow-2xl flex flex-col md:flex-row items-center justify-between gap-12">
+          {/* Subtle glow effect in the background */}
+          <div className="absolute top-0 right-0 w-96 h-96 bg-primary/10 blur-[100px] rounded-full pointer-events-none"></div>
+          
+          <div className="w-full md:w-2/3 relative z-10">
+            <div className="w-12 h-1 bg-primary/40 mb-8 rounded-full"></div>
+            <h2 className="text-4xl md:text-5xl font-headline-md text-on-surface mb-6">Designed Around Your Vision.</h2>
+            <p className="text-xl text-on-surface-variant mb-8 max-w-2xl leading-relaxed">
+              Every project begins with understanding your architecture, your aspirations, and the experience you want to create. Whether you’re designing a luxury residence, a commercial destination, or a landmark façade, we create lighting that is tailored exclusively to your space.
+            </p>
+            <p className="text-2xl font-serif italic text-primary-container">
+              Let’s create something extraordinary.
+            </p>
+          </div>
+          
+          <div className="w-full md:w-1/3 flex justify-start md:justify-end relative z-10">
+            <Link href="/contact" className="btn-primary whitespace-nowrap px-10 py-5 text-lg">
+              Book a Consultation
+            </Link>
+          </div>
         </div>
       </div>
     </main>

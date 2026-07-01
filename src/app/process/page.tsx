@@ -80,7 +80,7 @@ export default function ProcessPage() {
               <div className={`w-full md:w-5/12 pl-16 md:pl-0 ${isEven ? 'md:pr-12' : 'md:pl-12'} mb-8 md:mb-0`}>
                 <MouseGlowContainer className="w-full h-64 outline-none overflow-hidden block">
                   <div 
-                    className="absolute inset-0 bg-cover bg-center group-hover:scale-105 transition-transform duration-700 ease-in-out filter grayscale-0 md:grayscale group-hover:grayscale-0" 
+                    className="absolute inset-0 bg-cover bg-center group-hover:scale-105 transition-transform duration-700 ease-in-out" 
                     style={{ backgroundImage: `url('${step.image}')` }}
                     aria-hidden="true"
                   />
@@ -115,17 +115,20 @@ export default function ProcessPage() {
         </div>
       </div>
 
-      {/* Final CTA */}
-      <div className="max-w-[1440px] mx-auto px-margin-mobile md:px-margin-desktop mt-32 text-center reveal-base">
-        <div className="max-w-3xl mx-auto py-24 bg-zinc-900/40 backdrop-blur-sm border-t border-b border-primary/20">
-          <h2 className="text-4xl md:text-5xl font-headline-md text-primary-container mb-6">Let’s Bring Your Vision to Light.</h2>
-          <p className="text-xl text-on-surface-variant mb-12">
-            Whether you’re designing a luxury residence, a commercial environment, or an architectural façade, we’re here to create lighting that’s tailored to your space and crafted to last.
-          </p>
-          <Link href="/contact" className="btn-primary">
-            Book a Consultation
-          </Link>
-        </div>
+      {/* Final CTA - Process Design */}
+      <div className="max-w-[1440px] mx-auto px-margin-mobile md:px-margin-desktop mt-32 mb-20 text-center reveal-base">
+        <MouseGlowContainer className="max-w-4xl mx-auto py-24 px-8 border border-white/10 rounded-[3rem] relative overflow-hidden group">
+          <div className="relative z-10 flex flex-col items-center">
+            <span className="material-symbols-outlined text-primary text-5xl mb-6 font-light" style={{ fontVariationSettings: "'wght' 200" }}>lightbulb</span>
+            <h2 className="text-4xl md:text-5xl font-headline-md text-on-surface mb-6">Let’s Bring Your Vision to Light.</h2>
+            <p className="text-xl text-on-surface-variant mb-12 max-w-2xl mx-auto">
+              Whether you’re designing a luxury residence, a commercial environment, or an architectural façade, we’re here to create lighting that’s tailored to your space and crafted to last.
+            </p>
+            <Link href="/contact" className="btn-primary">
+              Book a Consultation
+            </Link>
+          </div>
+        </MouseGlowContainer>
       </div>
     </main>
   );

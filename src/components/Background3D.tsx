@@ -80,19 +80,10 @@ const InteractiveShape = () => {
 
   useFrame((state, delta) => {
     if (groupRef.current) {
-      if (isDraggingRef.current) {
-        groupRef.current.rotation.y += dragVelocity.current;
-        // Rapidly decay velocity while dragging so if the mouse stops, the bulb stops
-        dragVelocity.current *= 0.5;
-      } else {
-        // Apply momentum (inertia) after releasing
-        groupRef.current.rotation.y += dragVelocity.current;
-        dragVelocity.current *= 0.95; 
-      }
+      // Rotation tracking disabled per request so reflection is always full and constant
 
-      // Base rotation added constantly
-      groupRef.current.rotation.y += delta * 0.4;
-      groupRef.current.rotation.x = Math.sin(state.clock.elapsedTime * 0.5) * 0.1;
+      // Very subtle floating animation
+      groupRef.current.position.y = Math.sin(state.clock.elapsedTime * 0.5) * 0.1 - 0.2;
 
       // Positioning without mouse tracking (floating statically)
       // We use viewport size to detect mobile layout, avoiding window.innerWidth in the render loop
@@ -161,7 +152,7 @@ const InteractiveShape = () => {
         {/* Core Glow (Cheap Bloom Sprite) */}
         <pointLight position={[0, 0.2, 0]} color="#f2ca50" intensity={3} distance={10} />
         {glowTexture && (
-          <group position={[0, 0, 1.2]}>
+          <group position={[0, 0, 0]}>
             {/* Inner intense glow */}
             <sprite position={[0, 0.3, 0]} scale={[3, 3, 1]} renderOrder={99}>
               <spriteMaterial 

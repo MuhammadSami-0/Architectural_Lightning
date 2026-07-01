@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import MouseGlowContainer from "./MouseGlowContainer";
 
 const reviews = [
   { text: "The lighting completely transformed our villa. Every fixture feels like a piece of art, and the team’s recommendations were spot on.", author: "Sarah M.", role: "Luxury Villa Owner" },
@@ -44,8 +45,8 @@ export default function ReviewSlider() {
           <div className="flex animate-marquee shrink-0">
             {[...reviews, ...reviews, ...reviews].map((review, i) => (
               <div key={`first-${i}`} className="pr-6 md:pr-8 shrink-0">
-                <div 
-                  className="w-[85vw] md:w-[400px] bg-[#161616] rounded-[2rem] border border-white/5 p-10 flex flex-col justify-between luxury-card-hover h-full"
+                <MouseGlowContainer 
+                  className="w-[85vw] md:w-[400px] bg-[#161616] p-10 flex flex-col justify-between h-full"
                 >
                   <div>
                     <div className="flex gap-1 text-primary-container mb-8">
@@ -61,7 +62,7 @@ export default function ReviewSlider() {
                     <p className="font-headline-md text-on-background text-lg">{review.author}</p>
                     <p className="text-primary-container/80 font-label-caps uppercase tracking-widest text-sm mt-2">{review.role}</p>
                   </div>
-                </div>
+                </MouseGlowContainer>
               </div>
             ))}
           </div>
@@ -69,8 +70,8 @@ export default function ReviewSlider() {
           <div className="flex animate-marquee shrink-0" aria-hidden="true">
             {[...reviews, ...reviews, ...reviews].map((review, i) => (
               <div key={`second-${i}`} className="pr-6 md:pr-8 shrink-0">
-                <div 
-                  className="w-[85vw] md:w-[400px] bg-[#161616] rounded-[2rem] border border-white/5 p-10 flex flex-col justify-between luxury-card-hover h-full"
+                <MouseGlowContainer 
+                  className="w-[85vw] md:w-[400px] bg-[#161616] p-10 flex flex-col justify-between h-full"
                 >
                   <div>
                     <div className="flex gap-1 text-primary-container mb-8">
@@ -86,7 +87,7 @@ export default function ReviewSlider() {
                     <p className="font-headline-md text-on-background text-lg">{review.author}</p>
                     <p className="text-primary-container/80 font-label-caps uppercase tracking-widest text-sm mt-2">{review.role}</p>
                   </div>
-                </div>
+                </MouseGlowContainer>
               </div>
             ))}
           </div>
