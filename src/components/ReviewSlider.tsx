@@ -42,7 +42,7 @@ export default function ReviewSlider() {
         <div className="relative w-full overflow-hidden flex py-8 hover:[&>div]:[animation-play-state:paused]">
           
           <div className="flex animate-marquee shrink-0">
-            {reviews.map((review, i) => (
+            {[...reviews, ...reviews, ...reviews].map((review, i) => (
               <div key={`first-${i}`} className="pr-6 md:pr-8 shrink-0">
                 <div 
                   className="w-[85vw] md:w-[450px] bg-[#161616] rounded-[2rem] border border-white/5 p-10 flex flex-col justify-between hover:bg-[#1a1a1a] transition-colors duration-300 h-full"
@@ -67,7 +67,7 @@ export default function ReviewSlider() {
           </div>
 
           <div className="flex animate-marquee shrink-0" aria-hidden="true">
-            {reviews.map((review, i) => (
+            {[...reviews, ...reviews, ...reviews].map((review, i) => (
               <div key={`second-${i}`} className="pr-6 md:pr-8 shrink-0">
                 <div 
                   className="w-[85vw] md:w-[450px] bg-[#161616] rounded-[2rem] border border-white/5 p-10 flex flex-col justify-between hover:bg-[#1a1a1a] transition-colors duration-300 h-full"
