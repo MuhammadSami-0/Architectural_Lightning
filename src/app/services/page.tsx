@@ -129,7 +129,7 @@ export default function ExpertisePage() {
 
       {/* CTA Section - Expertise Design */}
       <div className="max-w-[1440px] mx-auto px-margin-mobile md:px-margin-desktop mt-40 reveal-base">
-        <div className="relative overflow-hidden rounded-[2rem] bg-gradient-to-br from-zinc-900/80 to-zinc-950 border border-white/5 p-12 md:p-20 shadow-2xl flex flex-col md:flex-row items-center justify-between gap-12">
+        <MouseGlowContainer className="relative overflow-hidden rounded-[2rem] bg-gradient-to-br from-zinc-900/80 to-zinc-950 border border-white/5 p-12 md:p-20 shadow-2xl flex flex-col md:flex-row items-center justify-between gap-12">
           {/* Subtle glow effect in the background */}
           <div className="absolute top-0 right-0 w-96 h-96 bg-primary/10 blur-[100px] rounded-full pointer-events-none"></div>
           
@@ -149,7 +149,7 @@ export default function ExpertisePage() {
               Book a Consultation
             </Link>
           </div>
-        </div>
+        </MouseGlowContainer>
       </div>
     </main>
   );

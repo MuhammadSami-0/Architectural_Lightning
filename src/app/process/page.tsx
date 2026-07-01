@@ -90,29 +90,22 @@ export default function ProcessPage() {
               {/* Timeline Node */}
               <div className="absolute left-6 md:left-1/2 -translate-x-1/2 w-6 h-6 rounded-full border-2 border-primary bg-surface-container-lowest z-10 shadow-[0_0_15px_rgba(245,158,11,0.5)]"></div>
               
-              {/* Image Side */}
-              <div className={`w-full md:w-5/12 pl-16 md:pl-0 ${isEven ? 'md:pr-12' : 'md:pl-12'} mb-8 md:mb-0`}>
-                <MouseGlowContainer className="w-full h-64 outline-none overflow-hidden block">
-                  <div 
-                    className="absolute inset-0 bg-cover bg-center group-hover:scale-105 transition-transform duration-700 ease-in-out" 
-                    style={{ backgroundImage: `url('${step.image}')` }}
-                    aria-hidden="true"
-                  />
-                  <div className="absolute inset-0 bg-black/40 group-hover:bg-black/10 transition-colors duration-500"></div>
-                </MouseGlowContainer>
-              </div>
+              {/* Empty Side */}
+              <div className={`hidden md:block md:w-5/12`}></div>
 
               {/* Spacer for center line */}
               <div className="hidden md:block w-2/12"></div>
 
               {/* Content Side */}
               <div className={`w-full md:w-5/12 pl-16 md:pl-0 ${isEven ? 'md:pl-12 md:text-left' : 'md:pr-12 md:text-right'}`}>
-                <div className="text-primary font-headline-md text-6xl opacity-20 absolute -z-10 -top-8 -left-4 md:-left-8">{step.number}</div>
-                <h3 className="text-primary text-sm font-label-caps tracking-widest uppercase mb-2">Step {step.number}</h3>
-                <h2 className="text-3xl font-headline-md text-on-surface mb-4">{step.title}</h2>
-                <p className="text-on-surface-variant font-body-md text-lg leading-relaxed">
-                  {step.description}
-                </p>
+                <div className="text-primary font-headline-md text-6xl opacity-10 absolute -z-10 -top-8 left-4 md:left-auto md:right-auto">{step.number}</div>
+                <MouseGlowContainer className="p-8 md:p-12 rounded-[2rem] bg-zinc-900/30 border border-white/5 relative overflow-hidden group h-full">
+                  <h3 className="text-primary text-sm font-label-caps tracking-widest uppercase mb-4">Step {step.number}</h3>
+                  <h2 className="text-3xl md:text-4xl font-headline-md text-on-surface mb-6">{step.title}</h2>
+                  <p className="text-on-surface-variant font-body-md text-lg leading-relaxed">
+                    {step.description}
+                  </p>
+                </MouseGlowContainer>
               </div>
             </div>
           );

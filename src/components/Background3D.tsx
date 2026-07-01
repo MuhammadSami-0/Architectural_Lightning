@@ -115,7 +115,7 @@ const InteractiveShape = () => {
   });
 
   return (
-    <Float speed={2} rotationIntensity={0.2} floatIntensity={1}>
+    <Float speed={2} rotationIntensity={0} floatIntensity={1}>
       <group ref={outerGroupRef} scale={scale}>
         {/* Invisible Hit Mesh for interaction */}
         <mesh 
