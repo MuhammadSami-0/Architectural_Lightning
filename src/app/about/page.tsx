@@ -15,7 +15,8 @@ export default function About() {
           transition={{ duration: 1.5, ease: [0.22, 1, 0.36, 1], delay: 0.2 }}
           className="mb-12"
         >
-          <h1 className="font-headline-xl-mobile md:font-headline-xl text-on-surface uppercase">
+          <h3 className="text-primary text-sm font-label-caps tracking-widest uppercase mb-4">OUR STUDIO</h3>
+          <h1 className="text-5xl md:text-7xl font-headline-xl text-primary-container tracking-tight uppercase mb-8">
             Where Engineering <br className="hidden md:block" /> Meets Light.
           </h1>
         </motion.div>

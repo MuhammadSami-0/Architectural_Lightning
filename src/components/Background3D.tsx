@@ -80,7 +80,21 @@ const InteractiveShape = () => {
 
   useFrame((state, delta) => {
     if (groupRef.current) {
-      // Rotation tracking disabled per request so reflection is always full and constant
+      if (isDraggingRef.current) {
+        groupRef.current.rotation.y += dragVelocity.current;
+        // Rapidly decay velocity while dragging so if the mouse stops, the bulb stops
+        dragVelocity.current *= 0.5;
+      } else {
+        // Apply momentum (inertia) after releasing
+        groupRef.current.rotation.y += dragVelocity.current;
+        dragVelocity.current *= 0.95; 
+      }
+      
+      // Base rotation added constantly
+      groupRef.current.rotation.y += delta * 0.4;
+      
+      // Lock X rotation to keep the reflection constantly full on the glass
+      groupRef.current.rotation.x = 0;
 
       // Very subtle floating animation
       groupRef.current.position.y = Math.sin(state.clock.elapsedTime * 0.5) * 0.1 - 0.2;
@@ -153,8 +167,8 @@ const InteractiveShape = () => {
         <pointLight position={[0, 0.2, 0]} color="#f2ca50" intensity={3} distance={10} />
         {glowTexture && (
           <group position={[0, 0, 0]}>
-            {/* Inner intense glow */}
-            <sprite position={[0, 0.3, 0]} scale={[3, 3, 1]} renderOrder={99}>
+            {/* Inner intense glow - stretched vertically to match filament */}
+            <sprite position={[0, 0.3, 0]} scale={[0.8, 3.5, 1]} renderOrder={99}>
               <spriteMaterial 
                 map={glowTexture} 
                 blending={THREE.AdditiveBlending} 
@@ -164,8 +178,8 @@ const InteractiveShape = () => {
                 opacity={1}
               />
             </sprite>
-            {/* Outer ambient glow */}
-            <sprite position={[0, 0.4, -0.5]} scale={[6, 6, 1]} renderOrder={98}>
+            {/* Outer ambient glow - stretched vertically */}
+            <sprite position={[0, 0.4, -0.5]} scale={[1.5, 6, 1]} renderOrder={98}>
               <spriteMaterial 
                 map={glowTexture} 
                 blending={THREE.AdditiveBlending} 

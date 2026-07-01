@@ -1,7 +1,8 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import Link from "next/link";
+import { motion, useScroll, useTransform } from "framer-motion";
 import MouseGlowContainer from "@/components/MouseGlowContainer";
 
 export default function ProcessPage() {
@@ -22,6 +23,14 @@ export default function ProcessPage() {
     reveals.forEach(reveal => observer.observe(reveal));
     return () => observer.disconnect();
   }, []);
+
+  const containerRef = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start center", "end center"]
+  });
+
+  const lineHeight = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
 
   const steps = [
     {
@@ -64,9 +73,14 @@ export default function ProcessPage() {
       </div>
 
       {/* Timeline */}
-      <div className="max-w-5xl mx-auto px-margin-mobile md:px-margin-desktop relative mt-32">
-        {/* Central Line */}
-        <div className="absolute left-6 md:left-1/2 top-0 bottom-0 w-[2px] bg-primary/20 -translate-x-1/2"></div>
+      <div ref={containerRef} className="max-w-5xl mx-auto px-margin-mobile md:px-margin-desktop relative mt-32">
+        {/* Central Line Base */}
+        <div className="absolute left-6 md:left-1/2 top-0 bottom-0 w-[2px] bg-primary/10 -translate-x-1/2"></div>
+        {/* Central Line Active (Scroll Fill) */}
+        <motion.div 
+          className="absolute left-6 md:left-1/2 top-0 w-[2px] bg-primary shadow-[0_0_10px_rgba(212,175,55,0.8)] -translate-x-1/2 origin-top"
+          style={{ height: lineHeight }}
+        ></motion.div>
         
         {steps.map((step, index) => {
           const isEven = index % 2 === 0;
