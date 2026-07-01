@@ -67,10 +67,10 @@ const InteractiveShape = () => {
     const context = canvas.getContext('2d');
     if (context) {
       const gradient = context.createRadialGradient(256, 256, 0, 256, 256, 256);
-      gradient.addColorStop(0, 'rgba(255, 230, 150, 1)'); 
-      gradient.addColorStop(0.1, 'rgba(242, 202, 80, 0.9)'); 
-      gradient.addColorStop(0.4, 'rgba(212, 175, 55, 0.4)'); 
-      gradient.addColorStop(1, 'rgba(212, 175, 55, 0)'); 
+      gradient.addColorStop(0, 'rgba(255, 240, 180, 1)'); // Intense bright center
+      gradient.addColorStop(0.2, 'rgba(242, 202, 80, 0.8)'); // Golden core
+      gradient.addColorStop(0.5, 'rgba(212, 175, 55, 0.3)'); // Soft ambient falloff
+      gradient.addColorStop(1, 'rgba(0, 0, 0, 0)'); // Must fade to 0 alpha
       context.fillStyle = gradient;
       context.fillRect(0, 0, 512, 512);
     }
@@ -122,42 +122,64 @@ const InteractiveShape = () => {
           <meshBasicMaterial transparent opacity={0} depthWrite={false} />
         </mesh>
 
-        {/* Glass Bulb Body - Using native material and lower segments for massive performance boost */}
+        {/* Glass Bulb Body - Standard Material for massive performance while still looking like glass */}
         <mesh position={[0, 0.5, 0]}>
           <sphereGeometry args={[1, 32, 32]} />
-          <meshPhysicalMaterial 
+          <meshStandardMaterial 
             transparent
-            opacity={0.3}
-            roughness={0.05}
-            metalness={0.1}
-            transmission={0.9} 
-            ior={1.5}
-            thickness={0.5}
-            envMapIntensity={2}
+            opacity={0.15}
+            roughness={0.1}
+            metalness={0.8}
             color="#ffffff"
+            envMapIntensity={2}
+          />
+        </mesh>
+        
+        {/* Inner Glass Glow (Makes the whole bulb feel illuminated from within) */}
+        <mesh position={[0, 0.4, 0]}>
+          <sphereGeometry args={[0.95, 32, 32]} />
+          <meshBasicMaterial 
+            color="#f2ca50" 
+            transparent 
+            opacity={0.08} 
+            blending={THREE.AdditiveBlending} 
+            depthWrite={false}
           />
         </mesh>
 
         {/* Inner Glowing Filament */}
         <mesh position={[0, 0.2, 0]}>
-          <cylinderGeometry args={[0.05, 0.05, 0.8, 16]} />
+          <cylinderGeometry args={[0.06, 0.06, 0.8, 16]} />
           <meshBasicMaterial 
-            color="#fff0b3"
+            color="#fff8d6"
           />
         </mesh>
         
         {/* Core Glow (Cheap Bloom Sprite) */}
-        <pointLight position={[0, 0.2, 0]} color="#f2ca50" intensity={1.5} distance={5} />
+        <pointLight position={[0, 0.2, 0]} color="#f2ca50" intensity={2} distance={8} />
         {glowTexture && (
-          <sprite position={[0, 0.4, 0]} scale={[4, 4, 1]}>
-            <spriteMaterial 
-              map={glowTexture} 
-              blending={THREE.AdditiveBlending} 
-              transparent 
-              depthWrite={false} 
-              opacity={0.85}
-            />
-          </sprite>
+          <>
+            {/* Inner intense glow */}
+            <sprite position={[0, 0.3, 0]} scale={[2, 2, 1]} renderOrder={99}>
+              <spriteMaterial 
+                map={glowTexture} 
+                blending={THREE.AdditiveBlending} 
+                transparent 
+                depthWrite={false} 
+                opacity={0.9}
+              />
+            </sprite>
+            {/* Outer ambient glow */}
+            <sprite position={[0, 0.4, -0.5]} scale={[4.5, 4.5, 1]} renderOrder={-1}>
+              <spriteMaterial 
+                map={glowTexture} 
+                blending={THREE.AdditiveBlending} 
+                transparent 
+                depthWrite={false} 
+                opacity={0.6}
+              />
+            </sprite>
+          </>
         )}
         
         {/* Filament Supports */}
