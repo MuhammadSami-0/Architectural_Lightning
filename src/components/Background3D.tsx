@@ -133,8 +133,8 @@ const InteractiveShape = () => {
 
         {/* --- STATIC ELEMENTS (No rotation, so reflections stay locked and glow stays centered) --- */}
 
-        {/* Glass Bulb Body - Standard Material for massive performance while still looking like glass */}
-        <mesh position={[0, 0.5, 0]}>
+        {/* Glass Bulb Body - Pitched forward to catch full studio reflection on the face */}
+        <mesh position={[0, 0.5, 0]} rotation={[Math.PI / 2, 0, 0]}>
           <sphereGeometry args={[1, 32, 32]} />
           <meshStandardMaterial 
             transparent
@@ -189,9 +189,9 @@ const InteractiveShape = () => {
 
         {/* --- ROTATING ELEMENTS (Filament & Base spin) --- */}
         <group ref={innerGroupRef}>
-          {/* Inner Glowing Filament */}
-          <mesh position={[0, 0.2, 0]}>
-            <cylinderGeometry args={[0.06, 0.06, 0.8, 16]} />
+          {/* Inner Glowing Filament - Replaced with sphere to match the glow shape */}
+          <mesh position={[0, 0.3, 0]}>
+            <sphereGeometry args={[0.15, 32, 32]} />
             <meshBasicMaterial 
               color="#fff8d6"
               depthTest={false}
