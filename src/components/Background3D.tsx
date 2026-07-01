@@ -6,7 +6,8 @@ import { Environment, Float, ContactShadows } from '@react-three/drei';
 import * as THREE from 'three';
 
 const InteractiveShape = () => {
-  const groupRef = useRef<THREE.Group>(null);
+  const outerGroupRef = useRef<THREE.Group>(null);
+  const innerGroupRef = useRef<THREE.Group>(null);
   const { viewport } = useThree();
   const [scale, setScale] = useState(1.8);
   const isDraggingRef = useRef(false);
@@ -79,25 +80,27 @@ const InteractiveShape = () => {
   }, []);
 
   useFrame((state, delta) => {
-    if (groupRef.current) {
+    if (innerGroupRef.current) {
       if (isDraggingRef.current) {
-        groupRef.current.rotation.y += dragVelocity.current;
+        innerGroupRef.current.rotation.y += dragVelocity.current;
         // Rapidly decay velocity while dragging so if the mouse stops, the bulb stops
         dragVelocity.current *= 0.5;
       } else {
         // Apply momentum (inertia) after releasing
-        groupRef.current.rotation.y += dragVelocity.current;
+        innerGroupRef.current.rotation.y += dragVelocity.current;
         dragVelocity.current *= 0.95; 
       }
       
       // Base rotation added constantly
-      groupRef.current.rotation.y += delta * 0.4;
+      innerGroupRef.current.rotation.y += delta * 0.4;
       
       // Lock X rotation to keep the reflection constantly full on the glass
-      groupRef.current.rotation.x = 0;
+      innerGroupRef.current.rotation.x = 0;
+    }
 
+    if (outerGroupRef.current) {
       // Very subtle floating animation
-      groupRef.current.position.y = Math.sin(state.clock.elapsedTime * 0.5) * 0.1 - 0.2;
+      outerGroupRef.current.position.y = Math.sin(state.clock.elapsedTime * 0.5) * 0.1 - 0.2;
 
       // Positioning without mouse tracking (floating statically)
       // We use viewport size to detect mobile layout, avoiding window.innerWidth in the render loop
@@ -106,14 +109,14 @@ const InteractiveShape = () => {
       const offsetY = 0; // Keep perfectly centered vertically on all screens
 
       // Smoothly move to fixed position (handles window resize smoothly)
-      groupRef.current.position.x = THREE.MathUtils.lerp(groupRef.current.position.x, offsetX, 0.05);
-      groupRef.current.position.y = THREE.MathUtils.lerp(groupRef.current.position.y, offsetY, 0.05);
+      outerGroupRef.current.position.x = THREE.MathUtils.lerp(outerGroupRef.current.position.x, offsetX, 0.05);
+      outerGroupRef.current.position.y = THREE.MathUtils.lerp(outerGroupRef.current.position.y, offsetY, 0.05);
     }
   });
 
   return (
     <Float speed={2} rotationIntensity={0.2} floatIntensity={1}>
-      <group ref={groupRef} scale={scale}>
+      <group ref={outerGroupRef} scale={scale}>
         {/* Invisible Hit Mesh for interaction */}
         <mesh 
           position={[0, 0.2, 0]} 
@@ -127,6 +130,8 @@ const InteractiveShape = () => {
           <sphereGeometry args={[1.5, 16, 16]} />
           <meshBasicMaterial transparent opacity={0} depthWrite={false} />
         </mesh>
+
+        {/* --- STATIC ELEMENTS (No rotation, so reflections stay locked and glow stays centered) --- */}
 
         {/* Glass Bulb Body - Standard Material for massive performance while still looking like glass */}
         <mesh position={[0, 0.5, 0]}>
@@ -153,22 +158,12 @@ const InteractiveShape = () => {
           />
         </mesh>
 
-        {/* Inner Glowing Filament */}
-        <mesh position={[0, 0.2, 0]}>
-          <cylinderGeometry args={[0.06, 0.06, 0.8, 16]} />
-          <meshBasicMaterial 
-            color="#fff8d6"
-            depthTest={false}
-            transparent
-          />
-        </mesh>
-        
         {/* Core Glow (Cheap Bloom Sprite) */}
         <pointLight position={[0, 0.2, 0]} color="#f2ca50" intensity={3} distance={10} />
         {glowTexture && (
           <group position={[0, 0, 0]}>
-            {/* Inner intense glow - stretched vertically to match filament */}
-            <sprite position={[0, 0.3, 0]} scale={[0.8, 3.5, 1]} renderOrder={99}>
+            {/* Inner intense glow - restored to spherical */}
+            <sprite position={[0, 0.3, 0]} scale={[3, 3, 1]} renderOrder={99}>
               <spriteMaterial 
                 map={glowTexture} 
                 blending={THREE.AdditiveBlending} 
@@ -178,8 +173,8 @@ const InteractiveShape = () => {
                 opacity={1}
               />
             </sprite>
-            {/* Outer ambient glow - stretched vertically */}
-            <sprite position={[0, 0.4, -0.5]} scale={[1.5, 6, 1]} renderOrder={98}>
+            {/* Outer ambient glow - restored to spherical */}
+            <sprite position={[0, 0.4, -0.5]} scale={[6, 6, 1]} renderOrder={98}>
               <spriteMaterial 
                 map={glowTexture} 
                 blending={THREE.AdditiveBlending} 
@@ -191,38 +186,51 @@ const InteractiveShape = () => {
             </sprite>
           </group>
         )}
-        
-        {/* Filament Supports */}
-        <mesh position={[-0.2, -0.1, 0]} rotation={[0, 0, 0.3]}>
-          <cylinderGeometry args={[0.02, 0.02, 0.5, 8]} />
-          <meshStandardMaterial color="#555" metalness={0.8} roughness={0.2} />
-        </mesh>
-        <mesh position={[0.2, -0.1, 0]} rotation={[0, 0, -0.3]}>
-          <cylinderGeometry args={[0.02, 0.02, 0.5, 8]} />
-          <meshStandardMaterial color="#555" metalness={0.8} roughness={0.2} />
-        </mesh>
 
-        {/* Bulb Base */}
-        <mesh position={[0, -0.8, 0]}>
-          <cylinderGeometry args={[0.4, 0.35, 0.6, 32]} />
-          <meshStandardMaterial color="#2a2a2a" metalness={0.9} roughness={0.4} />
-        </mesh>
-        
-        {/* Base Details (Rings) */}
-        <mesh position={[0, -0.7, 0]}>
-          <torusGeometry args={[0.41, 0.03, 16, 32]} />
-          <meshStandardMaterial color="#2a2a2a" metalness={0.9} roughness={0.4} />
-        </mesh>
-        <mesh position={[0, -0.9, 0]}>
-          <torusGeometry args={[0.38, 0.03, 16, 32]} />
-          <meshStandardMaterial color="#2a2a2a" metalness={0.9} roughness={0.4} />
-        </mesh>
-        
-        {/* Base Bottom Contact */}
-        <mesh position={[0, -1.15, 0]}>
-          <sphereGeometry args={[0.15, 32, 16]} />
-          <meshStandardMaterial color="#111" metalness={0.8} roughness={0.8} />
-        </mesh>
+        {/* --- ROTATING ELEMENTS (Filament & Base spin) --- */}
+        <group ref={innerGroupRef}>
+          {/* Inner Glowing Filament */}
+          <mesh position={[0, 0.2, 0]}>
+            <cylinderGeometry args={[0.06, 0.06, 0.8, 16]} />
+            <meshBasicMaterial 
+              color="#fff8d6"
+              depthTest={false}
+              transparent
+            />
+          </mesh>
+          
+          {/* Filament Supports */}
+          <mesh position={[-0.2, -0.1, 0]} rotation={[0, 0, 0.3]}>
+            <cylinderGeometry args={[0.02, 0.02, 0.5, 8]} />
+            <meshStandardMaterial color="#555" metalness={0.8} roughness={0.2} />
+          </mesh>
+          <mesh position={[0.2, -0.1, 0]} rotation={[0, 0, -0.3]}>
+            <cylinderGeometry args={[0.02, 0.02, 0.5, 8]} />
+            <meshStandardMaterial color="#555" metalness={0.8} roughness={0.2} />
+          </mesh>
+
+          {/* Bulb Base */}
+          <mesh position={[0, -0.8, 0]}>
+            <cylinderGeometry args={[0.4, 0.35, 0.6, 32]} />
+            <meshStandardMaterial color="#2a2a2a" metalness={0.9} roughness={0.4} />
+          </mesh>
+          
+          {/* Base Details (Rings) */}
+          <mesh position={[0, -0.7, 0]}>
+            <torusGeometry args={[0.41, 0.03, 16, 32]} />
+            <meshStandardMaterial color="#2a2a2a" metalness={0.9} roughness={0.4} />
+          </mesh>
+          <mesh position={[0, -0.9, 0]}>
+            <torusGeometry args={[0.38, 0.03, 16, 32]} />
+            <meshStandardMaterial color="#2a2a2a" metalness={0.9} roughness={0.4} />
+          </mesh>
+          
+          {/* Base Bottom Contact */}
+          <mesh position={[0, -1.15, 0]}>
+            <sphereGeometry args={[0.15, 32, 16]} />
+            <meshStandardMaterial color="#111" metalness={0.8} roughness={0.8} />
+          </mesh>
+        </group>
       </group>
     </Float>
   );
