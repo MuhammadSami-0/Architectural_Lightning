@@ -27,36 +27,39 @@ export default function Contact() {
   return (
     <div className="flex-grow flex flex-col md:flex-row w-full max-w-[1440px] mx-auto min-h-[calc(100vh-100px)]">
       {/* Left Column - Contact Info */}
-      <div className="w-full md:w-5/12 px-margin-mobile md:px-margin-desktop py-20 md:py-24 bg-zinc-900/40 backdrop-blur-2xl border-r border-white/10 shadow-[inset_-1px_0_0_rgba(255,255,255,0.1),20px_0_40px_-15px_rgba(0,0,0,0.5)] transition-all duration-500 ease-out hover:bg-zinc-900/50 flex flex-col justify-between">
-        <div>
-          <h1 className="text-headline-xl-mobile md:text-headline-xl font-headline-xl text-on-surface mb-8 leading-tight">
-            Begin the <br /> Dialogue.
+      <div className="w-full md:w-7/12 py-20 md:py-32 pr-0 md:pr-16 relative z-10">
+          <h1 className="text-5xl md:text-7xl lg:text-[100px] font-headline-xl leading-[0.9] text-primary-container uppercase tracking-tighter mb-8 break-words max-w-[100%]">
+            LET’S CREATE<br />
+            SOMETHING<br />
+            EXCEPTIONAL.
           </h1>
-          <p className="text-body-lg text-on-surface-variant max-w-sm mb-16 text-lg">
-            Whether you are conceptualizing a new architectural space or refining an existing one, we invite you to connect with our studio.
+          <p className="text-body-lg md:text-xl text-on-surface-variant max-w-xl leading-relaxed mb-12">
+            Whether you’re designing a luxury residence, a commercial environment, or an architectural façade, we’d be delighted to learn about your vision. Share your project with us, and we’ll create a bespoke lighting design that complements your architecture and elevates every space.
           </p>
 
           <div className="space-y-12">
             <div>
-              <span className="text-label-caps font-label-caps text-primary uppercase tracking-widest block mb-4">Studio</span>
-              <address className="not-italic text-body-md text-on-surface-variant text-lg leading-relaxed">
-                1200 Obsidian Way<br />
-                Suite 404<br />
-                London, UK W1B 3AG
-              </address>
-            </div>
-            
-            <div>
-              <span className="text-label-caps font-label-caps text-primary uppercase tracking-widest block mb-4">Inquiries</span>
-              <a href="mailto:consult@lumenandshadow.com" className="text-body-md text-on-surface hover:text-primary transition-colors text-lg block mb-2">
-                consult@lumenandshadow.com
-              </a>
-              <a href="tel:+442071234567" className="text-body-md text-on-surface hover:text-primary transition-colors text-lg block">
-                +44 207 123 4567
-              </a>
+              <h3 className="text-primary text-sm font-label-caps tracking-widest uppercase mb-6">Begin the Conversation</h3>
+              <div className="space-y-6">
+                <div>
+                  <h4 className="text-xs font-label-caps tracking-widest uppercase text-on-surface-variant mb-1">Location</h4>
+                  <p className="text-body-md text-on-surface text-lg">Global</p>
+                </div>
+                <div>
+                  <h4 className="text-xs font-label-caps tracking-widest uppercase text-on-surface-variant mb-1">Email</h4>
+                  <a href="mailto:affannadeem@luxurylightingstudio.com" className="text-body-md text-on-surface hover:text-primary transition-colors text-lg block mb-2">
+                    affannadeem@luxurylightingstudio.com
+                  </a>
+                </div>
+                <div>
+                  <h4 className="text-xs font-label-caps tracking-widest uppercase text-on-surface-variant mb-1">Number</h4>
+                  <a href="tel:03342342188" className="text-body-md text-on-surface hover:text-primary transition-colors text-lg block">
+                    03342342188
+                  </a>
+                </div>
+              </div>
             </div>
           </div>
-        </div>
       </div>
 
       {/* Right Column - Form */}
@@ -86,51 +89,44 @@ export default function Contact() {
           </div>
 
           <div className="flex flex-col relative group z-20" ref={dropdownRef}>
-            <label className="text-label-caps font-label-caps text-on-surface-variant uppercase tracking-widest mb-3">Inquiry Type</label>
-            <div 
-              className="bg-transparent border-b border-surface-container-highest text-on-surface text-lg py-3 flex justify-between items-center cursor-pointer select-none"
-              onClick={() => setDropdownOpen(!dropdownOpen)}
-            >
-              <span>{inquiryType}</span>
-              <div className={`material-symbols-outlined text-on-surface-variant transition-transform duration-300 ${dropdownOpen ? 'rotate-180' : ''}`}>expand_more</div>
-            </div>
-            <div className={`absolute bottom-0 left-0 h-[2px] bg-primary transition-all duration-300 ${dropdownOpen ? 'w-full' : 'w-0'}`}></div>
-            
-            {/* Custom Dropdown Menu */}
-            <div 
-              className={`absolute top-full left-0 w-full mt-2 bg-zinc-900 border border-white/10 shadow-2xl overflow-hidden transition-all duration-300 transform origin-top ${dropdownOpen ? 'opacity-100 scale-y-100 pointer-events-auto' : 'opacity-0 scale-y-95 pointer-events-none'}`}
-            >
-              {options.map((opt) => (
-                <div 
-                  key={opt}
-                  className="px-6 py-4 text-on-surface hover:bg-primary/20 hover:text-primary cursor-pointer transition-colors"
-                  onClick={() => {
-                    setInquiryType(opt);
-                    setDropdownOpen(false);
-                  }}
+              <label htmlFor="project" className="block text-xs font-label-caps tracking-widest uppercase text-on-surface-variant mb-3">
+                Project Type
+              </label>
+              <div className="relative">
+                <select 
+                  id="project" 
+                  className="w-full bg-transparent border-b border-white/20 pb-4 text-on-surface font-body-md text-lg focus:outline-none focus:border-primary transition-colors appearance-none cursor-pointer rounded-none"
+                  required
                 >
-                  {opt}
-                </div>
-              ))}
+                  <option value="" disabled selected className="bg-[#1a1a1a]">Select</option>
+                  <option value="residential" className="bg-[#1a1a1a]">Luxury Residence</option>
+                  <option value="commercial" className="bg-[#1a1a1a]">Commercial Environment</option>
+                  <option value="facade" className="bg-[#1a1a1a]">Architectural Façade</option>
+                </select>
+                <span className="absolute right-0 top-1/2 -translate-y-1/2 text-primary pointer-events-none material-symbols-outlined text-sm">
+                  expand_more
+                </span>
+              </div>
             </div>
-          </div>
 
-          <div className="flex flex-col relative group">
-            <label htmlFor="message" className="text-label-caps font-label-caps text-on-surface-variant uppercase tracking-widest mb-3">Project Details</label>
-            <textarea 
-              id="message" 
-              rows={4}
-              className="bg-transparent border-b border-surface-container-highest text-on-surface text-lg py-3 focus:outline-none focus:border-primary transition-colors rounded-none resize-none"
-              placeholder="Tell us about your vision, architectural scale, and timeline..."
-            ></textarea>
-            <div className="absolute bottom-0 left-0 w-0 h-[2px] bg-primary transition-all duration-300 group-focus-within:w-full"></div>
-          </div>
+            <div>
+              <label htmlFor="details" className="block text-xs font-label-caps tracking-widest uppercase text-on-surface-variant mb-3">
+                Your Vision
+              </label>
+              <textarea 
+                id="details" 
+                rows={4}
+                className="w-full bg-transparent border-b border-white/20 pb-4 text-on-surface font-body-md text-lg focus:outline-none focus:border-primary transition-colors placeholder:text-white/20 resize-none rounded-none"
+                placeholder="Tell us about your project, architectural style, timeline, or any specific lighting requirements."
+                required
+              ></textarea>
+            </div>
 
           <button 
             type="submit"
             className="w-full btn-primary mt-4"
           >
-            Submit Inquiry
+            Request a Consultation
           </button>
         </form>
       </div>

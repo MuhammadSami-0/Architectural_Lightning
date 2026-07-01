@@ -1,71 +1,147 @@
-import MouseGlowContainer from '@/components/MouseGlowContainer';
+"use client";
 
-const services = [
-  {
-    title: "Residential Lighting",
-    description: "Curated illumination strategies for luxury homes. We design with an emphasis on creating warm, dynamic environments that adapt to the daily rhythms of life, highlighting architectural details and art collections.",
-    image: "https://lh3.googleusercontent.com/aida-public/AB6AXuDTBxHsPIHZFbu34u_kh6kbPRviYaeY3zjo0QWThCliWL38BXrw1ISN9DwEoEQ1Xgu3xxrrTF0T_lE4ZhXlfKX4LNXV90NdofN_kOGKSVv2dBCLBfBFyXMucQK8r-gyKJdcOmWR5kljX3RjfhjUWt0V_j8Jplg1Pf6LxqaWXCIUMy2zlcZkd6AuKYa5xDqeDvnxCNp1JdEIIGUdr-1dsgJBeoOZc2sQJIEiXnICxdAKUKeZrfnNQwlhE5ThOUT0PY_Ub9nReH-5wdg"
-  },
-  {
-    title: "Commercial Spaces",
-    description: "Strategic lighting design for high-end retail, hospitality, and corporate headquarters. We balance visual comfort with dramatic focal points to guide customer journeys and reinforce brand identity.",
-    image: "https://lh3.googleusercontent.com/aida-public/AB6AXuA5SbwSnleHCTlk9YVzC_YcZtM-GNvujGWnM0pdY7xSGUphrZ-hIO-00ImI27zWRcReJy8EDaesknSNeUM8d6_2nTjEO-RMZRz3DUZDk7v_NodZq1aVLmm2P01RkGSFIZWMFGQJ9hF5osp22d1BvdTzUKVhwFNo9mYbbGClJH4ot7RE5GbDfhbIj2iGT_XrWslW-ia_BUwyMP3IP3o_esg3qP8TCEOGBdpeyMbGm2Stx1rjuztkwD_rrgK1QLd6P46eKYQhgBJIXmE"
-  },
-  {
-    title: "Custom Fixtures",
-    description: "Bespoke luminaire design and fabrication. When off-the-shelf solutions fail to meet the architectural vision, we engineer custom fixtures that serve as functional works of art.",
-    image: "https://lh3.googleusercontent.com/aida-public/AB6AXuArbGBv1kIOGSIwRYA7Ka5xCQ5nuRgtPKqzI9z73UMP67kjOELa55oaasi7U-Ohn4Rbohi87p4m7G9304b8FwXqJHQc6_w03tFcS05pgbDSaf0srS3lIKFBox3I9GrpEWdQefaW_zDGnAjycOEMMB2VW3UbjeCn2YZ1nqXWo5woYASpmtUkWqPNUWK-KfxzCUz0-el_cd5uCvFuG1X75TpVu-hWh9MGbLio96Nwi4faA8RTO3fUyKAGBFa3zNwmzCD24OdpJX1itus"
-  },
-  {
-    title: "Lighting Control Systems",
-    description: "Seamless integration of advanced control protocols (DALI, DMX, Casambi). We program sophisticated scenes that allow spaces to transition effortlessly from vibrant day settings to intimate evening atmospheres.",
-    image: "https://lh3.googleusercontent.com/aida-public/AB6AXuC5t5fSGN1NCQ-FK7HWWL9HiL0JT33q_7Vz9pXl3tyEhtMjC5ClCVPhvwIlphMOgojV-t4SFSCgDNd0cEESd4s7Piv3FV_mhqPGyjsKBxSiFmKeso1SeiiFDgm7FzQUNIXudkNXnaNgOtj-EKfYHyJDOmSRy1D_O3HonKwttbiiMmgWdFxFcBnkSfEZAcrWwjC9YLzBs_F--hmdoqsZpDwL3H2q6QtZObCTUDaMFGdmi5_xkuyg3WZHAvVDk72Kz0ONgUHdPwBx2PI"
-  }
-];
+import { useEffect } from "react";
+import Link from "next/link";
+import Image from "next/image";
+import { MouseGlowContainer } from "@/components/MouseGlowContainer";
 
-export default function Services() {
+export default function ExpertisePage() {
+  useEffect(() => {
+    const reveals = document.querySelectorAll('.reveal-base');
+    
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-revealed');
+        }
+      });
+    }, {
+      threshold: 0.1,
+      rootMargin: "0px 0px -50px 0px"
+    });
+
+    reveals.forEach(reveal => observer.observe(reveal));
+    return () => observer.disconnect();
+  }, []);
+
+  const expertiseAreas = [
+    {
+      title: "Luxury Residences",
+      category: "RESIDENTIAL",
+      description: "A remarkable home deserves lighting that is as considered as its architecture. We design bespoke residential lighting that enhances every room, celebrates every material, and creates an atmosphere that feels warm, elegant, and inviting.\n\nEvery lighting scheme is carefully tailored to complement your lifestyle while bringing harmony to both interior and exterior spaces.",
+      points: [
+        "Architectural Lighting Design",
+        "Interior & Exterior Lighting",
+        "Landscape & Garden Lighting",
+        "Smart Lighting & Control Systems",
+        "Lighting Consultancy & Specifications"
+      ],
+      image: "/images/residential.png"
+    },
+    {
+      title: "Commercial Environments",
+      category: "COMMERCIAL",
+      description: "Exceptional lighting shapes how people experience a space. Whether it’s a boutique retail destination, hospitality venue, corporate office, or mixed-use development, we create lighting that strengthens identity, enhances functionality, and leaves a lasting impression.\n\nOur commercial lighting solutions are designed to balance aesthetics, performance, and efficiency without compromising architectural integrity.",
+      points: [
+        "Office & Workplace Lighting",
+        "Retail & Showroom Lighting",
+        "Hospitality & Restaurant Lighting",
+        "Commercial Developments",
+        "Lighting Control & Automation"
+      ],
+      image: "/images/commercial.png"
+    },
+    {
+      title: "Architectural Façades",
+      category: "FAÇADE",
+      description: "Architecture deserves to be admired long after sunset. Our façade lighting designs reveal the character, texture, and craftsmanship of every building, creating elegant night-time identities that remain true to the original design.\n\nThrough carefully positioned illumination, we create façades that are visually striking, energy efficient, and timeless.",
+      points: [
+        "Architectural Façade Lighting",
+        "Feature & Landmark Lighting",
+        "Dynamic Lighting Systems",
+        "Landscape Integration",
+        "Energy-Efficient Lighting Solutions"
+      ],
+      image: "/images/facade.png"
+    }
+  ];
+
   return (
-    <div className="pb-32 px-margin-mobile md:px-margin-desktop max-w-[1440px] mx-auto w-full">
+    <main className="min-h-screen pt-32 pb-24">
       {/* Header */}
-      <header className="mb-24 md:mb-32 max-w-4xl pt-12">
-        <span className="text-label-caps font-label-caps text-primary uppercase tracking-widest mb-4 block">Our Expertise</span>
-        <h1 className="text-4xl md:text-headline-xl text-on-surface mb-8 leading-tight font-headline-xl-mobile md:font-headline-xl">
-          Comprehensive <br /> Lighting Design.
+      <div className="max-w-[1440px] mx-auto px-margin-mobile md:px-margin-desktop mb-24 reveal-base">
+        <h3 className="text-primary text-sm font-label-caps tracking-widest uppercase mb-4">OUR EXPERTISE</h3>
+        <h1 className="text-5xl md:text-7xl font-headline-xl text-primary-container tracking-tight uppercase mb-8">
+          Architectural<br/>Lighting, Perfected.
         </h1>
-        <p className="text-base md:text-body-lg text-on-surface-variant max-w-2xl text-lg">
-          We offer a full spectrum of architectural lighting services, from initial conceptualization to precise on-site focusing and programming.
+        <p className="text-body-lg md:text-xl text-on-surface-variant max-w-3xl leading-relaxed">
+          From luxury residences and commercial environments to iconic façades, our lighting solutions combine creative vision with engineering precision—delivering beauty, performance, and lasting impact.
         </p>
-      </header>
+      </div>
 
-      {/* Services Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16">
-        {services.map((service, index) => (
-          <div tabIndex={0} key={index} className="group relative flex flex-col outline-none">
-            {/* Image Container */}
-            <div className="w-full aspect-[4/3] rounded-[2rem] overflow-hidden relative mb-8 bg-zinc-900/40 backdrop-blur-2xl border border-white/10 shadow-[inset_0_1px_0_rgba(255,255,255,0.1),0_20px_40px_-15px_rgba(0,0,0,0.5)] luxury-card-hover focus:bg-zinc-900/50">
-              <div 
-                className="absolute inset-0 bg-cover bg-center transition-transform duration-1000 ease-in-out group-hover:scale-105 group-focus:scale-105 filter grayscale-0 md:grayscale group-hover:grayscale-0 group-focus:grayscale-0" 
-                style={{ backgroundImage: `url('${service.image}')` }}
-              ></div>
-              <div className="absolute inset-0 bg-black/40 group-hover:bg-black/10 transition-colors duration-500"></div>
-            </div>
+      {/* Expertise Areas */}
+      <div className="max-w-[1440px] mx-auto px-margin-mobile md:px-margin-desktop space-y-32">
+        {expertiseAreas.map((area, index) => (
+          <div key={index} className={`flex flex-col ${index % 2 === 1 ? 'md:flex-row-reverse' : 'md:flex-row'} gap-12 lg:gap-24 items-center reveal-base`}>
             
-            {/* Content Container */}
-            <MouseGlowContainer className="flex flex-col flex-grow p-6 md:p-8">
-              <div className="flex items-center gap-4 mb-4">
-                <span className="text-label-caps font-label-caps text-primary/60 uppercase">0{index + 1}</span>
-                <div className="h-px bg-surface-container-highest flex-grow"></div>
+            {/* Image Column */}
+            <div className="w-full md:w-1/2">
+              <MouseGlowContainer className="w-full aspect-[4/3] outline-none group cursor-pointer block">
+                <div 
+                  className="absolute inset-0 bg-cover bg-center transition-transform duration-1000 ease-in-out group-hover:scale-105 group-focus:scale-105 filter grayscale-0 md:grayscale group-hover:grayscale-0 group-focus:grayscale-0" 
+                  style={{ backgroundImage: `url('${area.image}')` }}
+                  aria-hidden="true"
+                />
+                <div className="absolute inset-0 bg-black/40 group-hover:bg-black/10 transition-colors duration-500"></div>
+              </MouseGlowContainer>
+            </div>
+
+            {/* Content Column */}
+            <div className="w-full md:w-1/2 space-y-8">
+              <div>
+                <span className="text-primary font-label-caps text-xs tracking-[0.2em] uppercase">{area.category}</span>
+                <h2 className="text-4xl md:text-5xl font-headline-md text-on-surface mt-3 mb-6">{area.title}</h2>
+                <div className="space-y-4">
+                  {area.description.split('\n\n').map((paragraph, i) => (
+                    <p key={i} className="text-on-surface-variant font-body-md text-lg leading-relaxed" key={i}>
+                      {paragraph}
+                    </p>
+                  ))}
+                </div>
               </div>
-              <h2 className="text-2xl md:text-[32px] font-headline-lg-mobile md:font-headline-lg text-on-surface mb-4">
-                {service.title}
-              </h2>
-              <p className="text-base md:text-body-lg text-on-surface-variant flex-grow leading-relaxed">
-                {service.description}
-              </p>
-            </MouseGlowContainer>
+              
+              <div className="pt-6 border-t border-white/10">
+                <h4 className="text-primary-container font-label-caps text-sm tracking-widest uppercase mb-4">Our Expertise</h4>
+                <ul className="space-y-3">
+                  {area.points.map((point, i) => (
+                    <li key={i} className="flex items-start text-on-surface-variant font-body-md">
+                      <span className="text-primary mr-3 mt-1 text-sm">•</span>
+                      {point}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+
           </div>
         ))}
       </div>
-    </div>
+
+      {/* CTA Section */}
+      <div className="max-w-[1440px] mx-auto px-margin-mobile md:px-margin-desktop mt-40 text-center reveal-base">
+        <div className="max-w-3xl mx-auto py-24 bg-zinc-900/40 backdrop-blur-sm border-t border-b border-primary/20">
+          <h2 className="text-4xl md:text-5xl font-headline-md text-primary-container mb-6">Designed Around Your Vision.</h2>
+          <p className="text-xl text-on-surface-variant mb-4">
+            Every project begins with understanding your architecture, your aspirations, and the experience you want to create. Whether you’re designing a luxury residence, a commercial destination, or a landmark façade, we create lighting that is tailored exclusively to your space.
+          </p>
+          <p className="text-2xl font-serif italic text-on-surface mb-12">
+            Let’s create something extraordinary.
+          </p>
+          <Link href="/contact" className="btn-primary">
+            Book a Consultation
+          </Link>
+        </div>
+      </div>
+    </main>
   );
 }

@@ -48,25 +48,41 @@ export default function About() {
                 className="h-full"
               >
                 <MouseGlowContainer className="p-6 md:p-12 h-full flex flex-col justify-center">
-                  <div className="space-y-4 md:space-y-6 font-body-md md:font-body-lg text-on-surface-variant mb-8 md:mb-12 text-base md:text-lg">
-                  <p>
-                    At Lumen & Shadow, we believe that light is only half of the equation. True architectural brilliance is defined by what remains unseen. We are a boutique consultancy dedicated to the art of high-end lighting design, where shadow is our primary medium.
-                  </p>
-                  <p>
-                    Founded by visionary architects and technical luminaries, our practice bridges the gap between raw emotion and precise engineering. We curate environments for luxury residences, avant-garde galleries, and flagship commercial spaces, ensuring every beam serves a deliberate purpose.
-                  </p>
-                </div>
-                
-                <blockquote className="pl-6 md:pl-8 border-l-[3px] md:border-l-[4px] border-primary relative">
-                  <div className="absolute -left-2 top-0 bottom-0 w-4 bg-primary/20 blur-md -z-10 pointer-events-none"></div>
-                  <p className="text-xl md:text-headline-lg font-serif italic text-on-surface leading-snug">
-                    "To reveal the architecture, you must first master the dark. Light is merely the tool we use to carve the shadow."
-                  </p>
-                  <footer className="mt-6 font-label-caps text-label-caps uppercase tracking-widest text-primary">
-                    — The Founders
-                  </footer>
-                </blockquote>
-              </MouseGlowContainer>
+                  <div className="max-w-4xl mx-auto space-y-8">
+          <h2 className="text-4xl md:text-5xl font-headline-md text-primary-container tracking-wide uppercase mb-12">Where Engineering Meets Light.</h2>
+          <div className="text-xl text-on-surface-variant leading-relaxed font-body-lg space-y-6">
+            <p>
+              At Luxury Lighting Studio, we believe exceptional lighting is never an afterthought—it is an essential element of exceptional architecture. Every project begins with a thoughtful understanding of the space, allowing us to create lighting that enhances its character, celebrates its materials, and transforms the way it is experienced.
+            </p>
+            <p>
+              Founded by Muhammad Affan Nadeem, an Electrical Engineer, Luxury Lighting Studio brings together technical expertise and refined design. Every lighting scheme is carefully tailored to complement the architecture while balancing aesthetics, performance, and functionality.
+            </p>
+            <p>
+              From luxury residences and private villas to commercial developments, we deliver bespoke architectural lighting solutions that combine precision, craftsmanship, and timeless elegance.
+            </p>
+          </div>
+        </div>
+
+        <div className="mt-32 max-w-5xl mx-auto bg-zinc-900/40 backdrop-blur-2xl rounded-[2rem] border border-white/10 p-8 md:p-16 flex flex-col md:flex-row gap-12 items-center luxury-card-hover">
+          <div className="w-full md:w-1/3 aspect-[3/4] relative rounded-2xl overflow-hidden border border-white/20 shadow-[0_0_30px_rgba(212,175,55,0.1)]">
+            <Image 
+              src="/images/founder.jpg" 
+              alt="Muhammad Affan Nadeem" 
+              fill 
+              className="object-cover object-top"
+            />
+          </div>
+          <div className="w-full md:w-2/3 space-y-6">
+            <h3 className="text-primary text-sm font-label-caps tracking-widest uppercase">Meet Our Founder</h3>
+            <h2 className="text-4xl font-headline-md text-on-surface">Muhammad Affan Nadeem</h2>
+            <p className="text-primary-container text-lg font-label-md tracking-wider uppercase">Electrical Engineer | Lighting Design Specialist</p>
+            <div className="w-12 h-1 bg-primary/30 rounded-full my-6"></div>
+            <p className="text-2xl text-on-surface-variant italic font-serif leading-relaxed">
+              “The finest lighting doesn’t ask to be noticed. It quietly reveals the beauty that was always there.”
+            </p>
+          </div>
+        </div>
+            </MouseGlowContainer>
             </div>
             </motion.div>
           </div>

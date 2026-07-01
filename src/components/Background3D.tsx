@@ -153,34 +153,38 @@ const InteractiveShape = () => {
           <cylinderGeometry args={[0.06, 0.06, 0.8, 16]} />
           <meshBasicMaterial 
             color="#fff8d6"
+            depthTest={false}
+            transparent
           />
         </mesh>
         
         {/* Core Glow (Cheap Bloom Sprite) */}
-        <pointLight position={[0, 0.2, 0]} color="#f2ca50" intensity={2} distance={8} />
+        <pointLight position={[0, 0.2, 0]} color="#f2ca50" intensity={3} distance={10} />
         {glowTexture && (
-          <>
+          <group position={[0, 0, 1.2]}>
             {/* Inner intense glow */}
-            <sprite position={[0, 0.3, 0]} scale={[2, 2, 1]} renderOrder={99}>
+            <sprite position={[0, 0.3, 0]} scale={[3, 3, 1]} renderOrder={99}>
               <spriteMaterial 
                 map={glowTexture} 
                 blending={THREE.AdditiveBlending} 
                 transparent 
+                depthTest={false}
                 depthWrite={false} 
-                opacity={0.9}
+                opacity={1}
               />
             </sprite>
             {/* Outer ambient glow */}
-            <sprite position={[0, 0.4, -0.5]} scale={[4.5, 4.5, 1]} renderOrder={-1}>
+            <sprite position={[0, 0.4, -0.5]} scale={[6, 6, 1]} renderOrder={98}>
               <spriteMaterial 
                 map={glowTexture} 
                 blending={THREE.AdditiveBlending} 
                 transparent 
+                depthTest={false}
                 depthWrite={false} 
-                opacity={0.6}
+                opacity={0.8}
               />
             </sprite>
-          </>
+          </group>
         )}
         
         {/* Filament Supports */}
@@ -240,7 +244,7 @@ const Background3D = () => {
         
         <InteractiveShape />
         
-        <Environment preset="city" />
+        <Environment preset="studio" />
       </Canvas>
     </div>
   );

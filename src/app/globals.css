@@ -118,9 +118,7 @@
       transition: all 500ms cubic-bezier(0.83, 0, 0.17, 1);
   }
   .luxury-card-hover:hover {
-      box-shadow: 0 0 40px rgba(212, 175, 55, 0.25);
-      border-color: rgba(212, 175, 55, 0.3);
-      background-color: rgba(30, 25, 10, 0.4);
+      box-shadow: 0 0 30px rgba(212, 175, 55, 0.15);
   }
 
   /* Universal Buttons */

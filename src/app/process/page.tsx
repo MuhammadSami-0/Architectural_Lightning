@@ -1,104 +1,132 @@
 "use client";
 
-import { motion, useScroll, useSpring } from 'framer-motion';
-import MouseGlowContainer from '@/components/MouseGlowContainer';
-import { useRef } from 'react';
+import { useEffect } from "react";
+import Link from "next/link";
+import { MouseGlowContainer } from "@/components/MouseGlowContainer";
 
-const steps = [
-  {
-    title: "The Discovery",
-    desc: "An intimate consultation to understand the structural canvas, architectural constraints, and your deepest atmospheric desires.",
-    image: "https://lh3.googleusercontent.com/aida-public/AB6AXuDOYYJTdUbioluEW36ccYWHe6Ec9YpdDEnGThPzdHzATnvWxAj9k8Kl1ZMfj-xQ9F2hC4UVO-YRJfyhuA1Lw0cD8CcfJJAbbgWwfVFdF6i35-LEDPHIkaO_oFoCvta2BnY0cYkBltRCH2tVHD1g6J5tFYtY6zHeKyQCwCDvmd1DzQm7LS04I3Wyz3LkGcoaOJZ603gd97txboAtXOxFUqiEG7bQTwjUelxsf70VKGfk8oi0KEdZtSdhr3IOUZRHObAtdTcJhQkJLLc"
-  },
-  {
-    title: "Conceptual Mapping",
-    desc: "Drafting precise photometric calculations, light-scapes, and hardware specifications to ensure technical feasibility.",
-    image: "https://lh3.googleusercontent.com/aida-public/AB6AXuA92c9e-15j6knwVmZokrNnlTb7_jVDfLkJMWbf4cRgMKEUJuunZ9Fkl0EssVSSD4L9Rgnz9vioX-vIqGicoM0MOk1cvCffPXJ2SPYRRZUTUTqsIsXzf7ViiHZOuieUImnzfsJ5bWkTyImFqTM69arO-QAjdU7XNx2tS_KrJa67zziMyMihp4KmrdmTljYz0O_qN32EshWAzTklg1RkYgguFZFM-74eUy5AwfFWUR6fLQURQl6pht2KrJux97VQT3jlpmt1xAP84lM"
-  },
-  {
-    title: "Prototyping",
-    desc: "Testing bespoke fixtures and color rendering indexes (CRI) in controlled environments to guarantee absolute perfection.",
-    image: "https://lh3.googleusercontent.com/aida-public/AB6AXuA0yMynJtLRwP4CR9ECIX3LqQR1JKaKBVbT4oKLJWavUlDsL-n3sMLgKU4F1Y1xAhlam_zUbecaesDDyJY4qglX1SkARegNvZEE_ZIojkow8N5U0ohOtA5vNP_kJXHSzUidkIXaWtt6-MROM_IP69oCNbwQeX7LzzmV3r_gJ2ImcLSBjeDwTGj32tUk4Rn3N2YkBvQXhrJN8OKAOvAWgeLW-T8JjaOEtoNB7wo2Kn5fm8nJCvn5fZi_YeGDWr7UXovD7kyrEU3SHSc"
-  },
-  {
-    title: "Precision Execution",
-    desc: "Flawless on-site installation and final focusing, orchestrated by our master technicians to bring the vision to life.",
-    image: "https://lh3.googleusercontent.com/aida-public/AB6AXuCHLBoctrQP3xN3LEP7m65I77vV1KufcEdLGjfAV4RmyjCmybFhs9eUCLCu9bmJIssizkldrcgKnLUpXxw8OMFJuixyQtZAvN9sOzjWZChhWSnIlIWCCaVrE-5pSjArhJJbHJruCZ_01CTGWIIBeJGRHFeJNqMRzpCj0Sr9Kq3CtaOqvmldabbo3YbhNwhjENoqohqEdrOGJ9og7woEmZWQoYmN1C_Q6SaQFBjDOmlWCH-An8ah3GR-MloNu7NOIWptzyAko2gDYX8"
-  }
-];
+export default function ProcessPage() {
+  useEffect(() => {
+    const reveals = document.querySelectorAll('.reveal-base');
+    
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-revealed');
+        }
+      });
+    }, {
+      threshold: 0.1,
+      rootMargin: "0px 0px -50px 0px"
+    });
 
-const ProcessStep = ({ step, index }: { step: any, index: number }) => {
-  const isEven = index % 2 === 0;
-  
+    reveals.forEach(reveal => observer.observe(reveal));
+    return () => observer.disconnect();
+  }, []);
+
+  const steps = [
+    {
+      number: "01",
+      title: "Discover",
+      description: "Every project begins with listening. We take the time to understand your architecture, lifestyle, vision, and the atmosphere you want to create.",
+      image: "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&q=80"
+    },
+    {
+      number: "02",
+      title: "Design",
+      description: "We transform ideas into bespoke architectural lighting concepts, carefully balancing beauty, function, and the unique character of every space.",
+      image: "https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&q=80"
+    },
+    {
+      number: "03",
+      title: "Specify",
+      description: "Every lighting scheme is supported by detailed layouts, fixture schedules, technical drawings, and carefully selected product recommendations, giving your project complete clarity before implementation.",
+      image: "https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&q=80"
+    },
+    {
+      number: "04",
+      title: "Collaborate",
+      description: "We work closely with your architect, contractor, electrician, or installer throughout the project, providing technical guidance and design support to ensure the lighting is delivered exactly as intended.",
+      image: "https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&q=80"
+    }
+  ];
+
   return (
-    <motion.div 
-      initial={{ opacity: 0, y: 50 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-100px" }}
-      transition={{ duration: 0.8, ease: "easeOut" }}
-      className={`relative flex flex-col md:flex-row items-center justify-between w-full mb-32 group pl-8 md:pl-0 ${!isEven ? 'md:flex-row-reverse' : ''}`}
-    >
-      <div className={`w-full md:w-5/12 ${isEven ? 'md:pr-12' : 'md:pl-12'} mb-8 md:mb-0`}>
-        <MouseGlowContainer className={`p-8 ${isEven ? 'md:text-right' : 'md:text-left'}`}>
-          <span className="text-label-caps font-label-caps text-primary-container mb-2 block">Step 0{index + 1}</span>
-          <h3 className="text-2xl md:text-headline-md font-headline-md text-on-surface mb-4">{step.title}</h3>
-          <p className="text-base md:text-body-md font-body-md text-on-surface-variant leading-relaxed">{step.desc}</p>
-        </MouseGlowContainer>
+    <main className="min-h-screen pt-32 pb-24">
+      {/* Header */}
+      <div className="max-w-[1440px] mx-auto px-margin-mobile md:px-margin-desktop mb-24 reveal-base text-center">
+        <h3 className="text-primary text-sm font-label-caps tracking-widest uppercase mb-4">OUR PROCESS</h3>
+        <h1 className="text-5xl md:text-7xl font-headline-xl text-primary-container tracking-tight uppercase mb-8">
+          From Vision<br/>to Illumination.
+        </h1>
+        <p className="text-body-lg md:text-xl text-on-surface-variant max-w-3xl leading-relaxed mx-auto">
+          Every exceptional lighting design begins with understanding. Our process combines creative thinking with engineering precision, ensuring every detail is thoughtfully considered before a single fixture is specified.
+        </p>
       </div>
-      
-      <div className="absolute left-0 md:left-1/2 -translate-x-1/2 w-6 h-6 rounded-full border-2 border-primary bg-surface-container-lowest z-10 shadow-[0_0_15px_rgba(245,158,11,0.5)]"></div>
-      
-      <div className={`w-full md:w-5/12 ${isEven ? 'md:pl-12' : 'md:pr-12'}`}>
-        <div tabIndex={0} className="w-full h-64 bg-zinc-900/40 backdrop-blur-2xl rounded-[2rem] border border-white/10 shadow-[inset_0_1px_0_rgba(255,255,255,0.1),0_20px_40px_-15px_rgba(0,0,0,0.5)] luxury-card-hover focus:bg-zinc-900/50 overflow-hidden relative outline-none">
-          <div 
-            className="absolute inset-0 bg-cover bg-center group-hover:scale-105 group-focus:scale-105 transition-transform duration-700 ease-in-out filter grayscale-0 md:grayscale group-hover:grayscale-0 group-focus:grayscale-0" 
-            style={{ backgroundImage: `url('${step.image}')` }}
-            aria-label={step.title}
-          ></div>
+
+      {/* Timeline */}
+      <div className="max-w-5xl mx-auto px-margin-mobile md:px-margin-desktop relative mt-32">
+        {/* Central Line */}
+        <div className="absolute left-6 md:left-1/2 top-0 bottom-0 w-[2px] bg-primary/20 -translate-x-1/2"></div>
+        
+        {steps.map((step, index) => {
+          const isEven = index % 2 === 0;
+          return (
+            <div key={index} className={`relative flex flex-col md:flex-row items-center mb-32 ${isEven ? 'md:flex-row-reverse' : ''} reveal-base`}>
+              
+              {/* Timeline Node */}
+              <div className="absolute left-6 md:left-1/2 -translate-x-1/2 w-6 h-6 rounded-full border-2 border-primary bg-surface-container-lowest z-10 shadow-[0_0_15px_rgba(245,158,11,0.5)]"></div>
+              
+              {/* Image Side */}
+              <div className={`w-full md:w-5/12 pl-16 md:pl-0 ${isEven ? 'md:pr-12' : 'md:pl-12'} mb-8 md:mb-0`}>
+                <MouseGlowContainer className="w-full h-64 outline-none overflow-hidden block">
+                  <div 
+                    className="absolute inset-0 bg-cover bg-center group-hover:scale-105 transition-transform duration-700 ease-in-out filter grayscale-0 md:grayscale group-hover:grayscale-0" 
+                    style={{ backgroundImage: `url('${step.image}')` }}
+                    aria-hidden="true"
+                  />
+                  <div className="absolute inset-0 bg-black/40 group-hover:bg-black/10 transition-colors duration-500"></div>
+                </MouseGlowContainer>
+              </div>
+
+              {/* Spacer for center line */}
+              <div className="hidden md:block w-2/12"></div>
+
+              {/* Content Side */}
+              <div className={`w-full md:w-5/12 pl-16 md:pl-0 ${isEven ? 'md:pl-12 md:text-left' : 'md:pr-12 md:text-right'}`}>
+                <div className="text-primary font-headline-md text-6xl opacity-20 absolute -z-10 -top-8 -left-4 md:-left-8">{step.number}</div>
+                <h3 className="text-primary text-sm font-label-caps tracking-widest uppercase mb-2">Step {step.number}</h3>
+                <h2 className="text-3xl font-headline-md text-on-surface mb-4">{step.title}</h2>
+                <p className="text-on-surface-variant font-body-md text-lg leading-relaxed">
+                  {step.description}
+                </p>
+              </div>
+            </div>
+          );
+        })}
+      </div>
+
+      {/* The Result Section */}
+      <div className="max-w-4xl mx-auto px-margin-mobile md:px-margin-desktop mt-40 text-center reveal-base">
+        <h2 className="text-3xl md:text-5xl font-headline-md text-primary-container mb-12">The Result</h2>
+        <div className="text-xl md:text-3xl text-on-surface-variant font-serif italic space-y-6">
+          <p>Lighting that feels effortless.</p>
+          <p>Architecture that speaks for itself.</p>
+          <p>Spaces designed to be experienced.</p>
         </div>
       </div>
-    </motion.div>
-  );
-};
 
-export default function Process() {
-  const containerRef = useRef<HTMLElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start center", "end center"]
-  });
-  
-  const scaleY = useSpring(scrollYProgress, {
-    stiffness: 100,
-    damping: 30,
-    restDelta: 0.001
-  });
-
-  return (
-    <div className="pb-32 px-margin-mobile md:px-margin-desktop max-w-[1440px] mx-auto w-full">
-      {/* Header */}
-      <header className="text-center mb-32">
-        <h1 className="text-4xl md:text-headline-xl font-headline-xl text-on-surface mb-6">The Methodology.</h1>
-        <p className="text-base md:text-body-lg text-on-surface-variant max-w-2xl mx-auto text-lg">
-          A rigorous sequence of creative exploration and technical precision, ensuring every lumen is placed with absolute intentionality.
-        </p>
-      </header>
-
-      {/* Timeline Section */}
-      <section ref={containerRef} className="relative max-w-4xl mx-auto">
-        {/* Central Line Background */}
-        <div className="absolute left-0 md:left-1/2 top-0 bottom-0 w-px bg-surface-container-highest -translate-x-1/2"></div>
-        
-        {/* Progress Line */}
-        <motion.div 
-          className="absolute left-0 md:left-1/2 top-0 bottom-0 w-[2px] bg-primary -translate-x-1/2 origin-top"
-          style={{ scaleY }}
-        ></motion.div>
-
-        {steps.map((step, index) => (
-          <ProcessStep key={index} step={step} index={index} />
-        ))}
-      </section>
-    </div>
+      {/* Final CTA */}
+      <div className="max-w-[1440px] mx-auto px-margin-mobile md:px-margin-desktop mt-32 text-center reveal-base">
+        <div className="max-w-3xl mx-auto py-24 bg-zinc-900/40 backdrop-blur-sm border-t border-b border-primary/20">
+          <h2 className="text-4xl md:text-5xl font-headline-md text-primary-container mb-6">Let’s Bring Your Vision to Light.</h2>
+          <p className="text-xl text-on-surface-variant mb-12">
+            Whether you’re designing a luxury residence, a commercial environment, or an architectural façade, we’re here to create lighting that’s tailored to your space and crafted to last.
+          </p>
+          <Link href="/contact" className="btn-primary">
+            Book a Consultation
+          </Link>
+        </div>
+      </div>
+    </main>
   );
 }
