@@ -3,7 +3,6 @@
 import { useRef, useState, useEffect } from 'react';
 import { Canvas, useFrame, useThree, ThreeEvent } from '@react-three/fiber';
 import { Environment, Float, ContactShadows } from '@react-three/drei';
-import { EffectComposer, Bloom } from '@react-three/postprocessing';
 import * as THREE from 'three';
 
 const InteractiveShape = () => {
@@ -132,14 +131,26 @@ const InteractiveShape = () => {
           />
         </mesh>
         
-        {/* Mobile-Safe Fallback Glow & Light */}
-        <pointLight position={[0, 0.2, 0]} color="#f2ca50" intensity={1} distance={3} />
+        {/* Core Glow */}
+        <pointLight position={[0, 0.2, 0]} color="#f2ca50" intensity={1.5} distance={5} />
         <mesh position={[0, 0.2, 0]}>
-          <sphereGeometry args={[0.3, 32, 32]} />
+          <sphereGeometry args={[0.5, 32, 32]} />
           <meshBasicMaterial 
             color="#f2ca50" 
             transparent 
-            opacity={0.05} 
+            opacity={0.2} 
+            blending={THREE.AdditiveBlending} 
+            depthWrite={false}
+          />
+        </mesh>
+        
+        {/* Outer Soft Ambient Glow */}
+        <mesh position={[0, 0.2, 0]}>
+          <sphereGeometry args={[1.2, 32, 32]} />
+          <meshBasicMaterial 
+            color="#f2ca50" 
+            transparent 
+            opacity={0.03} 
             blending={THREE.AdditiveBlending} 
             depthWrite={false}
           />
@@ -203,10 +214,6 @@ const Background3D = () => {
         <InteractiveShape />
         
         <Environment preset="city" />
-
-        <EffectComposer>
-          <Bloom luminanceThreshold={0.2} luminanceSmoothing={0.9} intensity={2.5} />
-        </EffectComposer>
       </Canvas>
     </div>
   );

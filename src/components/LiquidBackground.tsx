@@ -1,6 +1,5 @@
 "use client";
 
-import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
 
 interface Orb {
@@ -68,9 +67,18 @@ export default function LiquidBackground() {
       {/* Base dark layer */}
       <div className="absolute inset-0 bg-[#131313]"></div>
       
+      <style dangerouslySetInnerHTML={{__html: orbs.map(orb => `
+        @keyframes float-${orb.id} {
+          0%, 100% { transform: translate(0vw, 0vh); }
+          25% { transform: translate(${orb.moveX[1]}, ${orb.moveY[1]}); }
+          50% { transform: translate(${orb.moveX[2]}, ${orb.moveY[2]}); }
+          75% { transform: translate(${orb.moveX[3]}, ${orb.moveY[3]}); }
+        }
+      `).join('')}} />
+
       {/* Floating Tiny Orbs (Dust/Fireflies Effect) */}
       {orbs.map((orb) => (
-        <motion.div
+        <div
           key={orb.id}
           className="absolute rounded-full transform-gpu will-change-transform"
           style={{
@@ -80,16 +88,7 @@ export default function LiquidBackground() {
             height: `${orb.size * 6}px`,
             background: `radial-gradient(circle, ${orb.color} 0%, transparent 70%)`,
             opacity: orb.opacity,
-          }}
-          animate={{
-            x: orb.moveX,
-            y: orb.moveY,
-          }}
-          transition={{
-            duration: orb.duration,
-            repeat: Infinity,
-            ease: "linear",
-            delay: orb.delay,
+            animation: `float-${orb.id} ${orb.duration}s linear infinite ${orb.delay}s`,
           }}
         />
       ))}

@@ -36,12 +36,11 @@ export default function CursorTrail() {
 
   return (
     <motion.div
-      className="fixed top-0 left-0 w-[30px] h-[30px] rounded-full pointer-events-none z-[100] mix-blend-screen"
+      className="fixed top-0 left-0 w-[30px] h-[30px] rounded-full pointer-events-none z-[100]"
       style={{
         x: cursorX,
         y: cursorY,
-        background: "radial-gradient(circle, rgba(242, 202, 80, 0.9) 0%, rgba(242, 202, 80, 0) 70%)",
-        boxShadow: "0 0 30px 10px rgba(242, 202, 80, 0.3)",
+        background: "radial-gradient(circle, rgba(242, 202, 80, 0.6) 0%, rgba(242, 202, 80, 0) 70%)",
       }}
     />
   );
