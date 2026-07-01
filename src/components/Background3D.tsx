@@ -3,6 +3,7 @@
 import { useRef, useState, useEffect } from 'react';
 import { Canvas, useFrame, useThree, ThreeEvent } from '@react-three/fiber';
 import { Environment, Float, ContactShadows } from '@react-three/drei';
+import { EffectComposer, Bloom } from '@react-three/postprocessing';
 import * as THREE from 'three';
 
 const InteractiveShape = () => {
@@ -144,18 +145,6 @@ const InteractiveShape = () => {
           />
         </mesh>
         
-        {/* Outer Soft Ambient Glow */}
-        <mesh position={[0, 0.2, 0]}>
-          <sphereGeometry args={[1.2, 32, 32]} />
-          <meshBasicMaterial 
-            color="#f2ca50" 
-            transparent 
-            opacity={0.03} 
-            blending={THREE.AdditiveBlending} 
-            depthWrite={false}
-          />
-        </mesh>
-        
         {/* Filament Supports */}
         <mesh position={[-0.2, -0.1, 0]} rotation={[0, 0, 0.3]}>
           <cylinderGeometry args={[0.02, 0.02, 0.5, 8]} />
@@ -214,6 +203,10 @@ const Background3D = () => {
         <InteractiveShape />
         
         <Environment preset="city" />
+
+        <EffectComposer>
+          <Bloom luminanceThreshold={0.2} luminanceSmoothing={0.9} intensity={2.5} />
+        </EffectComposer>
       </Canvas>
     </div>
   );

@@ -25,7 +25,7 @@ export default function Home() {
         </div>
 
         <div className="relative z-20 text-left px-margin-mobile md:px-margin-desktop max-w-[1440px] mx-auto flex flex-col items-start justify-center pointer-events-none w-full pt-[95svh] md:pt-0 mt-auto md:mt-0">
-          <h1 className="font-headline-xl-mobile md:font-headline-xl text-on-background mb-6 max-w-4xl hero-glow text-4xl md:text-8xl font-bold tracking-tighter">
+          <h1 className="font-headline-xl-mobile md:font-headline-xl text-on-background mb-6 max-w-4xl hero-glow text-4xl md:text-6xl lg:text-7xl font-bold tracking-tighter">
             Experience <br className="hidden md:block" />
             <span className="text-primary-container drop-shadow-[0_0_20px_rgba(251,191,36,0.5)]">Light</span><br className="hidden md:block" />
             With Purpose.
@@ -45,7 +45,7 @@ export default function Home() {
       </header>
 
       {/* Intro Section */}
-      <section className="py-32 px-margin-mobile md:px-margin-desktop bg-transparent relative z-10">
+      <section className="py-20 md:py-24 px-margin-mobile md:px-margin-desktop bg-transparent relative z-10">
         <div className="max-w-[1440px] mx-auto grid grid-cols-1 md:grid-cols-12 gap-gutter items-center group">
           <MouseGlowContainer className="md:col-span-5 md:col-start-2 mb-12 md:mb-0 p-6 md:p-12">
             <span className="inline-block px-3 py-1 border border-outline-variant text-primary font-label-caps text-label-caps uppercase tracking-widest rounded-sm mb-6 md:mb-8">
@@ -81,7 +81,7 @@ export default function Home() {
       <ReviewSlider />
 
       {/* CTA Section */}
-      <section className="py-32 px-margin-mobile md:px-margin-desktop bg-surface/30 relative z-10 text-center">
+      <section className="py-20 md:py-24 px-margin-mobile md:px-margin-desktop bg-surface/30 relative z-10 text-center">
         <div className="max-w-4xl mx-auto">
           <h2 className="font-headline-lg text-headline-lg text-on-background mb-6">Ready to Transform Your Space?</h2>
           <p className="text-body-lg text-on-surface-variant max-w-2xl mx-auto text-lg mb-12">

@@ -11,14 +11,14 @@ const reviews = [
 
 export default function ReviewSlider() {
   return (
-    <section className="py-32 bg-transparent relative z-10 overflow-hidden">
+    <section className="py-20 md:py-24 bg-transparent relative z-10 overflow-hidden">
       <style dangerouslySetInnerHTML={{__html: `
         @keyframes marquee {
           0% { transform: translateX(0); }
           100% { transform: translateX(-100%); }
         }
         .animate-marquee {
-          animation: marquee 30s linear infinite;
+          animation: marquee 100s linear infinite;
           will-change: transform;
         }
       `}} />
@@ -45,7 +45,7 @@ export default function ReviewSlider() {
             {[...reviews, ...reviews, ...reviews].map((review, i) => (
               <div key={`first-${i}`} className="pr-6 md:pr-8 shrink-0">
                 <div 
-                  className="w-[85vw] md:w-[450px] bg-[#161616] rounded-[2rem] border border-white/5 p-10 flex flex-col justify-between hover:bg-[#1a1a1a] transition-colors duration-300 h-full"
+                  className="w-[85vw] md:w-[400px] bg-[#161616] rounded-[2rem] border border-white/5 p-10 flex flex-col justify-between hover:bg-[#1a1a1a] transition-colors duration-300 h-full"
                 >
                   <div>
                     <div className="flex gap-1 text-primary-container mb-8">
@@ -70,7 +70,7 @@ export default function ReviewSlider() {
             {[...reviews, ...reviews, ...reviews].map((review, i) => (
               <div key={`second-${i}`} className="pr-6 md:pr-8 shrink-0">
                 <div 
-                  className="w-[85vw] md:w-[450px] bg-[#161616] rounded-[2rem] border border-white/5 p-10 flex flex-col justify-between hover:bg-[#1a1a1a] transition-colors duration-300 h-full"
+                  className="w-[85vw] md:w-[400px] bg-[#161616] rounded-[2rem] border border-white/5 p-10 flex flex-col justify-between hover:bg-[#1a1a1a] transition-colors duration-300 h-full"
                 >
                   <div>
                     <div className="flex gap-1 text-primary-container mb-8">

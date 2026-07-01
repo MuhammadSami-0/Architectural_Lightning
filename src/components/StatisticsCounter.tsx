@@ -39,7 +39,7 @@ const Counter = ({ value, suffix = "" }: { value: number; suffix?: string }) => 
 
 export default function StatisticsCounter() {
   return (
-    <section className="py-24 md:py-32 px-margin-mobile md:px-margin-desktop bg-background relative z-10">
+    <section className="py-20 md:py-24 px-margin-mobile md:px-margin-desktop bg-background relative z-10">
       <div className="max-w-[1440px] mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-8 text-center md:text-left">
           
